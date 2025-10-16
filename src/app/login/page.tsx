@@ -16,7 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useUser } from "@/firebase";
+import { useUser, useAuth } from "@/firebase";
+import { initiateEmailSignIn } from "@/firebase/non-blocking-login";
 import { redirect } from "next/navigation";
 
 const initialState = {
@@ -40,12 +41,19 @@ function SubmitButton() {
 export default function LoginPage() {
   const [state, formAction] = useActionState(login, initialState);
   const { user, isUserLoading } = useUser();
+  const auth = useAuth();
 
   useEffect(() => {
     if (user) {
       redirect("/");
     }
   }, [user]);
+
+  useEffect(() => {
+    if (state.message === "success" && state.data) {
+      initiateEmailSignIn(auth, state.data.email, state.data.password);
+    }
+  }, [state, auth]);
 
   if (isUserLoading || user) {
     return (
