@@ -21,14 +21,14 @@ const claimSchema = z.object({
 });
 
 
-export async function getExplanation(claim: Claim) {
+export async function getExplanation(claim: Claim, language: string = "en") {
   const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${claim.confidenceScore}%. It has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
 
   const summary = await summarizeVerifiedInfo({
     claim: claim.content,
     verificationResult: verificationResult,
     confidenceScore: claim.confidenceScore,
-    languages: ["en", "hi", "mr"], // English, Hindi, Marathi
+    languages: [language],
   });
 
   return summary;

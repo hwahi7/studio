@@ -10,9 +10,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "../ui/skeleton";
 import type { Claim } from "@/lib/types";
+
+const supportedLanguages = [
+  { code: "en", name: "English" },
+  { code: "es", name: "Spanish" },
+  { code: "fr", name: "French" },
+  { code: "de", name: "German" },
+  { code: "hi", name: "Hindi" },
+  { code: "mr", name: "Marathi" },
+  { code: "zh", name: "Chinese" },
+  { code: "ja", name: "Japanese" },
+  { code: "ar", name: "Arabic" },
+];
 
 export function ExplanationDialog({
   children,
@@ -25,17 +43,23 @@ export function ExplanationDialog({
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [explanation, setExplanation] = React.useState<Record<string, string> | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = React.useState("en");
 
   React.useEffect(() => {
-    if (isOpen && !explanation) {
+    if (isOpen) {
       setIsLoading(true);
       setError(null);
-      getExplanation(claim)
+      getExplanation(claim, selectedLanguage)
         .then(setExplanation)
         .catch((e) => setError("Failed to generate explanation. Please try again."))
         .finally(() => setIsLoading(false));
     }
-  }, [isOpen, explanation, claim]);
+  }, [isOpen, claim, selectedLanguage]);
+
+  const handleLanguageChange = (langCode: string) => {
+    setSelectedLanguage(langCode);
+    setExplanation(null); // Clear previous explanation to trigger refetch
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -54,9 +78,24 @@ export function ExplanationDialog({
             "{claim.content}"
           </p>
 
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium">Language:</span>
+            <Select value={selectedLanguage} onValueChange={handleLanguageChange}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                {supportedLanguages.map(lang => (
+                  <SelectItem key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           {isLoading && (
-            <div className="space-y-3">
-              <Skeleton className="h-8 w-1/2" />
+            <div className="space-y-3 pt-4">
               <Skeleton className="h-20 w-full" />
             </div>
           )}
@@ -64,20 +103,9 @@ export function ExplanationDialog({
           {error && <p className="text-destructive text-sm">{error}</p>}
           
           {explanation && (
-            <Tabs defaultValue={Object.keys(explanation)[0] || 'en'}>
-              <TabsList>
-                {Object.keys(explanation).map(lang => (
-                  <TabsTrigger key={lang} value={lang}>
-                    {lang.toUpperCase()}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              {Object.entries(explanation).map(([lang, summary]) => (
-                <TabsContent key={lang} value={lang}>
-                  <p className="text-sm leading-relaxed">{summary}</p>
-                </TabsContent>
-              ))}
-            </Tabs>
+            <div className="pt-4">
+               <p className="text-sm leading-relaxed">{explanation[selectedLanguage]}</p>
+            </div>
           )}
         </div>
       </DialogContent>
