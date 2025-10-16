@@ -10,6 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { searchGoogle } from '@/services/google-search';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
@@ -50,12 +51,22 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     outputSchema: DetectTrendingMisinformationOutputSchema,
   },
   async ({webPageContent}) => {
-    const {output} = await ai.generate({
-      system: `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
 
-      CRITICAL INSTRUCTION: You MUST use your own internal knowledge to determine if the claim is factual. You MUST NOT use any external tools. Provide a confidence score and a detailed explanation for your reasoning.
-      The explanation must be comprehensive and act as a neutral, authoritative source.`,
-      prompt: `Please analyze the following text for misinformation: "${webPageContent}"`,
+    const searchResults = await searchGoogle(webPageContent);
+    const searchContext = searchResults.map(r => ({ title: r.title, snippet: r.snippet, link: r.link })).slice(0, 5);
+
+    const systemPrompt = `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
+
+CRITICAL INSTRUCTION: You MUST use the provided real-time Google Search Results to determine if the claim is factual. You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates.
+You MUST base your entire analysis on the 'Search Results Context' provided below. Find and use the current date in your reasoning.
+
+Search Results Context:
+${JSON.stringify(searchContext, null, 2)}
+`;
+
+    const {output} = await ai.generate({
+      system: systemPrompt,
+      prompt: `Based *only* on the provided search results, please analyze the following text for misinformation: "${webPageContent}"`,
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
         format: 'json',
