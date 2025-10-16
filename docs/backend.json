@@ -1,0 +1,265 @@
+{
+  "entities": {
+    "Claim": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Claim",
+      "type": "object",
+      "description": "Represents a claim detected by the system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the claim."
+        },
+        "content": {
+          "type": "string",
+          "description": "The text content of the claim."
+        },
+        "detectionTimestamp": {
+          "type": "string",
+          "description": "Timestamp when the claim was first detected.",
+          "format": "date-time"
+        },
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "description": "Timestamp when the claim was last updated (verified, debunked, etc.).",
+          "format": "date-time"
+        },
+        "confidenceScore": {
+          "type": "number",
+          "description": "Confidence score assigned by the AI reasoner (0-1)."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current verification status of the claim (e.g., 'Verified', 'False', 'Needs Review')."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the claim."
+        },
+        "sourceUrls": {
+          "type": "array",
+          "description": "URLs of the sources where the claim was found.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "content",
+        "detectionTimestamp",
+        "lastUpdatedTimestamp",
+        "confidenceScore",
+        "status",
+        "language"
+      ]
+    },
+    "Verification": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Verification",
+      "type": "object",
+      "description": "Represents a single verification attempt for a claim.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the verification attempt."
+        },
+        "claimId": {
+          "type": "string",
+          "description": "Reference to the Claim being verified. (Relationship: Claim 1:N Verification)"
+        },
+        "agentType": {
+          "type": "string",
+          "description": "The type of agent performing the verification (e.g., 'AI', 'Human', 'Community')."
+        },
+        "verificationTimestamp": {
+          "type": "string",
+          "description": "Timestamp of the verification attempt.",
+          "format": "date-time"
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the verification (e.g., 'True', 'False', 'Inconclusive')."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Explanation or reasoning behind the verification result."
+        },
+        "sourceUrls": {
+          "type": "array",
+          "description": "URLs of sources used for verification.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "claimId",
+        "agentType",
+        "verificationTimestamp",
+        "result",
+        "explanation"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the system, including moderators and community members.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "username": {
+          "type": "string",
+          "description": "User's username."
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "User's role (e.g., 'Moderator', 'Community Member')."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Indicates if the user is a verified user."
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "email",
+        "role",
+        "verified"
+      ]
+    },
+    "CommunityFeedback": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CommunityFeedback",
+      "type": "object",
+      "description": "Represents community feedback on a claim.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the feedback."
+        },
+        "claimId": {
+          "type": "string",
+          "description": "Reference to the Claim the feedback is about. (Relationship: Claim 1:N CommunityFeedback)"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User providing the feedback. (Relationship: User 1:N CommunityFeedback)"
+        },
+        "vote": {
+          "type": "string",
+          "description": "User's vote on the claim (e.g., 'Agree', 'Disagree')."
+        },
+        "comment": {
+          "type": "string",
+          "description": "User's comment on the claim."
+        },
+        "feedbackTimestamp": {
+          "type": "string",
+          "description": "Timestamp of the feedback submission.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "claimId",
+        "userId",
+        "vote",
+        "feedbackTimestamp"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/claims/{claimId}",
+        "definition": {
+          "entityName": "Claim",
+          "schema": {
+            "$ref": "#/backend/entities/Claim"
+          },
+          "description": "Stores claim data.  Root-level collection for global access.",
+          "params": [
+            {
+              "name": "claimId",
+              "description": "Unique identifier for the claim."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/claims/{claimId}/verifications/{verificationId}",
+        "definition": {
+          "entityName": "Verification",
+          "schema": {
+            "$ref": "#/backend/entities/Verification"
+          },
+          "description": "Stores verification attempts for a specific claim. Includes denormalized 'claimId' for authorization independence.",
+          "params": [
+            {
+              "name": "claimId",
+              "description": "Unique identifier for the claim."
+            },
+            {
+              "name": "verificationId",
+              "description": "Unique identifier for the verification."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles. Accessible only by the user and admins.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/claims/{claimId}/communityFeedback/{feedbackId}",
+        "definition": {
+          "entityName": "CommunityFeedback",
+          "schema": {
+            "$ref": "#/backend/entities/CommunityFeedback"
+          },
+          "description": "Stores community feedback for a claim. Includes denormalized 'userId' and 'claimId' for authorization independence.",
+          "params": [
+            {
+              "name": "claimId",
+              "description": "Unique identifier for the claim."
+            },
+            {
+              "name": "feedbackId",
+              "description": "Unique identifier for the community feedback."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support real-time misinformation detection and community verification, prioritizing authorization independence and clear security rules. It leverages denormalization to avoid complex `get()` calls in security rules and structural segregation to ensure homogeneous security postures within collections.  The design accommodates the requirement for QAPs by ensuring all list operations are secure.\n\n**Authorization Independence (Denormalization):**\n\n*   The `verifications` subcollection denormalizes the `claimId` to allow direct association and secure querying. Also, the community feedback contains userId and claimId denormalized for simple querying.\n\n**Structural Segregation:**\n\n*   Claims and their associated data (verifications, community feedback) are stored in separate collections to maintain a clear separation of concerns and simplify security rules.\n\n**Access Modeling:**\n\n*   The `/users/{userId}` collection uses path-based ownership for user-related data, simplifying user-specific data access rules.\n*   The `/claims/{claimId}/verifications` subcollection structure enables straightforward querying of verifications associated with a specific claim.\n*   Community Feedback uses Claim 1:N CommunityFeedback and User 1:N CommunityFeedback relationships, as designed in the original schema.\n\n**QAPs (Rules are not Filters):**\n\n*   The structure ensures secure list operations by segregating data based on access requirements. Only authenticated users can access data in `/users/{userId}`. Rules can enforce that only the user specified by `{userId}` can access their data."
+  }
+}
