@@ -2,13 +2,14 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Chrome,
   LayoutDashboard,
   LogOut,
   Settings,
   User,
+  Loader2,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -36,9 +37,44 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useAuth, useUser } from "@/firebase";
+import { signOut } from "firebase/auth";
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, isUserLoading } = useUser();
+  const auth = useAuth();
+
+  const handleLogout = async () => {
+    if (auth) {
+      await signOut(auth);
+      router.push("/login");
+    }
+  };
+
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+
+  if (isUserLoading && !isAuthPage) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
+
+  if (!user && !isUserLoading) {
+    router.push("/login");
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider>
@@ -83,12 +119,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <Button variant="ghost" className="w-full justify-start p-2 h-auto">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://picsum.photos/seed/1/100/100" data-ai-hint="person" alt="Riya" />
-                    <AvatarFallback>R</AvatarFallback>
+                    <AvatarImage src={user?.photoURL || "https://picsum.photos/seed/1/100/100"} data-ai-hint="person" alt={user?.displayName || "User"} />
+                    <AvatarFallback>{user?.email?.[0].toUpperCase()}</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-start text-sm">
-                    <span className="font-medium">Riya</span>
-                    <span className="text-muted-foreground">Student</span>
+                    <span className="font-medium">{user?.displayName || user?.email}</span>
+                    <span className="text-muted-foreground">User</span>
                   </div>
                 </div>
               </Button>
@@ -107,7 +143,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
                 <LogOut />
                 <span>Log out</span>
               </DropdownMenuItem>
