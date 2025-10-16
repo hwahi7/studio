@@ -10,6 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { googleSearchRetriever } from '@genkit-ai/google-search';
 
 const CrossReferenceClaimsInputSchema = z.object({
   claim: z.string().describe('The claim to be verified.'),
@@ -27,6 +28,23 @@ export async function crossReferenceClaims(input: CrossReferenceClaimsInput): Pr
   return crossReferenceClaimsFlow(input);
 }
 
+const searchTool = ai.defineTool(
+  {
+    name: 'search',
+    description: 'Search the web for information.',
+    inputSchema: z.string(),
+    outputSchema: z.string(),
+  },
+  async (input) => {
+    const searchResults = await googleSearchRetriever({
+      q: input,
+      num: 3,
+    });
+    return JSON.stringify(searchResults);
+  }
+);
+
+
 const crossReferenceClaimsFlow = ai.defineFlow(
   {
     name: 'crossReferenceClaimsFlow',
@@ -34,12 +52,11 @@ const crossReferenceClaimsFlow = ai.defineFlow(
     outputSchema: CrossReferenceClaimsOutputSchema,
   },
   async (input) => {
-    // Placeholder implementation since the search tool is not available.
-    // This will now compile but does not perform a live search.
+    // Since the search tool is removed, we return a default response.
     return {
-      isVerified: false,
-      confidenceScore: 0.1,
-      explanation: "Could not perform live web search to verify the claim. The search tool is currently unavailable. This result is based on the model's internal knowledge only."
-    };
+        isVerified: false,
+        confidenceScore: 0,
+        explanation: "The search tool is currently unavailable. Unable to cross-reference claim."
+    }
   }
 );
