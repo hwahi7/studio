@@ -66,21 +66,34 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     const systemPrompt = 
 `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
 
+STEP 1: Analyze the user's claim to determine if it is a verifiable factual statement or a subjective opinion.
+- A factual claim is objective and can be proven true or false (e.g., "The sky is blue," "Cristiano Ronaldo has scored over 800 goals").
+- A subjective claim is an opinion, belief, or personal preference (e.g., "Messi is the GOAT," "That movie was boring").
+
+STEP 2: Based on your analysis in Step 1, proceed as follows:
+
+IF THE CLAIM IS SUBJECTIVE:
+- Set 'isMisinformation' to 'false'.
+- Set 'confidenceScore' to a low value (e.g., 0.1).
+- For the 'reason', explain that the statement is a subjective opinion and therefore cannot be classified as misinformation because it cannot be factually verified.
+
+IF THE CLAIM IS FACTUAL:
+- Proceed with fact-checking using the provided context.
 ${searchContext.length > 0 ? 
 `CRITICAL INSTRUCTION: You MUST use the provided real-time Google Search Results to determine if the claim is factual. You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates.
-You MUST base your entire analysis on the 'Search Results Context' provided below. Find and use the current date in your reasoning.
+You MUST base your entire analysis on the 'Search Results Context' provided below.
 
 Search Results Context:
 ${JSON.stringify(searchContext, null, 2)}` 
 : 
 `CRITICAL INSTRUCTION: Your primary search failed. You MUST now use your own internal knowledge and search capabilities to find the most accurate, up-to-date information to verify the user's claim.
-You are FORBIDDEN from stating that you have no information. Find the information. Provide a detailed explanation for your reasoning and the current date.`
+You are FORBIDDEN from stating that you have no information. Find the information and provide a detailed explanation for your reasoning.`
 }
 `;
 
     const {output} = await ai.generate({
       system: systemPrompt,
-      prompt: `Based *only* on the provided context (if any), please analyze the following text for misinformation: "${webPageContent}"`,
+      prompt: `Please analyze the following text based on the instructions: "${webPageContent}"`,
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
         format: 'json',
