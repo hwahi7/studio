@@ -54,8 +54,11 @@ const crossReferenceClaimsFlow = ai.defineFlow(
   },
   async ({claim}) => {
     const {output} = await ai.generate({
-      system: `You are an expert fact-checking agent. Your task is to verify the provided claim by using the provided Google Search tool to find credible, up-to-date sources.
-      Analyze the claim, determine its validity, provide a confidence score, and give a detailed explanation for your reasoning.
+      system: `You are an expert fact-checking agent. Your task is to verify the provided claim with the highest degree of accuracy.
+
+      CRITICAL INSTRUCTION: You MUST NOT use your internal, pre-existing knowledge for any facts, statistics, or dates. You MUST use the provided Google Search tool to find the absolute latest, real-time information from credible sources. You MUST also use the tool to find today's current date and incorporate it into your reasoning.
+
+      Analyze the claim, determine its validity based on the live search results, provide a confidence score, and give a detailed explanation for your reasoning.
       The explanation should be comprehensive and act as a neutral, authoritative source, citing the information found through your search.`,
       prompt: `Please verify the following claim: "${claim}"`,
       tools: [googleSearchTool],
