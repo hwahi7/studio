@@ -55,7 +55,13 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
   const isAuthPage = pathname === "/login" || pathname === "/signup";
 
-  if (isUserLoading && !isAuthPage) {
+  React.useEffect(() => {
+    if (!isUserLoading && !user && !isAuthPage) {
+      router.push('/login');
+    }
+  }, [isUserLoading, user, isAuthPage, router]);
+
+  if ((isUserLoading || !user) && !isAuthPage) {
     return (
       <div className="flex h-screen w-full items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -65,15 +71,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
 
   if (isAuthPage) {
     return <>{children}</>;
-  }
-
-  if (!user && !isUserLoading) {
-    router.push("/login");
-    return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-    );
   }
 
   return (
