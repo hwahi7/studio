@@ -14,6 +14,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useUser, useAuth } from "@/firebase";
@@ -50,11 +57,15 @@ export default function SignupPage() {
   }, [user]);
 
   useEffect(() => {
-    if (state.message === 'success' && state.data) {
-      initiateEmailSignUp(auth, state.data.email, state.data.password);
+    if (state.message === "success" && state.data) {
+      initiateEmailSignUp(
+        auth,
+        state.data.email,
+        state.data.password,
+        state.data.language
+      );
     }
   }, [state, auth]);
-
 
   if (isUserLoading || user) {
     return (
@@ -97,9 +108,23 @@ export default function SignupPage() {
                 </p>
               )}
             </div>
-             {state.message !== "success" && state.message !== "Invalid input." && state.message !== "" && (
-              <p className="text-sm text-destructive">{state.message}</p>
-            )}
+            <div className="grid gap-2">
+              <Label htmlFor="language">Language</Label>
+              <Select name="language" defaultValue="en">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="hi">Hindi</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {state.message !== "success" &&
+              state.message !== "Invalid input." &&
+              state.message !== "" && (
+                <p className="text-sm text-destructive">{state.message}</p>
+              )}
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
             <SubmitButton />
