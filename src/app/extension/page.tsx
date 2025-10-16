@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MisinformationChecker } from "@/components/extension/misinformation-checker";
 import { Download } from "lucide-react";
+import Link from "next/link";
 
 export default function ExtensionPage() {
   return (
@@ -13,9 +14,11 @@ export default function ExtensionPage() {
         <p className="text-muted-foreground max-w-2xl">
           Bring the power of LocalTruth's AI verification directly to your browser. Detect potential misinformation in real-time on social media, emails, and news articles.
         </p>
-         <Button className="mt-4 w-fit">
-            <Download className="mr-2 h-4 w-4" />
-            Install Chrome Extension
+         <Button asChild className="mt-4 w-fit">
+            <Link href="https://chromewebstore.google.com/" target="_blank">
+                <Download className="mr-2 h-4 w-4" />
+                Install Chrome Extension
+            </Link>
         </Button>
       </header>
 

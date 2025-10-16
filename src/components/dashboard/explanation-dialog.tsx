@@ -30,10 +30,10 @@ export function ExplanationDialog({
     if (isOpen && !explanation) {
       setIsLoading(true);
       setError(null);
-      // getExplanation(claim)
-      //   .then(setExplanation)
-      //   .catch((e) => setError("Failed to generate explanation. Please try again."))
-      //   .finally(() => setIsLoading(false));
+      getExplanation(claim)
+        .then(setExplanation)
+        .catch((e) => setError("Failed to generate explanation. Please try again."))
+        .finally(() => setIsLoading(false));
     }
   }, [isOpen, explanation, claim]);
 

@@ -32,7 +32,6 @@ export function MisinformationChecker() {
     checkTextForMisinformation,
     initialState
   );
-  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -43,14 +42,11 @@ export function MisinformationChecker() {
         variant: "destructive",
       });
     }
-    if (state.message === 'success') {
-      formRef.current?.reset();
-    }
   }, [state, toast]);
 
   return (
     <div className="space-y-6">
-      <form ref={formRef} action={formAction} className="space-y-4">
+      <form action={formAction} className="space-y-4">
         <Textarea
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."

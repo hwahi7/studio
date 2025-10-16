@@ -33,6 +33,8 @@ import { ExplanationDialog } from "./explanation-dialog";
 import { useFirestore } from "@/firebase";
 import { doc, runTransaction } from "firebase/firestore";
 import { formatDistanceToNow } from 'date-fns';
+import { errorEmitter } from "@/firebase/error-emitter";
+import { FirestorePermissionError } from "@/firebase/errors";
 
 const statusConfig: Record<
   ClaimStatus,
@@ -77,33 +79,37 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     if (!firestore) return;
     const claimRef = doc(firestore, "claims", claim.id);
     
-    try {
-      await runTransaction(firestore, async (transaction) => {
-        const claimDoc = await transaction.get(claimRef);
-        if (!claimDoc.exists()) {
-          throw "Document does not exist!";
-        }
+    runTransaction(firestore, async (transaction) => {
+      const claimDoc = await transaction.get(claimRef);
+      if (!claimDoc.exists()) {
+        throw "Document does not exist!";
+      }
 
-        let newUpvotes = claimDoc.data().upvotes || 0;
-        let newDownvotes = claimDoc.data().downvotes || 0;
+      let newUpvotes = claimDoc.data().upvotes || 0;
+      let newDownvotes = claimDoc.data().downvotes || 0;
 
-        if (voted === type) { // un-voting
-          if (type === 'up') newUpvotes--;
-          else newDownvotes--;
-          setVoted(null);
-        } else { // new vote or changing vote
-          if (voted === 'up') newUpvotes--;
-          if (voted === 'down') newDownvotes--;
-          if (type === 'up') newUpvotes++;
-          else newDownvotes++;
-          setVoted(type);
-        }
-        
-        transaction.update(claimRef, { upvotes: newUpvotes, downvotes: newDownvotes });
-      });
-    } catch (e) {
-      console.error("Transaction failed: ", e);
-    }
+      if (voted === type) { // un-voting
+        if (type === 'up') newUpvotes--;
+        else newDownvotes--;
+        setVoted(null);
+      } else { // new vote or changing vote
+        if (voted === 'up') newUpvotes--;
+        if (voted === 'down') newDownvotes--;
+        if (type === 'up') newUpvotes++;
+        else newDownvotes++;
+        setVoted(type);
+      }
+      
+      transaction.update(claimRef, { upvotes: newUpvotes, downvotes: newDownvotes });
+    }).catch((e) => {
+        errorEmitter.emit(
+        'permission-error',
+        new FirestorePermissionError({
+            path: claimRef.path,
+            operation: 'update',
+        })
+        );
+    });
   };
   
   const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
@@ -191,9 +197,9 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 </TooltipContent>
               </Tooltip>
             </div>
-            {/* <ExplanationDialog claim={claim}>
+            <ExplanationDialog claim={claim}>
               <Button>Explain</Button>
-            </ExplanationDialog> */}
+            </ExplanationDialog>
           </div>
         </CardFooter>
       </Card>
