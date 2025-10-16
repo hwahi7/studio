@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/tooltip";
 import { ExplanationDialog } from "./explanation-dialog";
 import { useFirestore } from "@/firebase";
-import { doc, runTransaction } from "firebase/firestore";
+import { doc, runTransaction, Timestamp } from "firebase/firestore";
 import { formatDistanceToNow } from 'date-fns';
 import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
@@ -70,6 +70,15 @@ const statusConfig: Record<
     label: "Trending",
   },
 };
+
+function toDate(timestamp: Timestamp | { seconds: number; nanoseconds: number }): Date {
+  if (timestamp instanceof Timestamp) {
+    return timestamp.toDate();
+  }
+  // Handle the plain object case
+  return new Timestamp(timestamp.seconds, timestamp.nanoseconds).toDate();
+}
+
 
 export function ClaimCard({ claim }: { claim: Claim }) {
   const firestore = useFirestore();
@@ -113,8 +122,8 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   };
   
   const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
-  ? Math.round((claim.lastUpdatedTimestamp.toMillis() - claim.detectionTimestamp.toMillis()) / 60000)
-  : undefined;
+    ? Math.round((toDate(claim.lastUpdatedTimestamp).getTime() - toDate(claim.detectionTimestamp).getTime()) / 60000)
+    : undefined;
 
   const currentStatus = statusConfig[claim.status];
   const StatusIcon = currentStatus.icon;
@@ -125,7 +134,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
         <CardHeader>
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>{claim.sourceUrls?.[0] || 'Unknown Source'}</span>
-            {claim.detectionTimestamp && <span>{formatDistanceToNow(claim.detectionTimestamp.toDate(), { addSuffix: true })}</span>}
+            {claim.detectionTimestamp && <span>{formatDistanceToNow(toDate(claim.detectionTimestamp), { addSuffix: true })}</span>}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
@@ -144,7 +153,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 <StatusIcon className="h-4 w-4" />
                 <span>{currentStatus.label}</span>
               </Badge>
-              {timeToVerify !== undefined && (
+              {timeToVerify !== undefined && timeToVerify >= 0 && (
                 <Badge
                   variant="outline"
                   className="gap-1.5 border-brand-accent/50 bg-brand-accent/10 text-brand-accent"
