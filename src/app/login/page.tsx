@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useEffect } from "react";
+import { useFormStatus } from "react-dom";
 import { login } from "@/app/auth-actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +18,6 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@/firebase";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 const initialState = {
   message: "",
@@ -38,7 +38,7 @@ function SubmitButton() {
 }
 
 export default function LoginPage() {
-  const [state, formAction] = useFormState(login, initialState);
+  const [state, formAction] = useActionState(login, initialState);
   const { user, isUserLoading } = useUser();
 
   useEffect(() => {

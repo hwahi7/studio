@@ -1,12 +1,12 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useEffect, useRef } from "react";
+import { useFormStatus } from "react-dom";
 import { checkTextForMisinformation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
-import { useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const initialState = {
@@ -28,7 +28,7 @@ function SubmitButton() {
 }
 
 export function MisinformationChecker() {
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     checkTextForMisinformation,
     initialState
   );
@@ -43,10 +43,6 @@ export function MisinformationChecker() {
         variant: "destructive",
       });
     }
-    // Don't reset the form on success to keep the text
-    // if (state.message === 'success') {
-    //   formRef.current?.reset();
-    // }
   }, [state, toast]);
 
   return (
@@ -56,7 +52,7 @@ export function MisinformationChecker() {
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
           rows={5}
-          key={state.message === 'success' ? Date.now() : 'text-area'}
+          defaultValue={state.text || ''}
         />
         <SubmitButton />
       </form>
