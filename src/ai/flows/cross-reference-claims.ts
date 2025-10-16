@@ -9,21 +9,40 @@
  */
 
 import {ai} from '@/ai/genkit';
+import {googleSearchTool} from '@genkit-ai/google-genai';
 import {z} from 'genkit';
 
 const CrossReferenceClaimsInputSchema = z.object({
   claim: z.string().describe('The claim to be verified.'),
 });
-export type CrossReferenceClaimsInput = z.infer<typeof CrossReferenceClaimsInputSchema>;
+export type CrossReferenceClaimsInput = z.infer<
+  typeof CrossReferenceClaimsInputSchema
+>;
 
 const CrossReferenceClaimsOutputSchema = z.object({
-  isVerified: z.boolean().describe('Whether the claim is considered true or false based on available information.'),
-  confidenceScore: z.number().describe('Confidence score (0-1) indicating the reliability of the verification.'),
-  explanation: z.string().describe('A detailed explanation of the verification result, citing the reasoning and information used.'),
+  isVerified: z
+    .boolean()
+    .describe(
+      'Whether the claim is considered true or false based on available information.'
+    ),
+  confidenceScore: z
+    .number()
+    .describe(
+      'Confidence score (0-1) indicating the reliability of the verification.'
+    ),
+  explanation: z
+    .string()
+    .describe(
+      'A detailed explanation of the verification result, citing the reasoning and information used.'
+    ),
 });
-export type CrossReferenceClaimsOutput = z.infer<typeof CrossReferenceClaimsOutputSchema>;
+export type CrossReferenceClaimsOutput = z.infer<
+  typeof CrossReferenceClaimsOutputSchema
+>;
 
-export async function crossReferenceClaims(input: CrossReferenceClaimsInput): Promise<CrossReferenceClaimsOutput> {
+export async function crossReferenceClaims(
+  input: CrossReferenceClaimsInput
+): Promise<CrossReferenceClaimsOutput> {
   return crossReferenceClaimsFlow(input);
 }
 
@@ -33,18 +52,19 @@ const crossReferenceClaimsFlow = ai.defineFlow(
     inputSchema: CrossReferenceClaimsInputSchema,
     outputSchema: CrossReferenceClaimsOutputSchema,
   },
-  async ({ claim }) => {
-    const { output } = await ai.generate({
-      system: `You are an expert fact-checking agent. Your task is to verify the provided claim using your extensive internal knowledge. 
-      Analyze the claim, determine its validity, provide a confidence score, and give a detailed explanation for your reasoning. 
-      The explanation should be comprehensive and act as a neutral, authoritative source.`,
+  async ({claim}) => {
+    const {output} = await ai.generate({
+      system: `You are an expert fact-checking agent. Your task is to verify the provided claim by using the provided Google Search tool to find credible, up-to-date sources.
+      Analyze the claim, determine its validity, provide a confidence score, and give a detailed explanation for your reasoning.
+      The explanation should be comprehensive and act as a neutral, authoritative source, citing the information found through your search.`,
       prompt: `Please verify the following claim: "${claim}"`,
+      tools: [googleSearchTool],
       output: {
         schema: CrossReferenceClaimsOutputSchema,
         format: 'json',
       },
     });
-    
+
     return output!;
   }
 );
