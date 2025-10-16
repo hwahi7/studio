@@ -11,11 +11,12 @@
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 import { searchGoogle } from '@/services/google-search';
+import { generateSearchQuery } from './generate-search-query';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
     .string()
-    .describe('The text content to analyze for misinformation.'),
+    .describe('The text to analyze for misinformation.'),
 });
 export type DetectTrendingMisinformationInput = z.infer<
   typeof DetectTrendingMisinformationInputSchema
@@ -52,21 +53,34 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
   },
   async ({webPageContent}) => {
 
-    const searchResults = await searchGoogle(webPageContent);
+    let searchResults = await searchGoogle(webPageContent);
+
+    // If initial search yields no results, generate a better query and retry
+    if (searchResults.length === 0) {
+        const newQuery = await generateSearchQuery({ text: webPageContent });
+        searchResults = await searchGoogle(newQuery.query);
+    }
+    
     const searchContext = searchResults.map(r => ({ title: r.title, snippet: r.snippet, link: r.link })).slice(0, 5);
 
-    const systemPrompt = `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
+    const systemPrompt = 
+`You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
 
-CRITICAL INSTRUCTION: You MUST use the provided real-time Google Search Results to determine if the claim is factual. You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates.
+${searchContext.length > 0 ? 
+`CRITICAL INSTRUCTION: You MUST use the provided real-time Google Search Results to determine if the claim is factual. You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates.
 You MUST base your entire analysis on the 'Search Results Context' provided below. Find and use the current date in your reasoning.
 
 Search Results Context:
-${JSON.stringify(searchContext, null, 2)}
+${JSON.stringify(searchContext, null, 2)}` 
+: 
+`CRITICAL INSTRUCTION: Your primary search failed. You MUST now use your own internal knowledge and search capabilities to find the most accurate, up-to-date information to verify the user's claim.
+You are FORBIDDEN from stating that you have no information. Find the information. Provide a detailed explanation for your reasoning and the current date.`
+}
 `;
 
     const {output} = await ai.generate({
       system: systemPrompt,
-      prompt: `Based *only* on the provided search results, please analyze the following text for misinformation: "${webPageContent}"`,
+      prompt: `Based *only* on the provided context (if any), please analyze the following text for misinformation: "${webPageContent}"`,
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
         format: 'json',
