@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useActionState, useEffect } from "react";
@@ -116,7 +117,30 @@ export default function SignupPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="hi">Hindi</SelectItem>
+                  <SelectItem value="es">Español (Spanish)</SelectItem>
+                  <SelectItem value="fr">Français (French)</SelectItem>
+                  <SelectItem value="de">Deutsch (German)</SelectItem>
+                  <SelectItem value="hi">हिंदी (Hindi)</SelectItem>
+                  <SelectItem value="mr">मराठी (Marathi)</SelectItem>
+                  <SelectItem value="zh">中文 (Chinese)</SelectItem>
+                  <SelectItem value="ja">日本語 (Japanese)</SelectItem>
+                  <SelectItem value="ar">العربية (Arabic)</SelectItem>
+                  <SelectItem value="pt">Português (Portuguese)</SelectItem>
+                  <SelectItem value="ru">Русский (Russian)</SelectItem>
+                  <SelectItem value="bn">বাংলা (Bengali)</SelectItem>
+                  <SelectItem value="id">Bahasa Indonesia (Indonesian)</SelectItem>
+                  <SelectItem value="ur">اردو (Urdu)</SelectItem>
+                  <SelectItem value="sw">Kiswahili (Swahili)</SelectItem>
+                  <SelectItem value="ko">한국어 (Korean)</SelectItem>
+                  <SelectItem value="it">Italiano (Italian)</SelectItem>
+                  <SelectItem value="nl">Nederlands (Dutch)</SelectItem>
+                  <SelectItem value="tr">Türkçe (Turkish)</SelectItem>
+                  <SelectItem value="vi">Tiếng Việt (Vietnamese)</SelectItem>
+                  <SelectItem value="pl">Polski (Polish)</SelectItem>
+                  <SelectItem value="th">ไทย (Thai)</SelectItem>
+                  <SelectItem value="uk">Українська (Ukrainian)</SelectItem>
+                  <SelectItem value="ro">Română (Romanian)</SelectItem>
+                  <SelectItem value="el">Ελληνικά (Greek)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
