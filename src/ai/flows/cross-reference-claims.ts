@@ -4,12 +4,11 @@
  * @fileOverview Verification Agent flow that cross-references claims against credible sources.
  *
  * - crossReferenceClaims - A function that handles the cross-referencing process.
- * - CrossReferenceClaimsInput - The input type for the crossReferenceClaims function.
- * - CrossReferenceClaimsOutput - The return type for the crossReferenceClaims function.
+ * - CrossReferenceClaimsInput - The input type for the crossReferenceClaims function
+ * - CrossReferenceClaimsOutput - The return type for the crossReferenceClaims function
  */
 
 import {ai} from '@/ai/genkit';
-import {googleSearchTool} from '@genkit-ai/google-genai';
 import {z} from 'genkit';
 
 const CrossReferenceClaimsInputSchema = z.object({
@@ -56,12 +55,9 @@ const crossReferenceClaimsFlow = ai.defineFlow(
     const {output} = await ai.generate({
       system: `You are an expert fact-checking agent. Your task is to verify the provided claim with the highest degree of accuracy.
 
-      CRITICAL INSTRUCTION: You MUST NOT use your internal, pre-existing knowledge for any facts, statistics, or dates. You MUST use the provided Google Search tool to find the absolute latest, real-time information from credible sources. You MUST also use the tool to find today's current date and incorporate it into your reasoning.
-
-      Analyze the claim, determine its validity based on the live search results, provide a confidence score, and give a detailed explanation for your reasoning.
-      The explanation should be comprehensive and act as a neutral, authoritative source, citing the information found through your search.`,
+      CRITICAL INSTRUCTION: You MUST use your own internal knowledge to determine if the claim is factual. You MUST NOT use any external tools. Provide a confidence score and a detailed explanation for your reasoning.
+      The explanation should be comprehensive and act as a neutral, authoritative source.`,
       prompt: `Please verify the following claim: "${claim}"`,
-      tools: [googleSearchTool],
       output: {
         schema: CrossReferenceClaimsOutputSchema,
         format: 'json',

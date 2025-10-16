@@ -53,10 +53,8 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     const {output} = await ai.generate({
       system: `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
 
-      CRITICAL INSTRUCTION: You MUST NOT use your internal, pre-existing knowledge for any facts, statistics, or dates. You MUST perform a fresh, real-time internet search to find the absolute latest information. You MUST also find and use today's current date in your reasoning.
-
-      Analyze the claim, determine its validity based on the live search results, provide a confidence score, and give a detailed explanation for your reasoning.
-      The explanation must be comprehensive and act as a neutral, authoritative source, citing the information found through your search.`,
+      CRITICAL INSTRUCTION: You MUST use your own internal knowledge to determine if the claim is factual. You MUST NOT use any external tools. Provide a confidence score and a detailed explanation for your reasoning.
+      The explanation must be comprehensive and act as a neutral, authoritative source.`,
       prompt: `Please analyze the following text for misinformation: "${webPageContent}"`,
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
