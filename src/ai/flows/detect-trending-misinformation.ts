@@ -10,11 +10,12 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleSearchTool} from '@genkit-ai/google-genai';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
     .string()
-    .describe('The content of the web page to analyze for misinformation.'),
+    .describe('The text content to analyze for misinformation.'),
 });
 export type DetectTrendingMisinformationInput = z.infer<
   typeof DetectTrendingMisinformationInputSchema
@@ -27,11 +28,11 @@ const DetectTrendingMisinformationOutputSchema = z.object({
   confidenceScore: z
     .number()
     .describe(
-      'The confidence score that the web page content contains misinformation (0-1).' /* This is out of 1 */
+      'The confidence score that the web page content contains misinformation (0-1).'
     ),
   reason: z
     .string()
-    .describe('The reason why the web page content is considered misinformation.'),
+    .describe('The reason why the web page content is considered misinformation, citing real-time data.'),
 });
 export type DetectTrendingMisinformationOutput = z.infer<
   typeof DetectTrendingMisinformationOutputSchema
@@ -43,31 +44,30 @@ export async function detectTrendingMisinformation(
   return detectTrendingMisinformationFlow(input);
 }
 
-const detectTrendingMisinformationPrompt = ai.definePrompt({
-  name: 'detectTrendingMisinformationPrompt',
-  input: {schema: DetectTrendingMisinformationInputSchema},
-  output: {schema: DetectTrendingMisinformationOutputSchema},
-  prompt: `You are the Scout Agent, tasked with detecting potential misinformation on web pages.
-
-  Analyze the following web page content and determine if it contains misinformation.
-
-  Web Page Content: {{{webPageContent}}}
-
-  Respond with whether the content is misinformation, your confidence score (0-1), and the reason for your determination.
-  Consider trending topics and common misinformation patterns.
-
-  Output should be structured JSON. Do not include any text outside of the JSON block.
-  `,
-});
-
 const detectTrendingMisinformationFlow = ai.defineFlow(
   {
     name: 'detectTrendingMisinformationFlow',
     inputSchema: DetectTrendingMisinformationInputSchema,
     outputSchema: DetectTrendingMisinformationOutputSchema,
   },
-  async input => {
-    const {output} = await detectTrendingMisinformationPrompt(input);
+  async ({webPageContent}) => {
+    const {output} = await ai.generate({
+      system: `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
+
+      CRITICAL INSTRUCTION: You MUST NOT use your internal, pre-existing knowledge for any facts, statistics, dates, or other real-world data. Your internal knowledge is outdated.
+
+      You MUST use the provided Google Search tool to find the absolute latest, real-time information from credible sources to evaluate the provided text. You MUST also use the tool to find today's current date and incorporate it into your reasoning.
+
+      Analyze the claim, determine its validity based on the live search results, provide a confidence score, and give a detailed explanation for your reasoning.
+      The explanation must be comprehensive and act as a neutral, authoritative source, citing the information found through your live search.`,
+      prompt: `Please analyze the following text for misinformation: "${webPageContent}"`,
+      tools: [googleSearchTool],
+      output: {
+        schema: DetectTrendingMisinformationOutputSchema,
+        format: 'json',
+      },
+    });
+
     return output!;
   }
 );
