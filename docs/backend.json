@@ -42,6 +42,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "upvotes": {
+            "type": "number",
+            "description": "Number of upvotes from the community."
+        },
+        "downvotes": {
+            "type": "number",
+            "description": "Number of downvotes from the community."
         }
       },
       "required": [
@@ -186,80 +194,29 @@
     ]
   },
   "firestore": {
-    "structure": [
-      {
-        "path": "/claims/{claimId}",
-        "definition": {
-          "entityName": "Claim",
-          "schema": {
-            "$ref": "#/backend/entities/Claim"
-          },
-          "description": "Stores claim data.  Root-level collection for global access.",
-          "params": [
-            {
-              "name": "claimId",
-              "description": "Unique identifier for the claim."
-            }
-          ]
-        }
+    "/claims/{claimId}": {
+      "schema": {
+        "$ref": "#/entities/Claim"
       },
-      {
-        "path": "/claims/{claimId}/verifications/{verificationId}",
-        "definition": {
-          "entityName": "Verification",
-          "schema": {
-            "$ref": "#/backend/entities/Verification"
-          },
-          "description": "Stores verification attempts for a specific claim. Includes denormalized 'claimId' for authorization independence.",
-          "params": [
-            {
-              "name": "claimId",
-              "description": "Unique identifier for the claim."
-            },
-            {
-              "name": "verificationId",
-              "description": "Unique identifier for the verification."
-            }
-          ]
-        }
+      "description": "Stores claim data. Root-level collection for global access."
+    },
+    "/claims/{claimId}/verifications/{verificationId}": {
+      "schema": {
+        "$ref": "#/entities/Verification"
       },
-      {
-        "path": "/users/{userId}",
-        "definition": {
-          "entityName": "User",
-          "schema": {
-            "$ref": "#/backend/entities/User"
-          },
-          "description": "Stores user profiles. Accessible only by the user and admins.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            }
-          ]
-        }
+      "description": "Stores verification attempts for a specific claim. Includes denormalized 'claimId' for authorization independence."
+    },
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
       },
-      {
-        "path": "/claims/{claimId}/communityFeedback/{feedbackId}",
-        "definition": {
-          "entityName": "CommunityFeedback",
-          "schema": {
-            "$ref": "#/backend/entities/CommunityFeedback"
-          },
-          "description": "Stores community feedback for a claim. Includes denormalized 'userId' and 'claimId' for authorization independence.",
-          "params": [
-            {
-              "name": "claimId",
-              "description": "Unique identifier for the claim."
-            },
-            {
-              "name": "feedbackId",
-              "description": "Unique identifier for the community feedback."
-            }
-          ]
-        }
-      }
-    ],
-    "reasoning": "The Firestore structure is designed to support real-time misinformation detection and community verification, prioritizing authorization independence and clear security rules. It leverages denormalization to avoid complex `get()` calls in security rules and structural segregation to ensure homogeneous security postures within collections.  The design accommodates the requirement for QAPs by ensuring all list operations are secure.\n\n**Authorization Independence (Denormalization):**\n\n*   The `verifications` subcollection denormalizes the `claimId` to allow direct association and secure querying. Also, the community feedback contains userId and claimId denormalized for simple querying.\n\n**Structural Segregation:**\n\n*   Claims and their associated data (verifications, community feedback) are stored in separate collections to maintain a clear separation of concerns and simplify security rules.\n\n**Access Modeling:**\n\n*   The `/users/{userId}` collection uses path-based ownership for user-related data, simplifying user-specific data access rules.\n*   The `/claims/{claimId}/verifications` subcollection structure enables straightforward querying of verifications associated with a specific claim.\n*   Community Feedback uses Claim 1:N CommunityFeedback and User 1:N CommunityFeedback relationships, as designed in the original schema.\n\n**QAPs (Rules are not Filters):**\n\n*   The structure ensures secure list operations by segregating data based on access requirements. Only authenticated users can access data in `/users/{userId}`. Rules can enforce that only the user specified by `{userId}` can access their data."
+      "description": "Stores user profiles. Accessible only by the user and admins."
+    },
+    "/claims/{claimId}/communityFeedback/{feedbackId}": {
+      "schema": {
+        "$ref": "#/entities/CommunityFeedback"
+      },
+      "description": "Stores community feedback for a claim. Includes denormalized 'userId' and 'claimId' for authorization independence."
+    }
   }
 }

@@ -30,6 +30,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ExplanationDialog } from "./explanation-dialog";
+import { useFirestore } from "@/firebase";
+import { doc, runTransaction } from "firebase/firestore";
+import { formatDistanceToNow } from 'date-fns';
 
 const statusConfig: Record<
   ClaimStatus,
@@ -67,25 +70,45 @@ const statusConfig: Record<
 };
 
 export function ClaimCard({ claim }: { claim: Claim }) {
-  const [upvotes, setUpvotes] = React.useState(claim.upvotes);
-  const [downvotes, setDownvotes] = React.useState(claim.downvotes);
+  const firestore = useFirestore();
   const [voted, setVoted] = React.useState<"up" | "down" | null>(null);
 
-  const handleVote = (type: "up" | "down") => {
-    if (voted === type) {
-      // unvote
-      setVoted(null);
-      if (type === "up") setUpvotes(v => v - 1);
-      else setDownvotes(v => v - 1);
-    } else {
-      // change vote or new vote
-      if (voted === "up") setUpvotes(v => v - 1);
-      if (voted === "down") setDownvotes(v => v - 1);
-      setVoted(type);
-      if (type === "up") setUpvotes(v => v + 1);
-      else setDownvotes(v => v + 1);
+  const handleVote = async (type: "up" | "down") => {
+    if (!firestore) return;
+    const claimRef = doc(firestore, "claims", claim.id);
+    
+    try {
+      await runTransaction(firestore, async (transaction) => {
+        const claimDoc = await transaction.get(claimRef);
+        if (!claimDoc.exists()) {
+          throw "Document does not exist!";
+        }
+
+        let newUpvotes = claimDoc.data().upvotes || 0;
+        let newDownvotes = claimDoc.data().downvotes || 0;
+
+        if (voted === type) { // un-voting
+          if (type === 'up') newUpvotes--;
+          else newDownvotes--;
+          setVoted(null);
+        } else { // new vote or changing vote
+          if (voted === 'up') newUpvotes--;
+          if (voted === 'down') newDownvotes--;
+          if (type === 'up') newUpvotes++;
+          else newDownvotes++;
+          setVoted(type);
+        }
+        
+        transaction.update(claimRef, { upvotes: newUpvotes, downvotes: newDownvotes });
+      });
+    } catch (e) {
+      console.error("Transaction failed: ", e);
     }
   };
+  
+  const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
+  ? Math.round((claim.lastUpdatedTimestamp.toMillis() - claim.detectionTimestamp.toMillis()) / 60000)
+  : undefined;
 
   const currentStatus = statusConfig[claim.status];
   const StatusIcon = currentStatus.icon;
@@ -95,12 +118,12 @@ export function ClaimCard({ claim }: { claim: Claim }) {
       <Card className="flex flex-col">
         <CardHeader>
           <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>{claim.source}</span>
-            <span>{claim.timestamp}</span>
+            <span>{claim.sourceUrls?.[0] || 'Unknown Source'}</span>
+            {claim.detectionTimestamp && <span>{formatDistanceToNow(claim.detectionTimestamp.toDate(), { addSuffix: true })}</span>}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
-          <CardTitle className="text-lg leading-snug">{claim.claim}</CardTitle>
+          <CardTitle className="text-lg leading-snug">{claim.content}</CardTitle>
         </CardContent>
         <CardFooter className="flex-col items-start gap-4">
           <div className="w-full space-y-2">
@@ -115,22 +138,22 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 <StatusIcon className="h-4 w-4" />
                 <span>{currentStatus.label}</span>
               </Badge>
-              {claim.timeToVerify && (
+              {timeToVerify !== undefined && (
                 <Badge
                   variant="outline"
                   className="gap-1.5 border-brand-accent/50 bg-brand-accent/10 text-brand-accent"
                 >
                   <Clock className="h-3.5 w-3.5" />
-                  Verified in {claim.timeToVerify} mins
+                  Verified in {timeToVerify} mins
                 </Badge>
               )}
             </div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>Confidence Score</span>
-                <span>{claim.confidence}%</span>
+                <span>{Math.round(claim.confidenceScore * 100)}%</span>
               </div>
-              <Progress value={claim.confidence} aria-label={`${claim.confidence}% confidence`} />
+              <Progress value={claim.confidenceScore * 100} aria-label={`${claim.confidenceScore * 100}% confidence`} />
             </div>
           </div>
           <div className="w-full flex justify-between items-center">
@@ -144,7 +167,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                     onClick={() => handleVote("up")}
                   >
                     <ThumbsUp className="h-4 w-4" />
-                    {upvotes}
+                    {claim.upvotes || 0}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -160,7 +183,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                     onClick={() => handleVote("down")}
                   >
                     <ThumbsDown className="h-4 w-4" />
-                    {downvotes}
+                    {claim.downvotes || 0}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -168,9 +191,9 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 </TooltipContent>
               </Tooltip>
             </div>
-            <ExplanationDialog claim={claim}>
+            {/* <ExplanationDialog claim={claim}>
               <Button>Explain</Button>
-            </ExplanationDialog>
+            </ExplanationDialog> */}
           </div>
         </CardFooter>
       </Card>

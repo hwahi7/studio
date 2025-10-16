@@ -1,7 +1,22 @@
+"use client";
+
 import { ClaimList } from "@/components/dashboard/claim-list";
-import { mockClaims } from "@/lib/mock-data";
+import { useCollection, useFirestore, useMemoFirebase } from "@/firebase";
+import { collection, orderBy, query } from "firebase/firestore";
+import type { Claim } from "@/lib/types";
 
 export default function DashboardPage() {
+  const firestore = useFirestore();
+  const claimsQuery = useMemoFirebase(
+    () => {
+      if (!firestore) return null;
+      const claimsCollection = collection(firestore, "claims");
+      return query(claimsCollection, orderBy("detectionTimestamp", "desc"));
+    },
+    [firestore]
+  );
+  const { data: claims, isLoading } = useCollection<Claim>(claimsQuery);
+
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
@@ -12,7 +27,8 @@ export default function DashboardPage() {
           Live feed of trending claims detected by Scout Agent.
         </p>
       </header>
-      <ClaimList claims={mockClaims} />
+      {isLoading && <p>Loading claims...</p>}
+      {claims && <ClaimList claims={claims} />}
     </div>
   );
 }

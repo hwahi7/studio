@@ -30,10 +30,10 @@ export function ExplanationDialog({
     if (isOpen && !explanation) {
       setIsLoading(true);
       setError(null);
-      getExplanation(claim)
-        .then(setExplanation)
-        .catch((e) => setError("Failed to generate explanation. Please try again."))
-        .finally(() => setIsLoading(false));
+      // getExplanation(claim)
+      //   .then(setExplanation)
+      //   .catch((e) => setError("Failed to generate explanation. Please try again."))
+      //   .finally(() => setIsLoading(false));
     }
   }, [isOpen, explanation, claim]);
 
@@ -51,7 +51,7 @@ export function ExplanationDialog({
         </DialogHeader>
         <div className="py-4 space-y-4">
           <p className="border-l-4 border-primary pl-4 text-muted-foreground italic">
-            "{claim.claim}"
+            "{claim.content}"
           </p>
 
           {isLoading && (

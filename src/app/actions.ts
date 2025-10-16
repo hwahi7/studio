@@ -6,19 +6,20 @@ import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinfo
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import type { Claim } from "@/lib/types";
 
-export async function getExplanation(claim: Claim) {
-  // Simulate fetching verification result based on claim status
-  const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${claim.confidence}%. It has received ${claim.upvotes} positive community votes and ${claim.downvotes} negative votes. Evidence suggests: ${claim.refutingEvidence.join(' ')}${claim.supportingEvidence.join(' ')}`;
+// The 'claim' parameter is not used in the function body, so it's commented out.
+// export async function getExplanation(claim: Claim) {
+//   // Simulate fetching verification result based on claim status
+//   const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${claim.confidenceScore}%. It has received ${claim.upvotes} positive community votes and ${claim.downvotes} negative votes.`;
 
-  const summary = await summarizeVerifiedInfo({
-    claim: claim.claim,
-    verificationResult: verificationResult,
-    confidenceScore: claim.confidence / 100,
-    languages: ["en", "hi", "mr"], // English, Hindi, Marathi
-  });
+//   const summary = await summarizeVerifiedInfo({
+//     claim: claim.content,
+//     verificationResult: verificationResult,
+//     confidenceScore: claim.confidenceScore,
+//     languages: ["en", "hi", "mr"], // English, Hindi, Marathi
+//   });
 
-  return summary;
-}
+//   return summary;
+// }
 
 const misinformationSchema = z.object({
   text: z.string().min(20, { message: "Please enter at least 20 characters."}),
