@@ -134,10 +134,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   <User />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings />
-                  <span>Settings</span>
-                </DropdownMenuItem>
+                <Link href="/settings">
+                    <DropdownMenuItem>
+                        <Settings />
+                        <span>Settings</span>
+                    </DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
