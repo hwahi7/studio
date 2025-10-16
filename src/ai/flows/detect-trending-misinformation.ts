@@ -10,7 +10,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {googleSearchTool} from '@genkit-ai/google-genai';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
@@ -32,7 +31,7 @@ const DetectTrendingMisinformationOutputSchema = z.object({
     ),
   reason: z
     .string()
-    .describe('The reason why the web page content is considered misinformation, citing real-time data.'),
+    .describe('The reason why the web page content is considered misinformation.'),
 });
 export type DetectTrendingMisinformationOutput = z.infer<
   typeof DetectTrendingMisinformationOutputSchema
@@ -54,14 +53,9 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     const {output} = await ai.generate({
       system: `You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
 
-      CRITICAL INSTRUCTION: You MUST NOT use your internal, pre-existing knowledge for any facts, statistics, dates, or other real-world data. Your internal knowledge is outdated.
-
-      You MUST use the provided Google Search tool to find the absolute latest, real-time information from credible sources to evaluate the provided text. You MUST also use the tool to find today's current date and incorporate it into your reasoning.
-
-      Analyze the claim, determine its validity based on the live search results, provide a confidence score, and give a detailed explanation for your reasoning.
-      The explanation must be comprehensive and act as a neutral, authoritative source, citing the information found through your live search.`,
+      Analyze the claim, determine its validity, provide a confidence score, and give a detailed explanation for your reasoning.
+      The explanation must be comprehensive and act as a neutral, authoritative source.`,
       prompt: `Please analyze the following text for misinformation: "${webPageContent}"`,
-      tools: [googleSearchTool],
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
         format: 'json',
