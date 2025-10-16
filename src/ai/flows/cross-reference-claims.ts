@@ -10,10 +10,24 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+// import {googleSearchRetriever} from '@genkit-ai/google-search';
+import {defineTool} from 'genkit';
+
+// const googleSearchTool = defineTool(
+//     {
+//       name: 'googleSearch',
+//       description: 'Search Google for the given query.',
+//       inputSchema: z.object({query: z.string()}),
+//       outputSchema: z.string(),
+//     },
+//     async (input) => {
+//       const docs = await googleSearchRetriever.retrieve(input.query);
+//       return JSON.stringify(docs.map(doc => doc.text()));
+//     }
+//   );
 
 const CrossReferenceClaimsInputSchema = z.object({
   claim: z.string().describe('The claim to be verified.'),
-  sources: z.array(z.string()).optional().describe('Optional list of credible sources to check against.'),
 });
 export type CrossReferenceClaimsInput = z.infer<typeof CrossReferenceClaimsInputSchema>;
 
@@ -32,20 +46,14 @@ const prompt = ai.definePrompt({
   name: 'crossReferenceClaimsPrompt',
   input: {schema: CrossReferenceClaimsInputSchema},
   output: {schema: CrossReferenceClaimsOutputSchema},
+  // tools: [googleSearchTool],
   prompt: `You are a verification agent that cross-references claims against credible sources.
+  
+  For now, you cannot search the web. Please provide a placeholder response.
 
   Claim: {{{claim}}}
 
-  {{~#if sources}}
-  Credible Sources:
-  {{~#each sources}}
-  - {{{this}}}
-  {{~/each}}
-  {{~else}}
-  No credible sources provided. Use your best judgement to find credible sources online.
-  {{~/if}}
-
-  Based on the claim and the provided credible sources (if any), determine if the claim is verified. Provide a confidence score (0-1) and an explanation for the verification result.
+  Based on your instructions, determine if the claim is verified. Provide a confidence score (0-1) and an explanation for the verification result.
 
   Output in JSON format:
   {
@@ -63,6 +71,14 @@ const crossReferenceClaimsFlow = ai.defineFlow(
     outputSchema: CrossReferenceClaimsOutputSchema,
   },
   async input => {
+    // Return a default/placeholder response since search is disabled.
+    if (input.claim) {
+        return {
+            isVerified: false,
+            confidenceScore: 0,
+            explanation: "Live web search is temporarily unavailable. Unable to verify claim."
+        }
+    }
     const {output} = await prompt(input);
     return output!;
   }
