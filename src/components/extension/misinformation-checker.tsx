@@ -33,6 +33,7 @@ export function MisinformationChecker() {
     initialState
   );
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (state.message !== 'success' && state.message !== '') {
@@ -42,15 +43,20 @@ export function MisinformationChecker() {
         variant: "destructive",
       });
     }
+    // Don't reset the form on success to keep the text
+    // if (state.message === 'success') {
+    //   formRef.current?.reset();
+    // }
   }, [state, toast]);
 
   return (
     <div className="space-y-6">
-      <form action={formAction} className="space-y-4">
+      <form ref={formRef} action={formAction} className="space-y-4">
         <Textarea
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
           rows={5}
+          key={state.message === 'success' ? Date.now() : 'text-area'}
         />
         <SubmitButton />
       </form>
@@ -75,7 +81,7 @@ export function MisinformationChecker() {
               <AlertDescription>
                  <p className="font-semibold">Confidence: {Math.round((1 - state.data.confidenceScore) * 100)}%</p>
                 <p>
-                  Our agent found no strong signals of misinformation in the provided text.
+                  <strong>Reason:</strong> {state.data.reason}
                 </p>
               </AlertDescription>
             </Alert>
