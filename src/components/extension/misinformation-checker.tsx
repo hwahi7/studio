@@ -83,7 +83,7 @@ export function MisinformationChecker() {
       }).then(explanation => {
         const newClaim: Omit<Claim, "id"> = {
             content: state.text,
-            sourceUrls: ['User Input via Extension'],
+            sourceUrls: ['User Input via Simulator'],
             detectionTimestamp: Timestamp.now(),
             lastUpdatedTimestamp: Timestamp.now(),
             status: status,
