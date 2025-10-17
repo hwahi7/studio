@@ -122,49 +122,72 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   const handleVote = async (type: "up" | "down") => {
     if (!firestore || isMock) return;
     const claimRef = doc(firestore, "claims", claim.id);
-    
+    const VOTE_IMPACT = 0.01;
+
     runTransaction(firestore, async (transaction) => {
-      const claimDoc = await transaction.get(claimRef);
-      if (!claimDoc.exists()) {
-        throw "Document does not exist!";
-      }
+        const claimDoc = await transaction.get(claimRef);
+        if (!claimDoc.exists()) {
+            throw "Document does not exist!";
+        }
 
-      let newUpvotes = claimDoc.data().upvotes || 0;
-      let newDownvotes = claimDoc.data().downvotes || 0;
-      const currentStatus = claimDoc.data().status;
+        let newUpvotes = claimDoc.data().upvotes || 0;
+        let newDownvotes = claimDoc.data().downvotes || 0;
+        let newConfidenceScore = claimDoc.data().confidenceScore || 0.5;
 
-      if (voted === type) { 
-        if (type === 'up') newUpvotes--;
-        else newDownvotes--;
-        setVoted(null);
-      } else { 
-        if (voted === 'up') newUpvotes--;
-        if (voted === 'down') newDownvotes--;
-        if (type === 'up') newUpvotes++;
-        else newDownvotes++;
-        setVoted(type);
-      }
-      
-      const updateData: { upvotes: number; downvotes: number; status?: ClaimStatus } = {
-          upvotes: newUpvotes,
-          downvotes: newDownvotes,
-      };
+        // Logic to handle voting and unvoting
+        if (voted === type) { // User is un-voting
+            if (type === 'up') {
+                newUpvotes--;
+                newConfidenceScore -= VOTE_IMPACT;
+            } else {
+                newDownvotes--;
+                newConfidenceScore += VOTE_IMPACT;
+            }
+            setVoted(null);
+        } else { // User is casting a new vote or changing vote
+            // Revert previous vote if exists
+            if (voted === 'up') {
+                newUpvotes--;
+                newConfidenceScore -= VOTE_IMPACT;
+            }
+            if (voted === 'down') {
+                newDownvotes--;
+                newConfidenceScore += VOTE_IMPACT;
+            }
 
-      if (type === 'up' && newUpvotes >= 100 && currentStatus !== "Verified") {
-        updateData.status = "Verified";
-      }
+            // Apply new vote
+            if (type === 'up') {
+                newUpvotes++;
+                newConfidenceScore += VOTE_IMPACT;
+            } else {
+                newDownvotes++;
+                newConfidenceScore -= VOTE_IMPACT;
+            }
+            setVoted(type);
+        }
+        
+        // Clamp the confidence score between 0.01 and 0.99
+        newConfidenceScore = Math.max(0.01, Math.min(0.99, newConfidenceScore));
 
-      transaction.update(claimRef, updateData);
+        const updateData = {
+            upvotes: newUpvotes,
+            downvotes: newDownvotes,
+            confidenceScore: newConfidenceScore,
+        };
+
+        transaction.update(claimRef, updateData);
     }).catch((e) => {
+        console.error("Transaction failed: ", e);
         errorEmitter.emit(
-        'permission-error',
-        new FirestorePermissionError({
-            path: claimRef.path,
-            operation: 'update',
-        })
+            'permission-error',
+            new FirestorePermissionError({
+                path: claimRef.path,
+                operation: 'update',
+            })
         );
     });
-  };
+};
+
   
   const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
     ? Math.round((toDate(claim.lastUpdatedTimestamp).getTime() - toDate(claim.detectionTimestamp).getTime()) / 60000)
@@ -273,3 +296,4 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     </TooltipProvider>
   );
 }
+
