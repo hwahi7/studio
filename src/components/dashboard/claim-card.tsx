@@ -69,7 +69,7 @@ function toDate(timestamp: Timestamp | { seconds: number; nanoseconds: number })
   if (timestamp instanceof Timestamp) {
     return timestamp.toDate();
   }
-  // Handle the plain object case
+  // Handle the plain object case from mock data or non-hydrated server components
   return new Timestamp(timestamp.seconds, timestamp.nanoseconds).toDate();
 }
 
@@ -78,6 +78,17 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   const firestore = useFirestore();
   const [voted, setVoted] = React.useState<"up" | "down" | null>(null);
   const isMock = claim.id.startsWith('mock-');
+  
+  // State to force re-render for timestamp update
+  const [_, setTick] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setTick(prev => prev + 1);
+    }, 60000); // Update every minute
+    return () => clearInterval(timer);
+  }, []);
+
 
   const handleVote = async (type: "up" | "down") => {
     if (!firestore || isMock) return;
@@ -119,6 +130,9 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
     ? Math.round((toDate(claim.lastUpdatedTimestamp).getTime() - toDate(claim.detectionTimestamp).getTime()) / 60000)
     : undefined;
+  
+  const detectionTimeAgo = claim.detectionTimestamp ? formatDistanceToNow(toDate(claim.detectionTimestamp), { addSuffix: true }) : '';
+
 
   const currentStatus = statusConfig[claim.status];
   const StatusIcon = currentStatus.icon;
@@ -129,7 +143,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
         <CardHeader>
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>{claim.sourceUrls?.[0] || 'Unknown Source'}</span>
-            {claim.detectionTimestamp && <span>{formatDistanceToNow(toDate(claim.detectionTimestamp), { addSuffix: true })}</span>}
+            {detectionTimeAgo && <span>{detectionTimeAgo}</span>}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">

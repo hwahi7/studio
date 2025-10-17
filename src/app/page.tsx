@@ -2,8 +2,8 @@
 "use client";
 
 import { ClaimList } from "@/components/dashboard/claim-list";
-import { useCollection, useFirestore, useMemoFirebase, useUser } from "@/firebase";
-import { collection, orderBy, query } from "firebase/firestore";
+import { useFirestore, useMemoFirebase, useUser } from "@/firebase";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import type { Claim } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ export default function DashboardPage() {
   const { user, isUserLoading } = useUser();
   const router = useRouter();
   const [displayClaims, setDisplayClaims] = useState<Claim[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const claimsQuery = useMemoFirebase(
     () => {
@@ -24,7 +25,6 @@ export default function DashboardPage() {
     },
     [firestore]
   );
-  const { data: claims, isLoading } = useCollection<Claim>(claimsQuery);
 
   useEffect(() => {
     if (!isUserLoading && !user) {
@@ -33,14 +33,35 @@ export default function DashboardPage() {
   }, [isUserLoading, user, router]);
 
   useEffect(() => {
-    if (!isLoading) {
-      if (claims && claims.length > 0) {
-        setDisplayClaims(claims);
-      } else {
+    async function fetchClaims() {
+      if (!claimsQuery) {
+        setIsLoading(false);
         setDisplayClaims(mockClaims);
+        return;
+      }
+      
+      try {
+        setIsLoading(true);
+        const querySnapshot = await getDocs(claimsQuery);
+        if (querySnapshot.empty) {
+          setDisplayClaims(mockClaims);
+        } else {
+          const fetchedClaims = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Claim));
+          setDisplayClaims(fetchedClaims);
+        }
+      } catch (error) {
+        console.error("Error fetching claims:", error);
+        setDisplayClaims(mockClaims); // Fallback to mock claims on error
+      } finally {
+        setIsLoading(false);
       }
     }
-  }, [claims, isLoading]);
+
+    if (user) {
+      fetchClaims();
+    }
+  }, [claimsQuery, user]);
+
 
   if (isUserLoading || !user) {
     return (
