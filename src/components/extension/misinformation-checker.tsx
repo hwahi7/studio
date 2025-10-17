@@ -1,16 +1,17 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { checkTextForMisinformation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 const initialState = {
   message: "",
+  data: null,
+  text: "",
 };
 
 function SubmitButton() {
@@ -32,32 +33,23 @@ export function MisinformationChecker() {
     checkTextForMisinformation,
     initialState
   );
-  const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (state.message !== 'success' && state.message !== '') {
-      toast({
-        title: "Validation Error",
-        description: state.message,
-        variant: "destructive",
-      });
-    }
-  }, [state, toast]);
 
   return (
     <div className="space-y-6">
-      <form ref={formRef} action={formAction} className="space-y-4">
+      <form action={formAction} className="space-y-4">
         <Textarea
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
           rows={5}
-          defaultValue={state.text || ''}
+          key={state.message === 'success' ? Date.now() : undefined}
         />
+        {state?.message && state.message !== 'success' && (
+            <p className="text-sm text-destructive">{state.message}</p>
+        )}
         <SubmitButton />
       </form>
 
-      {state.data && (
+      {state?.data && state.message === 'success' && (
         <>
           {state.data.isMisinformation ? (
             <Alert variant="destructive">

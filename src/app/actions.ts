@@ -7,6 +7,7 @@ import { calculateConfidenceScore } from "@/ai/flows/calculate-confidence-score"
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import type { Claim } from "@/lib/types";
+import { revalidatePath } from "next/cache";
 
 const claimSchema = z.object({
   id: z.string(),
@@ -73,6 +74,7 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
             downvotes: 0,
         };
         await addDoc(claimsCollection, newClaim);
+        revalidatePath('/');
     } catch (dbError) {
         console.error("Failed to save claim to Firestore:", dbError);
         // We don't block the user response for this, just log the error
