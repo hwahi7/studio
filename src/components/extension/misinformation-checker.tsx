@@ -97,7 +97,7 @@ export function MisinformationChecker() {
             language: "en", 
             upvotes: 0,
             downvotes: 0,
-            explanation: explanation, 
+            explanation: explanation.includes("could not be generated") ? "" : explanation, 
         };
 
         addDocumentNonBlocking(claimsCollection, newClaim);

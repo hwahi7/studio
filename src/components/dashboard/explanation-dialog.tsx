@@ -29,19 +29,22 @@ export function ExplanationDialog({
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
-    if (open) {
+    if (open && claim.explanation) {
       // Reset on open
       setTranslatedExplanation(null);
       
       const targetLanguage = availableLanguages.find(lang => lang.code === language);
 
-      if (claim.explanation && language !== 'en' && targetLanguage) {
+      if (language !== 'en' && targetLanguage) {
         setIsLoading(true);
         translateText({
           text: claim.explanation,
           targetLanguage: targetLanguage.name,
         }).then(result => {
           setTranslatedExplanation(result.translatedText);
+          setIsLoading(false);
+        }).catch(() => {
+          setTranslatedExplanation(claim.explanation || null);
           setIsLoading(false);
         });
       } else {
