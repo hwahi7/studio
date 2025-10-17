@@ -11,7 +11,6 @@ import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useFirestore, addDocumentNonBlocking } from "@/firebase";
 import { collection, Timestamp } from "firebase/firestore";
 import type { Claim, ClaimStatus } from "@/lib/types";
-import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import { useLanguage } from "@/context/language-context";
 
 const initialState = {
@@ -70,38 +69,20 @@ export function MisinformationChecker() {
         confidence = invertedConfidence;
       }
       
-      const claimForExplanation = {
-        content: state.text,
-        status: status,
-        confidenceScore: confidence,
-        upvotes: 0,
-        downvotes: 0,
+      const newClaim: Omit<Claim, "id"> = {
+          content: state.text,
+          sourceUrls: ['User Input via Simulator'],
+          detectionTimestamp: Timestamp.now(),
+          lastUpdatedTimestamp: Timestamp.now(),
+          status: status,
+          confidenceScore: confidence,
+          language: "en", 
+          upvotes: 0,
+          downvotes: 0,
+          explanation: result.reason, 
       };
 
-      const communityFeedback = `This claim has received ${claimForExplanation.upvotes || 0} positive community votes and ${claimForExplanation.downvotes || 0} negative votes.`;
-
-      summarizeVerifiedInfo({
-        claim: claimForExplanation.content,
-        verificationResult: claimForExplanation.status,
-        confidenceScore: claimForExplanation.confidenceScore,
-        language: "en", // Explanations are stored in English
-        communityFeedback: communityFeedback
-      }).then(explanation => {
-        const newClaim: Omit<Claim, "id"> = {
-            content: state.text,
-            sourceUrls: ['User Input via Simulator'],
-            detectionTimestamp: Timestamp.now(),
-            lastUpdatedTimestamp: Timestamp.now(),
-            status: status,
-            confidenceScore: confidence,
-            language: "en", 
-            upvotes: 0,
-            downvotes: 0,
-            explanation: explanation.includes("could not be generated") ? "" : explanation, 
-        };
-
-        addDocumentNonBlocking(claimsCollection, newClaim);
-      });
+      addDocumentNonBlocking(claimsCollection, newClaim);
       
       setTextareaValue('');
     }
