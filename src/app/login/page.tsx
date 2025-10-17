@@ -26,6 +26,7 @@ const initialState = {
     email: "",
     password: "",
   },
+  data: undefined,
 };
 
 function SubmitButton() {
