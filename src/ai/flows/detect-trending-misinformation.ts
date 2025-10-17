@@ -11,6 +11,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
+import { searchGoogle } from '@/services/google-search';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
@@ -46,6 +47,22 @@ export async function detectTrendingMisinformation(
   return detectTrendingMisinformationFlow(input);
 }
 
+const factCheckSearch = ai.defineTool(
+    {
+      name: 'factCheckSearch',
+      description: 'Performs a web search to find the most relevant and factual information about a claim.',
+      inputSchema: z.object({ query: z.string() }),
+      outputSchema: z.string().describe('A summary of search results, including titles, snippets, and sources.'),
+    },
+    async ({ query }) => {
+      const searchResults = await searchGoogle(query);
+      if (searchResults.length === 0) {
+        return "No information found.";
+      }
+      return JSON.stringify(searchResults.map(r => ({ title: r.title, snippet: r.snippet, link: r.link })));
+    }
+  );
+
 const detectTrendingMisinformationFlow = ai.defineFlow(
   {
     name: 'detectTrendingMisinformationFlow',
@@ -55,10 +72,14 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
   async ({webPageContent}) => {
     const {output} = await ai.generate({
       system: `You are the Scout Agent, an expert fact-checker. Your mission is to analyze text for misinformation with extreme accuracy.
-You MUST use your own internal knowledge to determine if the claim is factual. You MUST NOT use any external tools.
-If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
-After your analysis, provide your response in the required JSON format.`,
+      
+      CRITICAL INSTRUCTIONS:
+      1. You MUST use the 'factCheckSearch' tool to search the web for the latest, most relevant information regarding the user's text. Do not rely solely on your internal knowledge.
+      2. Analyze the search results to determine if the claim is factual, false, or an opinion.
+      3. If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
+      4. After your analysis, provide your response in the required JSON format.`,
       prompt: `Please analyze the following text based on the instructions: "${webPageContent}"`,
+      tools: [factCheckSearch],
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
         format: 'json',
