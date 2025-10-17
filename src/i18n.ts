@@ -8,7 +8,17 @@ export default getRequestConfig(async ({locale}) => {
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as any)) notFound();
  
+  let messages;
+  try {
+    // Attempt to load the messages for the requested locale.
+    messages = (await import(`../messages/${locale}.json`)).default;
+  } catch (error) {
+    // If the messages for the requested locale are not found, fall back to English.
+    console.warn(`Messages for locale "${locale}" not found. Falling back to "en".`);
+    messages = (await import('../messages/en.json')).default;
+  }
+
   return {
-    messages: (await import(`../messages/${locale}.json`)).default
+    messages
   };
 });
