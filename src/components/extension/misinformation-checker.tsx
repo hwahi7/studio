@@ -57,19 +57,9 @@ export function MisinformationChecker() {
         const INCONCLUSIVE_THRESHOLD = 0.5;
 
         if (result.isMisinformation) {
-          if (confidence > INCONCLUSIVE_THRESHOLD) {
-            status = "False";
-          } else {
-            status = "Inconclusive";
-          }
+          status = confidence > INCONCLUSIVE_THRESHOLD ? "False" : "Inconclusive";
         } else {
-          const invertedConfidence = 1.0 - confidence;
-          if (invertedConfidence > INCONCLUSIVE_THRESHOLD) {
-              status = "Verified";
-          } else {
-              status = "Inconclusive";
-          }
-          confidence = invertedConfidence;
+          status = confidence > INCONCLUSIVE_THRESHOLD ? "Verified" : "Inconclusive";
         }
         
         const newClaim: Omit<Claim, "id"> = {
@@ -130,6 +120,10 @@ export function MisinformationChecker() {
   const errorMessage = getErrorMessage();
 
   const reasonToDisplay = translatedReason || (isTranslating ? null : state.data?.reason);
+  const displayConfidence = state.data?.isMisinformation 
+    ? state.data.confidenceScore 
+    : 1.0 - state.data.confidenceScore;
+
 
   return (
     <div className="space-y-6">
@@ -178,7 +172,7 @@ export function MisinformationChecker() {
                <CheckCircle2 className="h-4 w-4" />
               <AlertTitle>{t('MisinformationChecker.alert.noMisinformation')}</AlertTitle>
               <AlertDescription>
-                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round((1-state.data.confidenceScore) * 100)}%</p>
+                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
                 {isTranslating ? (
                   <div className="flex items-center gap-2 mt-1">
                     <Loader2 className="h-4 w-4 animate-spin" />
