@@ -66,7 +66,16 @@ export function ExplanationDialog({
     if (isOpen) {
       setIsLoading(true);
       setError(null);
-      getExplanation(claim, selectedLanguage)
+      // Create a plain object without the unserializable Timestamp
+      const claimSummary = {
+        content: claim.content,
+        status: claim.status,
+        confidenceScore: claim.confidenceScore,
+        upvotes: claim.upvotes,
+        downvotes: claim.downvotes,
+      };
+
+      getExplanation(claimSummary, selectedLanguage)
         .then(setExplanation)
         .catch((e) => setError("Failed to generate explanation. Please try again."))
         .finally(() => setIsLoading(false));

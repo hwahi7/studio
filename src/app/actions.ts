@@ -1,27 +1,21 @@
+
 "use server";
 
 import { z } from "zod";
-import { Timestamp } from "firebase/firestore";
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
-import type { Claim } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 
-const claimSchema = z.object({
-  id: z.string(),
-  content: z.string(),
-  sourceUrls: z.array(z.string()),
-  detectionTimestamp: z.custom<Timestamp>(),
-  lastUpdatedTimestamp: z.custom<Timestamp>(),
-  status: z.enum(["Verified", "False", "Inconclusive", "Trending"]),
-  confidenceScore: z.number(),
-  language: z.string(),
-  upvotes: z.number().optional(),
-  downvotes: z.number().optional(),
-});
+// This type can be simplified as we don't need the full Claim with Timestamps
+type ClaimSummary = {
+  content: string;
+  status: string;
+  confidenceScore: number;
+  upvotes?: number;
+  downvotes?: number;
+}
 
-
-export async function getExplanation(claim: Claim, language: string = "en") {
+export async function getExplanation(claim: ClaimSummary, language: string = "en") {
   const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${claim.confidenceScore}%. It has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
 
   const summary = await summarizeVerifiedInfo({
