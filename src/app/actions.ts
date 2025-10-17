@@ -20,7 +20,8 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
   if (!validatedFields.success) {
     const errorText = validatedFields.error.flatten().fieldErrors.text?.[0];
      return {
-      message: errorText === "String must contain at least 20 character(s)" ? "error_min_chars" : "error_invalid_input",
+      message: "error_min_chars",
+      error: errorText,
     };
   }
 
@@ -38,10 +39,11 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       data: result,
       text: textToAnalyze,
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in checkTextForMisinformation:", error);
     return {
       message: 'error_api',
+      error: error.message || "An unknown error occurred.",
       text: textToAnalyze,
     };
   }

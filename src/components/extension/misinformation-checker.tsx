@@ -18,6 +18,7 @@ const initialState = {
   message: "",
   data: null,
   text: "",
+  error: null,
 };
 
 function SubmitButton() {
@@ -54,23 +55,18 @@ export function MisinformationChecker() {
       const INCONCLUSIVE_THRESHOLD = 0.5;
 
       if (result.isMisinformation) {
-        // AI is confident it IS misinformation -> False
         if (confidence > INCONCLUSIVE_THRESHOLD) {
           status = "False";
         } else {
-        // AI is not confident -> Inconclusive
           status = "Inconclusive";
         }
       } else {
-        // AI is confident it is NOT misinformation -> Verified
-        // We invert the score to reflect confidence in the "Verified" status.
         const invertedConfidence = 1.0 - confidence;
         if (invertedConfidence > INCONCLUSIVE_THRESHOLD) {
             status = "Verified";
         } else {
             status = "Inconclusive";
         }
-        // Use the inverted score for the new claim object
         confidence = invertedConfidence;
       }
       
@@ -115,21 +111,24 @@ export function MisinformationChecker() {
     setTextareaValue(e.target.value);
   }
   
-  const getErrorMessage = (message: string | undefined) => {
-    if (!message || message === 'success') return '';
-    switch (message) {
+  const getErrorMessage = () => {
+    if (!state?.message || state.message === 'success') return '';
+
+    if (state.message === 'error_api' && state.error) {
+        return state.error;
+    }
+
+    switch (state.message) {
       case 'error_min_chars':
-        return t('MisinformationChecker.errorMinChars');
+        return state.error || t('MisinformationChecker.errorMinChars');
       case 'error_invalid_input':
         return t('MisinformationChecker.errorInvalidInput');
-      case 'error_api':
-        return t('MisinformationChecker.errorApi');
       default:
         return t('MisinformationChecker.errorApi');
     }
   };
 
-  const errorMessage = getErrorMessage(state?.message);
+  const errorMessage = getErrorMessage();
 
   return (
     <div className="space-y-6">
