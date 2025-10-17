@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "dashboardTooltip": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "chromeExtension": "Chrome ವಿಸ್ತರಣೆ",
+    "extensionTooltip": "Chrome ವಿಸ್ತರಣೆ",
+    "myAccount": "ನನ್ನ ಖಾತೆ",
+    "profile": "ಪ್ರೊಫೈಲ್",
+    "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "userRole": "ಬಳಕೆದಾರ"
+  },
+  "DashboardPage": {
+    "title": "ಹಕ್ಕು ಪತ್ತೆ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "subtitle": "ಸ್ಕೌಟ್ ಏಜೆಂಟ್‌ನಿಂದ ಪತ್ತೆಯಾದ ಟ್ರೆಂಡಿಂಗ್ ಹಕ್ಕುಗಳ ಲೈವ್ ಫೀಡ್."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome ವಿಸ್ತರಣೆ",
+    "description": "LocalTruth ನ AI ಪರಿಶೀಲನೆಯ ಶಕ್ತಿಯನ್ನು ನೇರವಾಗಿ ನಿಮ್ಮ ಬ್ರೌಸರ್‌ಗೆ ತನ್ನಿ. ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ, ಇಮೇಲ್‌ಗಳು ಮತ್ತು ಸುದ್ದಿ ಲೇಖನಗಳಲ್ಲಿ ಸಂಭಾವ್ಯ ತಪ್ಪು ಮಾಹಿತಿಯನ್ನು ನೈಜ ಸಮಯದಲ್ಲಿ ಪತ್ತೆ ಮಾಡಿ.",
+    "installButton": "Chrome ವಿಸ್ತರಣೆಯನ್ನು ಸ್ಥಾಪಿಸಿ",
+    "comingSoon": "ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ",
+    "simulatorTitle": "ವಿಸ್ತರಣೆ ಸಿಮ್ಯುಲೇಟರ್",
+    "simulatorDescription": "ಪತ್ತೆ ಎಂಜಿನ್ ಅನ್ನು ಪರೀಕ್ಷಿಸಿ. ಕೆಳಗೆ ಯಾವುದೇ ಪಠ್ಯವನ್ನು ಅಂಟಿಸಿ ಮತ್ತು ನಮ್ಮ ಸ್ಕೌಟ್ ಏಜೆಂಟ್ ಸಂಭಾವ್ಯ ತಪ್ಪು ಮಾಹಿತಿಗಾಗಿ ಅದನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತದೆ."
+  },
+  "ProfilePage": {
+    "title": "ಪ್ರೊಫೈಲ್",
+    "subtitle": "ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ ಪ್ರೊಫೈಲ್ ಮತ್ತು ಖಾತೆ ವಿವರಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    "accountInfoTitle": "ಖಾತೆ ಮಾಹಿತಿ",
+    "accountInfoDescription": "ನಿಮ್ಮ ಪ್ರದರ್ಶನ ಹೆಸರನ್ನು ನವೀಕರಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಖಾತೆ ಇಮೇಲ್ ಅನ್ನು ವೀಕ್ಷಿಸಿ.",
+    "emailLabel": "ಇಮೇಲ್",
+    "displayNameLabel": "ಪ್ರದರ್ಶನ ಹೆಸರು",
+    "saveButton": "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ"
+  },
+  "SettingsPage": {
+    "title": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "subtitle": "ನಿಮ್ಮ ಖಾತೆ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+    "preferences": {
+      "title": "ಆದ್ಯತೆಗಳು",
+      "description": "ನಿಮ್ಮ ಅನುಭವವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ."
+    },
+    "language": {
+      "label": "ಭಾಷೆ",
+      "placeholder": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      "description": "ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ಪ್ರದರ್ಶನ ಭಾಷೆಯನ್ನು ಆರಿಸಿ."
+    },
+    "password": {
+      "label": "ಪಾಸ್‌ವರ್ಡ್",
+      "button": "ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಿ",
+      "description": "ನಿಮ್ಮ ಖಾತೆ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನವೀಕರಿಸಿ."
+    }
+  },
+  "LoginPage": {
+    "title": "ಲಾಗಿನ್",
+    "description": "ನಿಮ್ಮ ಖಾತೆಗೆ ಲಾಗಿನ್ ಮಾಡಲು ಕೆಳಗೆ ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ನಮೂದಿಸಿ.",
+    "emailLabel": "ಇಮೇಲ್",
+    "passwordLabel": "ಪಾಸ್‌ವರ್ಡ್",
+    "signInButton": "ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    "noAccount": "ಖಾತೆ ಇಲ್ಲವೇ?",
+    "signUpLink": "ಸೈನ್ ಅಪ್ ಮಾಡಿ"
+  },
+  "SignupPage": {
+    "title": "ಸೈನ್ ಅಪ್ ಮಾಡಿ",
+    "description": "ಖಾತೆಯನ್ನು ರಚಿಸಲು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನಮೂದಿಸಿ.",
+    "emailLabel": "ಇಮೇಲ್",
+    "passwordLabel": "ಪಾಸ್‌ವರ್ಡ್",
+    "languageLabel": "ಭಾಷೆ",
+    "languagePlaceholder": "ಒಂದು ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "signUpButton": "ಸೈನ್ ಅಪ್ ಮಾಡಿ",
+    "haveAccount": "ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?",
+    "loginLink": "ಲಾಗಿನ್"
+  },
+  "ClaimCard": {
+    "unknownSource": "ಅജ്ഞಾತ ಮೂಲ",
+    "verifiedIn": "{minutes} ನಿಮಿಷಗಳಲ್ಲಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+    "confidenceScore": "ವಿಶ್ವಾಸಾರ್ಹತೆಯ ಅಂಕ",
+    "communityAgreesTooltip": "ಸಮುದಾಯವು ಒಪ್ಪುತ್ತದೆ",
+    "communityDisagreesTooltip": "ಸಮುદಾಯವು ಒಪ್ಪುವುದಿಲ್ಲ",
+    "cannotVoteOnMock": "ಅಣಕು ಹಕ್ಕುಗಳ ಮೇಲೆ ಮತ ಚಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "explainButton": "ವಿವರಿಸಿ",
+    "status": {
+      "Verified": "ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+      "False": "ಸುಳ್ಳು",
+      "Inconclusive": "অমীমাংসিত"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI ವಿವರಣೆ",
+    "description": "ಪರಿಶೀಲಿಸಿದ ಮಾಹಿತಿಯ ಆಧಾರದ ಮೇಲೆ ವಿವರಣೆಕಾರ ಏಜೆಂಟ್‌ನಿಂದ ರಚಿಸಲಾಗಿದೆ.",
+    "notAvailable": "ಈ ಹಕ್ಕಿಗೆ ವಿವರಣೆ ಲಭ್ಯವಿಲ್ಲ."
+  },
+  "MisinformationChecker": {
+    "placeholder": "ಒಂದು ಸುದ್ದಿ தலைப்பு, ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ ಪೋಸ್ಟ್, ಅಥವಾ ನೀವು ಪರಿಶೀಲಿಸಲು ಬಯಸುವ ಯಾವುದೇ ಪಠ್ಯವನ್ನು ಅಂಟಿಸಿ...",
+    "buttonText": "ತಪ್ಪು ಮಾಹಿತಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ",
+    "errorMinChars": "దయచేసి కనీసం 20 అక్షరాలను నమోదు చేయండి.",
+    "errorInvalidInput": "ಅಮಾನ್ಯ ಇನ್‌ಪುಟ್.",
+    "errorApi": "ಪಠ್ಯವನ್ನು ವಿಶ್ಲೇಷಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    "alert": {
+      "potentialMisinformation": "ಸಂಭಾವ್ಯ ತಪ್ಪು ಮಾಹಿತಿ ಪತ್ತೆಯಾಗಿದೆ",
+      "noMisinformation": "ಯಾವುದೇ ತಪ್ಪು ಮಾಹಿತಿ ಪತ್ತೆಯಾಗಿಲ್ಲ",
+      "confidence": "ವಿಶ್ವಾಸ",
+      "reason": "ಕಾರಣ"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಿ",
+    "description": "ಕೆಳಗೆ ನಿಮ್ಮ ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನಮೂದಿಸಿ.",
+    "newPassword": "ಹೊಸ ಪಾಸ್‌ವರ್ಡ್",
+    "confirmNewPassword": "ಹೊಸ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಖಚಿತಪಡಿಸಿ",
+    "updateButton": "ಪಾಸ್‌ವರ್ಡ್ ನವೀಕರಿಸಿ",
+    "cancelButton": "ರದ್ದುಮಾಡಿ",
+    "toast": {
+      "successTitle": "ಪಾಸ್‌ವರ್ಡ್ ನವೀಕರಿಸಲಾಗಿದೆ",
+      "successDescription": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಬದಲಾಯಿಸಲಾಗಿದೆ.",
+      "failTitle": "ನವೀಕರಣ ವಿಫಲವಾಗಿದೆ",
+      "failDescription": "ನಿಮ್ಮ ಅಧಿವೇಶನವು ಅವಧಿ ముగిసిರಬಹುದು. ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಬದಲಾಯಿಸಲು దయచేసి మళ్లీ లాగిన్ చేయండి.",
+      "errorTitle": "ದೋಷ"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "ಪ್ರೊಫೈಲ್ ನವೀಕರಿಸಲಾಗಿದೆ",
+        "successDescription": "ನಿಮ್ಮ ಪ್ರದರ್ಶನ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ.",
+        "failTitle": "ನವೀಕರಣ ವಿಫಲವಾಗಿದೆ",
+        "errorTitle": "ದೋಷ",
+        "nameTooShort": "ಪ್ರದರ್ಶನ ಹೆಸರು ಕನಿಷ್ಠ 3 అక్షరాలు ఉండాలి."
+    }
+  }
+}

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+    "dashboardTooltip": "ਡੈਸ਼ਬੋਰਡ",
+    "chromeExtension": "ਕਰੋਮ ਐਕਸਟੈਂਸ਼ਨ",
+    "extensionTooltip": "ਕਰੋਮ ਐਕਸਟੈਂਸ਼ਨ",
+    "myAccount": "ਮੇਰਾ ਖਾਤਾ",
+    "profile": "ਪ੍ਰੋਫਾਈਲ",
+    "settings": "ਸੈਟਿੰਗਾਂ",
+    "logout": "ਲੌਗ ਆਊਟ",
+    "userRole": "ਉਪਭੋਗਤਾ"
+  },
+  "DashboardPage": {
+    "title": "ਦਾਅਵਾ ਖੋਜ ਡੈਸ਼ਬੋਰਡ",
+    "subtitle": "ਸਕਾਊਟ ਏਜੰਟ ਦੁਆਰਾ ਖੋਜੇ ਗਏ ਰੁਝਾਨ ਵਾਲੇ ਦਾਅਵਿਆਂ ਦੀ ਲਾਈਵ ਫੀਡ।"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth ਕਰੋਮ ਐਕਸਟੈਂਸ਼ਨ",
+    "description": "LocalTruth ਦੀ AI ਤਸਦੀਕ ਦੀ ਸ਼ਕਤੀ ਨੂੰ ਸਿੱਧਾ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਲਿਆਓ। ਸੋਸ਼ਲ ਮੀਡੀਆ, ਈਮੇਲਾਂ ਅਤੇ ਖ਼ਬਰਾਂ ਦੇ ਲੇਖਾਂ 'ਤੇ ਅਸਲ-ਸਮੇਂ ਵਿੱਚ ਸੰਭਾਵੀ ਗਲਤ ਜਾਣਕਾਰੀ ਦਾ ਪਤਾ ਲਗਾਓ।",
+    "installButton": "ਕਰੋਮ ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਕਰੋ",
+    "comingSoon": "ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
+    "simulatorTitle": "ਐਕਸਟੈਂਸ਼ਨ ਸਿਮੂਲੇਟਰ",
+    "simulatorDescription": "ਖੋਜ ਇੰਜਣ ਦੀ ਜਾਂਚ ਕਰੋ। ਹੇਠਾਂ ਕੋਈ ਵੀ ਟੈਕਸਟ ਪੇਸਟ ਕਰੋ ਅਤੇ ਸਾਡਾ ਸਕਾਊਟ ਏਜੰਟ ਸੰਭਾਵੀ ਗਲਤ ਜਾਣਕਾਰੀ ਲਈ ਇਸਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੇਗਾ।"
+  },
+  "ProfilePage": {
+    "title": "ਪ੍ਰੋਫਾਈਲ",
+    "subtitle": "ਆਪਣੇ ਜਨਤਕ ਪ੍ਰੋਫਾਈਲ ਅਤੇ ਖਾਤੇ ਦੇ ਵੇਰਵਿਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+    "accountInfoTitle": "ਖਾਤਾ ਜਾਣਕਾਰੀ",
+    "accountInfoDescription": "ਆਪਣਾ ਡਿਸਪਲੇ ਨਾਮ ਅੱਪਡੇਟ ਕਰੋ ਅਤੇ ਆਪਣਾ ਖਾਤਾ ਈਮੇਲ ਦੇਖੋ।",
+    "emailLabel": "ਈ - ਮੇਲ",
+    "displayNameLabel": "ਡਿਸਪਲੇ ਨਾਮ",
+    "saveButton": "ਤਬਦੀਲੀਆਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ"
+  },
+  "SettingsPage": {
+    "title": "ਸੈਟਿੰਗਾਂ",
+    "subtitle": "ਆਪਣੇ ਖਾਤੇ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਸੈਟਿੰਗਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ।",
+    "preferences": {
+      "title": "ਤਰਜੀਹਾਂ",
+      "description": "ਆਪਣੇ ਤਜ਼ਰਬੇ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ।"
+    },
+    "language": {
+      "label": "ਭਾਸ਼ਾ",
+      "placeholder": "ਭਾਸ਼ਾ ਚੁਣੋ",
+      "description": "ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਡਿਸਪਲੇ ਭਾਸ਼ਾ ਚੁਣੋ।"
+    },
+    "password": {
+      "label": "ਪਾਸਵਰਡ",
+      "button": "ਪਾਸਵਰਡ ਬਦਲੋ",
+      "description": "ਆਪਣਾ ਖਾਤਾ ਪਾਸਵਰਡ ਅੱਪਡੇਟ ਕਰੋ।"
+    }
+  },
+  "LoginPage": {
+    "title": "ਲਾਗਿਨ",
+    "description": "ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਲਾਗਿਨ ਕਰਨ ਲਈ ਹੇਠਾਂ ਆਪਣਾ ਈਮੇਲ ਦਰਜ ਕਰੋ।",
+    "emailLabel": "ਈ - ਮੇਲ",
+    "passwordLabel": "ਪਾਸਵਰਡ",
+    "signInButton": "ਸਾਈਨ ਇਨ ਕਰੋ",
+    "noAccount": "ਖਾਤਾ ਨਹੀਂ ਹੈ?",
+    "signUpLink": "ਸਾਈਨ ਅਪ ਕਰੋ"
+  },
+  "SignupPage": {
+    "title": "ਸਾਈਨ ਅਪ ਕਰੋ",
+    "description": "ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਆਪਣੀ ਜਾਣਕਾਰੀ ਦਰਜ ਕਰੋ।",
+    "emailLabel": "ਈ - ਮੇਲ",
+    "passwordLabel": "ਪਾਸਵਰਡ",
+    "languageLabel": "ਭਾਸ਼ਾ",
+    "languagePlaceholder": "ਇੱਕ ਭਾਸ਼ਾ ਚੁਣੋ",
+    "signUpButton": "ਸਾਈਨ ਅਪ ਕਰੋ",
+    "haveAccount": "ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਖਾਤਾ ਹੈ?",
+    "loginLink": "ਲਾਗਿਨ"
+  },
+  "ClaimCard": {
+    "unknownSource": "ਅਣਜਾਣ ਸਰੋਤ",
+    "verifiedIn": "{minutes} ਮਿੰਟਾਂ ਵਿੱਚ ਤਸਦੀਕ ਕੀਤਾ ਗਿਆ",
+    "confidenceScore": "ਵਿਸ਼ਵਾਸ ਸਕੋਰ",
+    "communityAgreesTooltip": "ਭਾਈਚਾਰਾ ਸਹਿਮਤ ਹੈ",
+    "communityDisagreesTooltip": "ਭਾਈਚਾਰਾ ਅਸਹਿਮਤ ਹੈ",
+    "cannotVoteOnMock": "ਨਕਲੀ ਦਾਅਵਿਆਂ 'ਤੇ ਵੋਟ ਨਹੀਂ ਪਾ ਸਕਦੇ",
+    "explainButton": "ਸਮਝਾਓ",
+    "status": {
+      "Verified": "ਤਸਦੀਕ ਕੀਤਾ ਗਿਆ",
+      "False": "ਗਲਤ",
+      "Inconclusive": "ਬੇनਤੀਜਾ"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI ਵਿਆਖਿਆ",
+    "description": "ਤਸਦੀਕ ਕੀਤੀ ਜਾਣਕਾਰੀ ਦੇ ਆਧਾਰ 'ਤੇ ਵਿਆਖਿਆਕਾਰ ਏਜੰਟ ਦੁਆਰਾ ਤਿਆਰ ਕੀਤਾ ਗਿਆ।",
+    "notAvailable": "ਇਸ ਦਾਅਵੇ ਲਈ ਕੋਈ ਵਿਆਖਿਆ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"
+  },
+  "MisinformationChecker": {
+    "placeholder": "ਇੱਕ ਖ਼ਬਰ ਦੀ ਸੁਰਖੀ, ਸੋਸ਼ਲ ਮੀਡੀਆ ਪੋਸਟ, ਜਾਂ ਕੋਈ ਵੀ ਟੈਕਸਟ ਪੇਸਟ ਕਰੋ ਜਿਸਦੀ ਤੁਸੀਂ ਤਸਦੀਕ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ...",
+    "buttonText": "ਗਲਤ ਜਾਣਕਾਰੀ ਲਈ ਜਾਂਚ ਕਰੋ",
+    "errorMinChars": "ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ 20 ਅੱਖਰ ਦਾਖਲ ਕਰੋ।",
+    "errorInvalidInput": "ਅਯੋਗ ਇਨਪੁਟ।",
+    "errorApi": "ਟੈਕਸਟ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਦੇ ਸਮੇਂ ਇੱਕ ਗਲਤੀ ਆਈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "alert": {
+      "potentialMisinformation": "ਸੰਭਾਵੀ ਗਲਤ ਜਾਣਕਾਰੀ ਦਾ ਪਤਾ ਲੱਗਾ",
+      "noMisinformation": "ਕੋਈ ਗਲਤ ਜਾਣਕਾਰੀ ਨਹੀਂ ਮਿਲੀ",
+      "confidence": "ਵਿਸ਼ਵਾਸ",
+      "reason": "ਕਾਰਨ"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "ਪਾਸਵਰਡ ਬਦਲੋ",
+    "description": "ਹੇਠਾਂ ਆਪਣਾ ਨਵਾਂ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ।",
+    "newPassword": "ਨਵਾਂ ਪਾਸਵਰਡ",
+    "confirmNewPassword": "ਨਵੇਂ ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+    "updateButton": "ਪਾਸਵਰਡ ਅੱਪਡੇਟ ਕਰੋ",
+    "cancelButton": "ਰੱਦ ਕਰੋ",
+    "toast": {
+      "successTitle": "ਪਾਸਵਰਡ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "successDescription": "ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਬਦਲ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
+      "failTitle": "ਅੱਪਡੇਟ ਅਸਫਲ",
+      "failDescription": "ਤੁਹਾਡਾ ਸੈਸ਼ਨ ਖਤਮ ਹੋ ਸਕਦਾ ਹੈ। ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲਣ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਲੌਗਇਨ ਕਰੋ।",
+      "errorTitle": "ਗਲਤੀ"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "ਪ੍ਰੋਫਾਈਲ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+        "successDescription": "ਤੁਹਾਡਾ ਡਿਸਪਲੇ ਨਾਮ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
+        "failTitle": "ਅੱਪਡੇਟ ਅਸਫਲ",
+        "errorTitle": "ਗਲਤੀ",
+        "nameTooShort": "ਡਿਸਪਲੇ ਨਾਮ ਘੱਟੋ-ਘੱਟ 3 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+    }
+  }
+}

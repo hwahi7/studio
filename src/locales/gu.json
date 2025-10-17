@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ડેશબોર્ડ",
+    "dashboardTooltip": "ડેશબોર્ડ",
+    "chromeExtension": "ક્રોમ એક્સટેન્શન",
+    "extensionTooltip": "ક્રોમ એક્સટેન્શન",
+    "myAccount": "મારું ખાતું",
+    "profile": "પ્રોફાઇલ",
+    "settings": "સેટિંગ્સ",
+    "logout": "લૉગ આઉટ",
+    "userRole": "વપરાશકર્તા"
+  },
+  "DashboardPage": {
+    "title": "દાવો શોધ ડેશબોર્ડ",
+    "subtitle": "સ્કાઉટ એજન્ટ દ્વારા શોધાયેલ ટ્રેન્ડિંગ દાવાઓનો લાઇવ ફીડ."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth ક્રોમ એક્સટેન્શન",
+    "description": "LocalTruth ની AI ચકાસણીની શક્તિ સીધી તમારા બ્રાઉઝરમાં લાવો. સોશિયલ મીડિયા, ઇમેઇલ્સ અને સમાચાર લેખો પર રીઅલ-ટાઇમમાં સંભવિત ખોટી માહિતી શોધો.",
+    "installButton": "ક્રોમ એક્સટેન્શન ઇન્સ્ટોલ કરો",
+    "comingSoon": "ટૂંક સમયમાં આવી રહ્યું છે",
+    "simulatorTitle": "એક્સટેન્શન સિમ્યુલેટર",
+    "simulatorDescription": "શોધ એન્જિનનું પરીક્ષણ કરો. નીચે કોઈપણ ટેક્સ્ટ પેસ્ટ કરો અને અમારો સ્કાઉટ એજન્ટ સંભવિત ખોટી માહિતી માટે તેનું વિશ્લેષણ કરશે."
+  },
+  "ProfilePage": {
+    "title": "પ્રોફાઇલ",
+    "subtitle": "તમારી જાહેર પ્રોફાઇલ અને એકાઉન્ટ વિગતોનું સંચાલન કરો.",
+    "accountInfoTitle": "એકાઉન્ટ માહિતી",
+    "accountInfoDescription": "તમારું ડિસ્પ્લે નામ અપડેટ કરો અને તમારું એકાઉન્ટ ઇમેઇલ જુઓ.",
+    "emailLabel": "ઇમેઇલ",
+    "displayNameLabel": "ડિસ્પ્લે નામ",
+    "saveButton": "ફેરફારો સાચવો"
+  },
+  "SettingsPage": {
+    "title": "સેટિંગ્સ",
+    "subtitle": "તમારા એકાઉન્ટ અને એપ્લિકેશન સેટિંગ્સનું સંચાલન કરો.",
+    "preferences": {
+      "title": "પસંદગીઓ",
+      "description": "તમારા અનુભવને કસ્ટમાઇઝ કરો."
+    },
+    "language": {
+      "label": "ભાષા",
+      "placeholder": "ભાષા પસંદ કરો",
+      "description": "એપ્લિકેશન માટે ડિસ્પ્લે ભાષા પસંદ કરો."
+    },
+    "password": {
+      "label": "પાસવર્ડ",
+      "button": "પાસવર્ડ બદલો",
+      "description": "તમારો એકાઉન્ટ પાસવર્ડ અપડેટ કરો."
+    }
+  },
+  "LoginPage": {
+    "title": "લૉગિન",
+    "description": "તમારા ખાતામાં લૉગિન કરવા માટે નીચે તમારો ઇમેઇલ દાખલ કરો.",
+    "emailLabel": "ઇમેઇલ",
+    "passwordLabel": "પાસવર્ડ",
+    "signInButton": "સાઇન ઇન કરો",
+    "noAccount": "ખાતું નથી?",
+    "signUpLink": "સાઇન અપ કરો"
+  },
+  "SignupPage": {
+    "title": "સાઇન અપ કરો",
+    "description": "ખાતું બનાવવા માટે તમારી માહિતી દાખલ કરો.",
+    "emailLabel": "ઇમેઇલ",
+    "passwordLabel": "પાસવર્ડ",
+    "languageLabel": "ભાષા",
+    "languagePlaceholder": "એક ભાષા પસંદ કરો",
+    "signUpButton": "સાઇન અપ કરો",
+    "haveAccount": "પહેલેથી જ ખાતું છે?",
+    "loginLink": "લૉગિન"
+  },
+  "ClaimCard": {
+    "unknownSource": "અજ્ઞાત સ્ત્રોત",
+    "verifiedIn": "{minutes} મિનિટમાં ચકાસાયેલ",
+    "confidenceScore": "આત્મવિશ્વાસ સ્કોર",
+    "communityAgreesTooltip": "સમુદાય સંમત છે",
+    "communityDisagreesTooltip": "સમુદાય અસંમત છે",
+    "cannotVoteOnMock": "મોક દાવાઓ પર મત આપી શકતા નથી",
+    "explainButton": "સમજાવો",
+    "status": {
+      "Verified": "ચકાસાયેલ",
+      "False": "ખોટું",
+      "Inconclusive": "અનિર્ણાયક"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI સમજૂતી",
+    "description": "ચકાસાયેલ માહિતીના આધારે સમજાવનાર એજન્ટ દ્વારા જનરેટ.",
+    "notAvailable": "આ દાવા માટે કોઈ સમજૂતી ઉપલબ્ધ નથી."
+  },
+  "MisinformationChecker": {
+    "placeholder": "એક સમાચાર હેડલાઇન, સોશિયલ મીડિયા પોસ્ટ અથવા તમે ચકાસવા માંગતા હો તે કોઈપણ ટેક્સ્ટ પેસ્ટ કરો...",
+    "buttonText": "ખોટી માહિતી માટે તપાસો",
+    "errorMinChars": "કૃપા કરીને ઓછામાં ઓછા 20 અક્ષરો દાખલ કરો.",
+    "errorInvalidInput": "અમાન્ય ઇનપુટ.",
+    "errorApi": "ટેક્સ્ટનું વિશ્લેષણ કરતી વખતે ભૂલ આવી. કૃપા કરીને ફરી પ્રયાસ કરો.",
+    "alert": {
+      "potentialMisinformation": "સંભવિત ખોટી માહિતી મળી",
+      "noMisinformation": "કોઈ ખોટી માહિતી મળી નથી",
+      "confidence": "આત્મવિશ્વાસ",
+      "reason": "કારણ"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "પાસવર્ડ બદલો",
+    "description": "નીચે તમારો નવો પાસવર્ડ દાખલ કરો.",
+    "newPassword": "નવો પાસવર્ડ",
+    "confirmNewPassword": "નવો પાસવર્ડ ખાતરી કરો",
+    "updateButton": "પાસવર્ડ અપડેટ કરો",
+    "cancelButton": "રદ કરો",
+    "toast": {
+      "successTitle": "પાસવર્ડ અપડેટ થયો",
+      "successDescription": "તમારો પાસવર્ડ સફળતાપૂર્વક બદલાઈ ગયો છે.",
+      "failTitle": "અપડેટ નિષ્ફળ",
+      "failDescription": "તમારું સત્ર સમાપ્ત થઈ ગયું હોઈ શકે છે. તમારો પાસવર્ડ બદલવા માટે કૃપા કરીને ફરીથી લૉગિન કરો.",
+      "errorTitle": "ભૂલ"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "પ્રોફાઇલ અપડેટ થઈ",
+        "successDescription": "તમારું ડિસ્પ્લે નામ સફળતાપૂર્વક અપડેટ થયું છે.",
+        "failTitle": "અપડેટ નિષ્ફળ",
+        "errorTitle": "ભૂલ",
+        "nameTooShort": "ડિસ્પ્લે નામ ઓછામાં ઓછું 3 અક્ષરોનું હોવું જોઈએ."
+    }
+  }
+}

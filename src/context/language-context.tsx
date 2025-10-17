@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
@@ -27,6 +28,12 @@ import thMessages from '@/locales/th.json';
 import ukMessages from '@/locales/uk.json';
 import roMessages from '@/locales/ro.json';
 import elMessages from '@/locales/el.json';
+import taMessages from '@/locales/ta.json';
+import teMessages from '@/locales/te.json';
+import knMessages from '@/locales/kn.json';
+import guMessages from '@/locales/gu.json';
+import paMessages from '@/locales/pa.json';
+import mlMessages from '@/locales/ml.json';
 
 type Messages = Record<string, any>;
 const messages: Record<string, Messages> = {
@@ -55,6 +62,12 @@ const messages: Record<string, Messages> = {
   uk: ukMessages,
   ro: roMessages,
   el: elMessages,
+  ta: taMessages,
+  te: teMessages,
+  kn: knMessages,
+  gu: guMessages,
+  pa: paMessages,
+  ml: mlMessages,
 };
 
 export type TFunction = (key: string, values?: Record<string, string | number>) => string;

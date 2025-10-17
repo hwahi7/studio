@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "dashboardTooltip": "డాష్‌బోర్డ్",
+    "chromeExtension": "Chrome పొడిగింపు",
+    "extensionTooltip": "Chrome పొడిగింపు",
+    "myAccount": "నా ఖాతా",
+    "profile": "ప్రొఫైల్",
+    "settings": "సెట్టింగ్‌లు",
+    "logout": "లాగ్ అవుట్",
+    "userRole": "వినియోగదారు"
+  },
+  "DashboardPage": {
+    "title": "క్లెయిమ్ గుర్తింపు డాష్‌బోర్డ్",
+    "subtitle": "స్కౌట్ ఏజెంట్ ద్వారా గుర్తించబడిన ట్రెండింగ్ క్లెయిమ్‌ల ప్రత్యక్ష ప్రసారం."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome పొడిగింపు",
+    "description": "LocalTruth యొక్క AI ధృవీకరణ శక్తిని నేరుగా మీ బ్రౌజర్‌కు తీసుకురండి. సోషల్ మీడియా, ఇమెయిల్‌లు మరియు వార్తా కథనాలలో నిజ సమయంలో సంభావ్య తప్పుడు సమాచారాన్ని గుర్తించండి.",
+    "installButton": "Chrome పొడిగింపును ఇన్‌స్టాల్ చేయండి",
+    "comingSoon": "త్వరలో వస్తుంది",
+    "simulatorTitle": "పొడిగింపు సిమ్యులేటర్",
+    "simulatorDescription": "గుర్తింపు ఇంజిన్‌ను పరీక్షించండి. కింద ఏదైనా వచనాన్ని అతికించండి మరియు మా స్కౌట్ ఏజెంట్ సంభావ్య తప్పుడు సమాచారం కోసం దాన్ని విశ్లేషిస్తుంది."
+  },
+  "ProfilePage": {
+    "title": "ప్రొఫైల్",
+    "subtitle": "మీ పబ్లిక్ ప్రొఫైల్ మరియు ఖాతా వివరాలను నిర్వహించండి.",
+    "accountInfoTitle": "ఖాతా సమాచారం",
+    "accountInfoDescription": "మీ ప్రదర్శన పేరును నవీకరించండి మరియు మీ ఖాతా ఇమెయిల్‌ను వీక్షించండి.",
+    "emailLabel": "ఇమెయిల్",
+    "displayNameLabel": "ప్రదర్శన పేరు",
+    "saveButton": "మార్పులను సేవ్ చేయండి"
+  },
+  "SettingsPage": {
+    "title": "సెట్టింగ్‌లు",
+    "subtitle": "మీ ఖాతా మరియు అప్లికేషన్ సెట్టింగ్‌లను నిర్వహించండి.",
+    "preferences": {
+      "title": "ప్రాధాన్యతలు",
+      "description": "మీ అనుభవాన్ని అనుకూలీకరించండి."
+    },
+    "language": {
+      "label": "భాష",
+      "placeholder": "భాషను ఎంచుకోండి",
+      "description": "అప్లికేషన్ కోసం ప్రదర్శన భాషను ఎంచుకోండి."
+    },
+    "password": {
+      "label": "పాస్‌వర్డ్",
+      "button": "పాస్‌వర్డ్ మార్చండి",
+      "description": "మీ ఖాతా పాస్‌వర్డ్‌ను నవీకరించండి."
+    }
+  },
+  "LoginPage": {
+    "title": "లాగిన్",
+    "description": "మీ ఖాతాకు లాగిన్ చేయడానికి కింద మీ ఇమెయిల్‌ను నమోదు చేయండి.",
+    "emailLabel": "ఇమెయిల్",
+    "passwordLabel": "పాస్‌వర్డ్",
+    "signInButton": "సైన్ ఇన్ చేయండి",
+    "noAccount": "ఖాతా లేదా?",
+    "signUpLink": "సైన్ అప్ చేయండి"
+  },
+  "SignupPage": {
+    "title": "సైన్ అప్ చేయండి",
+    "description": "ఖాతాను సృష్టించడానికి మీ సమాచారాన్ని నమోదు చేయండి.",
+    "emailLabel": "ఇమెయిల్",
+    "passwordLabel": "పాస్‌వర్డ్",
+    "languageLabel": "భాష",
+    "languagePlaceholder": "ఒక భాషను ఎంచుకోండి",
+    "signUpButton": "సైన్ అప్ చేయండి",
+    "haveAccount": "ఇప్పటికే ఖాతా ఉందా?",
+    "loginLink": "లాగిన్"
+  },
+  "ClaimCard": {
+    "unknownSource": "తెలియని మూలం",
+    "verifiedIn": "{minutes} నిమిషాల్లో ధృవీకరించబడింది",
+    "confidenceScore": "విశ్వాస స్కోరు",
+    "communityAgreesTooltip": "సంఘం అంగీకరిస్తుంది",
+    "communityDisagreesTooltip": "సంఘం అంగీకరించదు",
+    "cannotVoteOnMock": "మాక్ క్లెయిమ్‌లపై ఓటు వేయలేరు",
+    "explainButton": "వివరించండి",
+    "status": {
+      "Verified": "ధృవీకరించబడింది",
+      "False": "తప్పు",
+      "Inconclusive": "முடிவற்ற"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI వివరణ",
+    "description": "ధృవీకరించబడిన సమాచారం ఆధారంగా వివరణకర్త ఏజెంట్ ద్వారా రూపొందించబడింది.",
+    "notAvailable": "ఈ క్లెయిమ్ కోసం వివరణ అందుబాటులో లేదు."
+  },
+  "MisinformationChecker": {
+    "placeholder": "ఒక వార్తా శీర్షిక, సోషల్ మీడియా పోస్ట్ లేదా మీరు ధృవీకరించాలనుకుంటున్న ఏదైనా వచనాన్ని అతికించండి...",
+    "buttonText": "తప్పుడు సమాచారం కోసం తనిఖీ చేయండి",
+    "errorMinChars": "దయచేసి కనీసం 20 అక్షరాలను నమోదు చేయండి.",
+    "errorInvalidInput": "చెల్లని ఇన్‌పుట్.",
+    "errorApi": "వచనాన్ని విశ్లేషించేటప్పుడు లోపం సంభవించింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+    "alert": {
+      "potentialMisinformation": "సంభావ్య తప్పుడు సమాచారం కనుగొనబడింది",
+      "noMisinformation": "తప్పుడు సమాచారం కనుగొనబడలేదు",
+      "confidence": "విశ్వాసం",
+      "reason": "కారణం"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "పాస్‌వర్డ్ మార్చండి",
+    "description": "కింద మీ కొత్త పాస్‌వర్డ్‌ను నమోదు చేయండి.",
+    "newPassword": "కొత్త పాస్‌వర్డ్",
+    "confirmNewPassword": "కొత్త పాస్‌వర్డ్‌ను నిర్ధారించండి",
+    "updateButton": "పాస్‌వర్డ్‌ను నవీకరించండి",
+    "cancelButton": "రద్దు చేయండి",
+    "toast": {
+      "successTitle": "పాస్‌వర్డ్ నవీకరించబడింది",
+      "successDescription": "మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది.",
+      "failTitle": "నవీకరణ విఫలమైంది",
+      "failDescription": "మీ సెషన్ గడువు ముగిసి ఉండవచ్చు. మీ పాస్‌వర్డ్ మార్చడానికి దయచేసి మళ్లీ లాగిన్ చేయండి.",
+      "errorTitle": "లోపం"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "ప్రొఫైల్ నవీకరించబడింది",
+        "successDescription": "మీ ప్రదర్శన పేరు విజయవంతంగా నవీకరించబడింది.",
+        "failTitle": "నవీకరణ విఫలమైంది",
+        "errorTitle": "లోపం",
+        "nameTooShort": "ప్రదర్శన పేరు కనీసం 3 అక్షరాలు ఉండాలి."
+    }
+  }
+}
