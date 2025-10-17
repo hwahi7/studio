@@ -47,8 +47,12 @@ export default function DashboardPage() {
           Live feed of trending claims detected by Scout Agent.
         </p>
       </header>
-      {isLoading && <div className="flex justify-center items-center h-40"><Loader2 className="h-8 w-8 animate-spin text-primary"/></div>}
-      {claims && <ClaimList claims={claims} />}
+      {isLoading && (
+        <div className="flex justify-center items-center h-64">
+          <Loader2 className="h-8 w-8 animate-spin text-primary"/>
+        </div>
+      )}
+      {!isLoading && claims && <ClaimList claims={claims} />}
     </div>
   );
 }

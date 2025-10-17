@@ -1,7 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { Timestamp } from "firebase/firestore";
+import { Timestamp, collection, addDoc, getFirestore } from "firebase/firestore";
+import { initializeFirebase } from "@/firebase/index";
 import { calculateConfidenceScore } from "@/ai/flows/calculate-confidence-score";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
@@ -49,19 +50,44 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
     };
   }
 
+  const textToAnalyze = validatedFields.data.text;
+
   try {
     const result = await detectTrendingMisinformation({
-      webPageContent: validatedFields.data.text,
+      webPageContent: textToAnalyze,
     });
+    
+    // Save to Firestore
+    try {
+        const { firestore } = initializeFirebase();
+        const claimsCollection = collection(firestore, "claims");
+        const newClaim: Omit<Claim, "id"> = {
+            content: textToAnalyze,
+            sourceUrls: ['User Input via Extension'],
+            detectionTimestamp: Timestamp.now(),
+            lastUpdatedTimestamp: Timestamp.now(),
+            status: result.isMisinformation ? "False" : "Verified",
+            confidenceScore: result.isMisinformation ? result.confidenceScore : 1 - result.confidenceScore,
+            language: "en", // Default language for now
+            upvotes: 0,
+            downvotes: 0,
+        };
+        await addDoc(claimsCollection, newClaim);
+    } catch (dbError) {
+        console.error("Failed to save claim to Firestore:", dbError);
+        // We don't block the user response for this, just log the error
+    }
+
+
     return {
       message: 'success',
       data: result,
-      text: validatedFields.data.text,
+      text: textToAnalyze,
     };
   } catch (error) {
     return {
       message: 'An error occurred while analyzing the text. Please try again.',
-      text: validatedFields.data.text,
+      text: textToAnalyze,
     };
   }
 }
