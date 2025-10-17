@@ -102,6 +102,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
 
       let newUpvotes = claimDoc.data().upvotes || 0;
       let newDownvotes = claimDoc.data().downvotes || 0;
+      const currentStatus = claimDoc.data().status;
 
       if (voted === type) { // un-voting
         if (type === 'up') newUpvotes--;
@@ -115,7 +116,16 @@ export function ClaimCard({ claim }: { claim: Claim }) {
         setVoted(type);
       }
       
-      transaction.update(claimRef, { upvotes: newUpvotes, downvotes: newDownvotes });
+      const updateData: { upvotes: number; downvotes: number; status?: ClaimStatus } = {
+          upvotes: newUpvotes,
+          downvotes: newDownvotes,
+      };
+
+      if (type === 'up' && newUpvotes >= 100 && currentStatus !== "Verified") {
+        updateData.status = "Verified";
+      }
+
+      transaction.update(claimRef, updateData);
     }).catch((e) => {
         errorEmitter.emit(
         'permission-error',

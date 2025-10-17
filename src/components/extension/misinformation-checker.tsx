@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
@@ -44,24 +45,32 @@ export function MisinformationChecker() {
       const claimsCollection = collection(firestore, "claims");
       const result = state.data;
       
-      let status: ClaimStatus = "Inconclusive";
+      let status: ClaimStatus;
       let confidence = result.confidenceScore;
+      const INCONCLUSIVE_THRESHOLD = 0.4; 
 
-      const INCONCLUSIVE_THRESHOLD = 0.6; 
-
-      if (confidence < INCONCLUSIVE_THRESHOLD) {
-        status = "Inconclusive";
-      } else if (result.isMisinformation) {
-        status = "False";
+      if (result.isMisinformation) {
+          if (confidence > INCONCLUSIVE_THRESHOLD) {
+            status = "False";
+          } else {
+            status = "Inconclusive";
+          }
       } else {
-        status = "Verified";
-        confidence = 1 - confidence; 
+          // If it's not misinformation, it should be Verified.
+          // The confidence score from the model reflects certainty of "not misinformation".
+          if (confidence > INCONCLUSIVE_THRESHOLD) {
+              status = "Verified";
+          } else {
+              status = "Inconclusive";
+          }
       }
       
-      const claimForExplanation = {
+      const claimForExplanation: Pick<Claim, 'content' | 'status' | 'confidenceScore' | 'upvotes' | 'downvotes'> = {
         content: state.text,
         status: status,
         confidenceScore: confidence,
+        upvotes: 0,
+        downvotes: 0,
       };
 
       // Generate the explanation now, to be stored with the claim.
@@ -124,7 +133,7 @@ export function MisinformationChecker() {
                <CheckCircle2 className="h-4 w-4" />
               <AlertTitle>No Misinformation Detected</AlertTitle>
               <AlertDescription>
-                 <p className="font-semibold">Confidence: {Math.round((1 - state.data.confidenceScore) * 100)}%</p>
+                 <p className="font-semibold">Confidence: {Math.round(state.data.confidenceScore * 100)}%</p>
                 <p>
                   <strong>Reason:</strong> {state.data.reason}
                 </p>
