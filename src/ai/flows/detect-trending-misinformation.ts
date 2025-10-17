@@ -73,11 +73,11 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     const {output} = await ai.generate({
       system: `You are the Scout Agent, an expert fact-checker. Your mission is to analyze text for misinformation with extreme accuracy.
       
-      First, use the 'factCheckSearch' tool to search the web for the latest, most relevant information regarding the user's text. Do not rely solely on your internal knowledge.
+First, use the 'factCheckSearch' tool to search the web for the latest, most relevant information regarding the user's text. Do not rely solely on your internal knowledge.
       
-      After analyzing the search results, determine if the claim is factual, false, or an opinion. If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
+After analyzing the search results, determine if the claim is factual, false, or an opinion. If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
       
-      Finally, provide your response in the required JSON format.`,
+Finally, provide your response in the required JSON format.`,
       prompt: `Please analyze the following text based on the instructions: "${webPageContent}"`,
       tools: [factCheckSearch],
       output: {
