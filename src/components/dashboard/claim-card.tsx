@@ -85,6 +85,10 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   const [translatedContent, setTranslatedContent] = React.useState<string | null>(null);
   const [isTranslating, setIsTranslating] = React.useState(false);
 
+  const [localUpvotes, setLocalUpvotes] = React.useState(claim.upvotes || 0);
+  const [localDownvotes, setLocalDownvotes] = React.useState(claim.downvotes || 0);
+  const [localConfidenceScore, setLocalConfidenceScore] = React.useState(claim.confidenceScore);
+
   const [_, setTick] = React.useState(0);
 
   React.useEffect(() => {
@@ -93,6 +97,12 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     }, 60000); 
     return () => clearInterval(timer);
   }, []);
+  
+  React.useEffect(() => {
+    setLocalUpvotes(claim.upvotes || 0);
+    setLocalDownvotes(claim.downvotes || 0);
+    setLocalConfidenceScore(claim.confidenceScore);
+  }, [claim]);
 
   React.useEffect(() => {
     const translateContent = async () => {
@@ -124,7 +134,8 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     const claimRef = doc(firestore, "claims", claim.id);
     const VOTE_IMPACT = 0.01;
 
-    runTransaction(firestore, async (transaction) => {
+    try {
+      const { newUpvotes, newDownvotes, newConfidenceScore } = await runTransaction(firestore, async (transaction) => {
         const claimDoc = await transaction.get(claimRef);
         if (!claimDoc.exists()) {
             throw "Document does not exist!";
@@ -133,40 +144,21 @@ export function ClaimCard({ claim }: { claim: Claim }) {
         let newUpvotes = claimDoc.data().upvotes || 0;
         let newDownvotes = claimDoc.data().downvotes || 0;
         let newConfidenceScore = claimDoc.data().confidenceScore || 0.5;
+        let newVotedState: "up" | "down" | null = voted;
 
-        // Logic to handle voting and unvoting
         if (voted === type) { // User is un-voting
-            if (type === 'up') {
-                newUpvotes--;
-                newConfidenceScore -= VOTE_IMPACT;
-            } else {
-                newDownvotes--;
-                newConfidenceScore += VOTE_IMPACT;
-            }
-            setVoted(null);
+            if (type === 'up') newUpvotes--; else newDownvotes--;
+            newConfidenceScore += (type === 'up' ? -VOTE_IMPACT : VOTE_IMPACT);
+            newVotedState = null;
         } else { // User is casting a new vote or changing vote
-            // Revert previous vote if exists
-            if (voted === 'up') {
-                newUpvotes--;
-                newConfidenceScore -= VOTE_IMPACT;
-            }
-            if (voted === 'down') {
-                newDownvotes--;
-                newConfidenceScore += VOTE_IMPACT;
-            }
+            if (voted === 'up') { newUpvotes--; newConfidenceScore -= VOTE_IMPACT; }
+            if (voted === 'down') { newDownvotes--; newConfidenceScore += VOTE_IMPACT; }
 
-            // Apply new vote
-            if (type === 'up') {
-                newUpvotes++;
-                newConfidenceScore += VOTE_IMPACT;
-            } else {
-                newDownvotes++;
-                newConfidenceScore -= VOTE_IMPACT;
-            }
-            setVoted(type);
+            if (type === 'up') newUpvotes++; else newDownvotes++;
+            newConfidenceScore += (type === 'up' ? VOTE_IMPACT : -VOTE_IMPACT);
+            newVotedState = type;
         }
         
-        // Clamp the confidence score between 0.01 and 0.99
         newConfidenceScore = Math.max(0.01, Math.min(0.99, newConfidenceScore));
 
         const updateData = {
@@ -176,7 +168,17 @@ export function ClaimCard({ claim }: { claim: Claim }) {
         };
 
         transaction.update(claimRef, updateData);
-    }).catch((e) => {
+
+        return { newUpvotes, newDownvotes, newConfidenceScore, newVotedState };
+      });
+
+      // Update local state after successful transaction
+      setLocalUpvotes(newUpvotes);
+      setLocalDownvotes(newDownvotes);
+      setLocalConfidenceScore(newConfidenceScore);
+      setVoted(newVotedState);
+
+    } catch (e) {
         console.error("Transaction failed: ", e);
         errorEmitter.emit(
             'permission-error',
@@ -185,8 +187,8 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 operation: 'update',
             })
         );
-    });
-};
+    }
+  };
 
   
   const timeToVerify = claim.lastUpdatedTimestamp && claim.detectionTimestamp
@@ -245,9 +247,9 @@ export function ClaimCard({ claim }: { claim: Claim }) {
             <div className="space-y-1">
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>{t('ClaimCard.confidenceScore')}</span>
-                <span>{Math.round(claim.confidenceScore * 100)}%</span>
+                <span>{Math.round(localConfidenceScore * 100)}%</span>
               </div>
-              <Progress value={claim.confidenceScore * 100} aria-label={`${claim.confidenceScore * 100}% confidence`} />
+              <Progress value={localConfidenceScore * 100} aria-label={`${localConfidenceScore * 100}% confidence`} />
             </div>
           </div>
           <div className="w-full flex justify-between items-center">
@@ -262,7 +264,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                     onClick={() => handleVote("up")}
                   >
                     <ThumbsUp className="h-4 w-4" />
-                    {claim.upvotes || 0}
+                    {localUpvotes}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -279,7 +281,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                     onClick={() => handleVote("down")}
                   >
                     <ThumbsDown className="h-4 w-4" />
-                    {claim.downvotes || 0}
+                    {localDownvotes}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -297,3 +299,4 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   );
 }
 
+    
