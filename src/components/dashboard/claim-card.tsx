@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -83,9 +84,10 @@ function toDate(timestamp: Timestamp | { seconds: number; nanoseconds: number })
 export function ClaimCard({ claim }: { claim: Claim }) {
   const firestore = useFirestore();
   const [voted, setVoted] = React.useState<"up" | "down" | null>(null);
+  const isMock = claim.id.startsWith('mock-');
 
   const handleVote = async (type: "up" | "down") => {
-    if (!firestore) return;
+    if (!firestore || isMock) return;
     const claimRef = doc(firestore, "claims", claim.id);
     
     runTransaction(firestore, async (transaction) => {
@@ -178,6 +180,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   <Button
                     variant="ghost"
                     size="sm"
+                    disabled={isMock}
                     className={cn("gap-1.5", voted === "up" && "bg-green-100 text-green-700 hover:bg-green-200 hover:text-green-800")}
                     onClick={() => handleVote("up")}
                   >
@@ -186,7 +189,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Community agrees</p>
+                  {isMock ? <p>Cannot vote on mock claims</p> : <p>Community agrees</p>}
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -194,6 +197,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   <Button
                     variant="ghost"
                     size="sm"
+                    disabled={isMock}
                     className={cn("gap-1.5", voted === "down" && "bg-red-100 text-red-700 hover:bg-red-200 hover:text-red-800")}
                     onClick={() => handleVote("down")}
                   >
@@ -202,7 +206,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Community disagrees</p>
+                   {isMock ? <p>Cannot vote on mock claims</p> : <p>Community disagrees</p>}
                 </TooltipContent>
               </Tooltip>
             </div>
