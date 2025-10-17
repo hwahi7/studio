@@ -1,3 +1,4 @@
+
 "use client";
 
 import { ClaimList } from "@/components/dashboard/claim-list";
@@ -5,13 +6,15 @@ import { useCollection, useFirestore, useMemoFirebase, useUser } from "@/firebas
 import { collection, orderBy, query } from "firebase/firestore";
 import type { Claim } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { mockClaims } from "@/lib/mock-claims";
 
 export default function DashboardPage() {
   const firestore = useFirestore();
   const { user, isUserLoading } = useUser();
   const router = useRouter();
+  const [displayClaims, setDisplayClaims] = useState<Claim[]>([]);
 
   const claimsQuery = useMemoFirebase(
     () => {
@@ -28,6 +31,16 @@ export default function DashboardPage() {
       router.push("/login");
     }
   }, [isUserLoading, user, router]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (claims && claims.length > 0) {
+        setDisplayClaims(claims);
+      } else {
+        setDisplayClaims(mockClaims);
+      }
+    }
+  }, [claims, isLoading]);
 
   if (isUserLoading || !user) {
     return (
@@ -52,7 +65,7 @@ export default function DashboardPage() {
           <Loader2 className="h-8 w-8 animate-spin text-primary"/>
         </div>
       )}
-      {!isLoading && claims && <ClaimList claims={claims} />}
+      {!isLoading && displayClaims && <ClaimList claims={displayClaims} />}
     </div>
   );
 }
