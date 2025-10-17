@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useRef, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { checkTextForMisinformation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,10 +33,17 @@ export function MisinformationChecker() {
     checkTextForMisinformation,
     initialState
   );
+  const formRef = useRef<HTMLFormElement>(null);
+  
+  useEffect(() => {
+    if (state.message === 'success') {
+      formRef.current?.reset();
+    }
+  }, [state]);
 
   return (
     <div className="space-y-6">
-      <form action={formAction} className="space-y-4">
+      <form ref={formRef} action={formAction} className="space-y-4">
         <Textarea
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
