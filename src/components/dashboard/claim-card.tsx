@@ -10,6 +10,7 @@ import {
   ThumbsDown,
   ThumbsUp,
   XCircle,
+  Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +37,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
 import { useLanguage } from "@/context/language-context";
+import { translateText } from "@/app/actions";
 
 const statusConfig: Record<
   ClaimStatus,
@@ -76,10 +78,13 @@ function toDate(timestamp: Timestamp | { seconds: number; nanoseconds: number })
 
 export function ClaimCard({ claim }: { claim: Claim }) {
   const firestore = useFirestore();
-  const { t } = useLanguage();
+  const { t, language, availableLanguages } = useLanguage();
   const [voted, setVoted] = React.useState<"up" | "down" | null>(null);
   const isMock = claim.id.startsWith('mock-');
   
+  const [translatedContent, setTranslatedContent] = React.useState<string | null>(null);
+  const [isTranslating, setIsTranslating] = React.useState(false);
+
   const [_, setTick] = React.useState(0);
 
   React.useEffect(() => {
@@ -88,6 +93,30 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     }, 60000); 
     return () => clearInterval(timer);
   }, []);
+
+  React.useEffect(() => {
+    const translateContent = async () => {
+      const targetLanguage = availableLanguages.find(lang => lang.code === language);
+      if (claim.content && language !== claim.language && targetLanguage && language !== 'en') {
+        setIsTranslating(true);
+        try {
+          const result = await translateText({
+            text: claim.content,
+            targetLanguage: targetLanguage.name,
+          });
+          setTranslatedContent(result.translatedText);
+        } catch (error) {
+          console.error("Translation failed:", error);
+          setTranslatedContent(claim.content); // Fallback to original content
+        } finally {
+          setIsTranslating(false);
+        }
+      } else {
+        setTranslatedContent(claim.content);
+      }
+    };
+    translateContent();
+  }, [claim.content, claim.language, language, availableLanguages]);
 
 
   const handleVote = async (type: "up" | "down") => {
@@ -147,6 +176,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
   const currentStatus = statusConfig[claim.status];
   const StatusIcon = currentStatus.icon;
   const translatedStatus = t(`ClaimCard.status.${currentStatus.labelKey}`);
+  const contentToDisplay = translatedContent || claim.content;
 
   return (
     <TooltipProvider>
@@ -158,7 +188,13 @@ export function ClaimCard({ claim }: { claim: Claim }) {
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
-          <CardTitle className="text-lg leading-snug">{claim.content}</CardTitle>
+          {isTranslating ? (
+            <div className="flex items-center justify-center h-10">
+              <Loader2 className="h-5 w-5 animate-spin" />
+            </div>
+          ) : (
+            <CardTitle className="text-lg leading-snug">{contentToDisplay}</CardTitle>
+          )}
         </CardContent>
         <CardFooter className="flex-col items-start gap-4">
           <div className="w-full space-y-2">
