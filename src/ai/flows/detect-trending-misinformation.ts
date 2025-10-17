@@ -11,7 +11,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
-import {searchGoogle} from '@/services/google-search';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
@@ -47,35 +46,6 @@ export async function detectTrendingMisinformation(
   return detectTrendingMisinformationFlow(input);
 }
 
-const getCurrentDate = ai.defineTool(
-  {
-    name: 'getCurrentDate',
-    description: 'Returns the current date.',
-    outputSchema: z.string(),
-  },
-  async () => {
-    return new Date().toDateString();
-  }
-);
-
-const factCheckSearch = ai.defineTool(
-  {
-    name: 'factCheckSearch',
-    description: 'Searches for fact-checking information on a given topic.',
-    inputSchema: z.object({ query: z.string().describe('The search query.') }),
-    outputSchema: z.array(
-      z.object({
-        title: z.string(),
-        link: z.string(),
-        snippet: z.string(),
-      })
-    ),
-  },
-  async ({query}) => {
-    return await searchGoogle(query);
-  }
-);
-
 const detectTrendingMisinformationFlow = ai.defineFlow(
   {
     name: 'detectTrendingMisinformationFlow',
@@ -84,20 +54,9 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
   },
   async ({webPageContent}) => {
     const {output} = await ai.generate({
-      tools: [factCheckSearch, getCurrentDate],
       system: `You are the Scout Agent, an expert fact-checker. Your mission is to analyze text for misinformation with extreme accuracy.
-
-You have access to two powerful tools:
-1. 'getCurrentDate': Use this tool to get the current date for verifying claims about time.
-2. 'factCheckSearch': Use this for all other factual claims to find the most accurate, up-to-date information.
-
-CRITICAL INSTRUCTIONS:
-- You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates. You MUST use the tools provided.
-- First, analyze the user's claim to determine if it is a verifiable factual statement or a subjective opinion.
-- If the claim is about the current date, use the 'getCurrentDate' tool.
-- For all other factual claims, use the 'factCheckSearch' tool.
-- If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
-
+You MUST use your own internal knowledge to determine if the claim is factual. You MUST NOT use any external tools.
+If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
 After your analysis, provide your response in the required JSON format.`,
       prompt: `Please analyze the following text based on the instructions: "${webPageContent}"`,
       output: {
