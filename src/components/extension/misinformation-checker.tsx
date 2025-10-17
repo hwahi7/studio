@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { checkTextForMisinformation } from "@/app/actions";
+import { checkTextForMisinformation, getExplanation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -47,7 +47,7 @@ export function MisinformationChecker() {
       let status: ClaimStatus = "Inconclusive";
       let confidence = result.confidenceScore;
 
-      const INCONCLUSIVE_THRESHOLD = 0.6; // If confidence is below 60%, mark as Inconclusive
+      const INCONCLUSIVE_THRESHOLD = 0.6; 
 
       if (confidence < INCONCLUSIVE_THRESHOLD) {
         status = "Inconclusive";
@@ -55,24 +55,33 @@ export function MisinformationChecker() {
         status = "False";
       } else {
         status = "Verified";
-        confidence = 1 - confidence; // Invert confidence for verified claims
+        confidence = 1 - confidence; 
       }
       
-      const newClaim: Omit<Claim, "id"> = {
-          content: state.text,
-          sourceUrls: ['User Input via Extension'],
-          detectionTimestamp: Timestamp.now(),
-          lastUpdatedTimestamp: Timestamp.now(),
-          status: status,
-          confidenceScore: confidence,
-          language: "en", // Default language for now
-          upvotes: 0,
-          downvotes: 0,
+      const claimForExplanation = {
+        content: state.text,
+        status: status,
+        confidenceScore: confidence,
       };
 
-      addDocumentNonBlocking(claimsCollection, newClaim);
+      // Generate the explanation now, to be stored with the claim.
+      getExplanation(claimForExplanation).then(explanation => {
+        const newClaim: Omit<Claim, "id"> = {
+            content: state.text,
+            sourceUrls: ['User Input via Extension'],
+            detectionTimestamp: Timestamp.now(),
+            lastUpdatedTimestamp: Timestamp.now(),
+            status: status,
+            confidenceScore: confidence,
+            language: "en", 
+            upvotes: 0,
+            downvotes: 0,
+            explanation: explanation, // Store the generated explanation
+        };
+
+        addDocumentNonBlocking(claimsCollection, newClaim);
+      });
       
-      // Clear the textarea after successful submission
       setTextareaValue('');
     }
   }, [state, firestore]);

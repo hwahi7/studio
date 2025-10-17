@@ -2,7 +2,6 @@
 "use client";
 
 import * as React from "react";
-import { getExplanation } from "@/app/actions";
 import {
   Dialog,
   DialogContent,
@@ -11,43 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Skeleton } from "../ui/skeleton";
 import type { Claim } from "@/lib/types";
-
-const supportedLanguages = [
-    { code: "en", name: "English" },
-    { code: "es", name: "Español (Spanish)" },
-    { code: "fr", name: "Français (French)" },
-    { code: "de", name: "Deutsch (German)" },
-    { code: "hi", name: "हिंदी (Hindi)" },
-    { code: "mr", name: "मराठी (Marathi)" },
-    { code: "zh", name: "中文 (Chinese)" },
-    { code: "ja", name: "日本語 (Japanese)" },
-    { code: "ar", name: "العربية (Arabic)" },
-    { code: "pt", name: "Português (Portuguese)" },
-    { code: "ru", name: "Русский (Russian)" },
-    { code: "bn", name: "বাংলা (Bengali)" },
-    { code: "id", name: "Bahasa Indonesia (Indonesian)" },
-    { code: "ur", name: "اردو (Urdu)" },
-    { code: "sw", name: "Kiswahili (Swahili)" },
-    { code: "ko", name: "한국어 (Korean)" },
-    { code: "it", name: "Italiano (Italian)" },
-    { code: "nl", name: "Nederlands (Dutch)" },
-    { code: "tr", name: "Türkçe (Turkish)" },
-    { code: "vi", name: "Tiếng Việt (Vietnamese)" },
-    { code: "pl", name: "Polski (Polish)" },
-    { code: "th", name: "ไทย (Thai)" },
-    { code: "uk", name: "Українська (Ukrainian)" },
-    { code: "ro", name: "Română (Romanian)" },
-    { code: "el", name: "Ελληνικά (Greek)" },
-];
 
 export function ExplanationDialog({
   children,
@@ -57,41 +20,6 @@ export function ExplanationDialog({
   claim: Claim;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
-  const [explanation, setExplanation] = React.useState<string | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = React.useState("en");
-
-  React.useEffect(() => {
-    if (isOpen) {
-      setIsLoading(true);
-      setError(null);
-      setExplanation(null);
-      
-      const claimSummary = {
-        content: claim.content,
-        status: claim.status,
-        confidenceScore: claim.confidenceScore,
-        upvotes: claim.upvotes,
-        downvotes: claim.downvotes,
-      };
-
-      const selectedLangName = supportedLanguages.find(l => l.code === selectedLanguage)?.name || "English";
-
-      getExplanation(claimSummary, selectedLangName)
-        .then(setExplanation)
-        .catch((e) => {
-          console.error("Failed to generate explanation:", e);
-          setError("Failed to generate explanation. Please try again.");
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [isOpen, claim, selectedLanguage]);
-
-  const handleLanguageChange = (langCode: string) => {
-    setSelectedLanguage(langCode);
-    setExplanation(null); 
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -110,36 +38,12 @@ export function ExplanationDialog({
             "{claim.content}"
           </p>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">Language:</span>
-            <Select value={selectedLanguage} onValueChange={handleLanguageChange}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select language" />
-              </SelectTrigger>
-              <SelectContent>
-                {supportedLanguages.map(lang => (
-                  <SelectItem key={lang.code} value={lang.code}>
-                    {lang.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {(isLoading || !explanation) && !error && (
-            <div className="space-y-3 pt-4">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-5/6" />
-            </div>
-          )}
-
-          {error && <p className="text-destructive text-sm">{error}</p>}
-          
-          {explanation && (
+          {claim.explanation ? (
             <div className="pt-4">
-               <p className="text-sm leading-relaxed">{explanation}</p>
+               <p className="text-sm leading-relaxed">{claim.explanation}</p>
             </div>
+          ) : (
+             <p className="text-sm text-muted-foreground">An explanation is not available for this claim.</p>
           )}
         </div>
       </DialogContent>

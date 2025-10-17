@@ -30,11 +30,15 @@
         },
         "status": {
           "type": "string",
-          "description": "The current verification status of the claim (e.g., 'Verified', 'False', 'Needs Review')."
+          "description": "The current verification status of the claim (e.g., 'Verified', 'False', 'Inconclusive')."
         },
         "language": {
           "type": "string",
           "description": "The language of the claim."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "The AI-generated explanation for the claim's status."
         },
         "sourceUrls": {
           "type": "array",

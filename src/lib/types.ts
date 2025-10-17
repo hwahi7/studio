@@ -11,6 +11,7 @@ export type Claim = {
   status: ClaimStatus;
   confidenceScore: number;
   language: string;
+  explanation?: string;
   upvotes?: number;
   downvotes?: number;
 };
