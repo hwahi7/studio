@@ -40,7 +40,7 @@ const summarizeVerifiedInfoPrompt = ai.definePrompt({
 
   Based on all of this information, generate a concise summary (2-3 sentences) that explains the outcome. Write the entire summary in the following language: {{{language}}}.
   
-  Do not just repeat the inputs. Synthesize them into a coherent explanation.
+  You MUST provide a coherent explanation. Synthesize the provided information into a clear summary. Do not just repeat the inputs.
 `,
 });
 
@@ -52,6 +52,12 @@ const summarizeVerifiedInfoFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await summarizeVerifiedInfoPrompt(input);
-    return output!;
+    
+    // Add a fallback to prevent schema validation errors if the model returns null/empty
+    if (!output) {
+      return "An explanation could not be generated at this time.";
+    }
+    
+    return output;
   }
 );
