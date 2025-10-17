@@ -56,13 +56,10 @@ export function MisinformationChecker() {
             status = "Inconclusive";
           }
       } else {
-          // If it's not misinformation, it should be Verified.
-          // The confidence score from the model reflects certainty of "not misinformation".
-          if (confidence > INCONCLUSIVE_THRESHOLD) {
-              status = "Verified";
-          } else {
-              status = "Inconclusive";
-          }
+          // If it's not misinformation, it should be Verified,
+          // regardless of confidence, as low confidence means "uncertain if it's NOT misinformation"
+          // which still leans towards verified until proven otherwise.
+          status = "Verified";
       }
       
       const claimForExplanation: Pick<Claim, 'content' | 'status' | 'confidenceScore' | 'upvotes' | 'downvotes'> = {
