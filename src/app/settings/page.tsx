@@ -17,45 +17,52 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangePasswordDialog } from "@/components/settings/change-password-dialog";
-import { useLocale, useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 
 export default function SettingsPage() {
     const router = useRouter();
-    const pathname = usePathname();
-    const locale = useLocale();
-    const t = useTranslations('SettingsPage');
+    const [selectedLocale, setSelectedLocale] = useState('en');
+
+    useEffect(() => {
+        const storedLocale = localStorage.getItem('language');
+        if (storedLocale) {
+            setSelectedLocale(storedLocale);
+        }
+    }, []);
 
     const handleLanguageChange = (newLocale: string) => {
-        // The middleware will handle the redirection.
-        router.replace(pathname, {locale: newLocale});
+        localStorage.setItem('language', newLocale);
+        setSelectedLocale(newLocale);
+        // We can optionally force a reload to see changes immediately on other pages
+        window.location.reload(); 
     };
 
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <h1 className="font-headline text-3xl font-bold tracking-tight">
-          {t('title')}
+          Settings
         </h1>
         <p className="text-muted-foreground">
-          {t('subtitle')}
+          Manage your account and application settings.
         </p>
       </header>
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('preferences.title')}</CardTitle>
+          <CardTitle>Preferences</CardTitle>
           <CardDescription>
-            {t('preferences.description')}
+            Customize your experience.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid gap-2">
-            <Label htmlFor="language">{t('language.label')}</Label>
-            <Select onValueChange={handleLanguageChange} defaultValue={locale}>
+            <Label htmlFor="language">Language</Label>
+            <Select onValueChange={handleLanguageChange} value={selectedLocale}>
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder={t('language.placeholder')} />
+                <SelectValue placeholder="Select language" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="en">English</SelectItem>
@@ -86,19 +93,19 @@ export default function SettingsPage() {
               </SelectContent>
             </Select>
              <p className="text-sm text-muted-foreground">
-              {t('language.description')}
+              Choose the display language for the application.
             </p>
           </div>
 
            <div className="grid gap-2">
-            <Label>{t('password.label')}</Label>
+            <Label>Password</Label>
             <div className="flex items-center gap-4">
                 <ChangePasswordDialog>
-                    <Button variant="outline">{t('password.button')}</Button>
+                    <Button variant="outline">Change Password</Button>
                 </ChangePasswordDialog>
             </div>
              <p className="text-sm text-muted-foreground">
-              {t('password.description')}
+              Update your account password.
             </p>
           </div>
 

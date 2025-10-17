@@ -12,7 +12,6 @@ import {
   User,
   Loader2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/icons";
@@ -47,7 +46,6 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
-  const t = useTranslations('AppLayout');
 
   const handleLogout = async () => {
     if (auth) {
@@ -56,14 +54,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const isAuthPage = pathname.endsWith("/login") || pathname.endsWith("/signup");
+  const isAuthPage = pathname.includes("/login") || pathname.includes("/signup");
 
   React.useEffect(() => {
     if (!isUserLoading && !user && !isAuthPage) {
-      const currentLocale = window.location.pathname.split('/')[1] || 'en';
-      router.push(`/${currentLocale}/login`);
+      router.push(`/login`);
     }
   }, [isUserLoading, user, isAuthPage, router]);
+
 
   if ((isUserLoading || !user) && !isAuthPage) {
     return (
@@ -92,11 +90,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <SidebarMenuButton
                 asChild
                 isActive={pathname.endsWith("/")}
-                tooltip={t('dashboardTooltip')}
+                tooltip="Dashboard"
               >
                 <Link href="/">
                   <LayoutDashboard />
-                  <span>{t('dashboard')}</span>
+                  <span>Dashboard</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -104,11 +102,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <SidebarMenuButton
                 asChild
                 isActive={pathname.endsWith("/extension")}
-                tooltip={t('extensionTooltip')}
+                tooltip="Chrome Extension"
               >
                 <Link href="/extension">
                   <Chrome />
-                  <span>{t('chromeExtension')}</span>
+                  <span>Chrome Extension</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -125,32 +123,32 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   </Avatar>
                   <div className="flex flex-col items-start text-sm">
                     <span className="font-medium">{user?.displayName || user?.email}</span>
-                    <span className="text-muted-foreground">{t('userRole')}</span>
+                    <span className="text-muted-foreground">User</span>
                   </div>
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 mb-2" side="top" align="start">
-              <DropdownMenuLabel>{t('myAccount')}</DropdownMenuLabel>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <Link href="/profile">
                   <DropdownMenuItem>
                     <User />
-                    <span>{t('profile')}</span>
+                    <span>Profile</span>
                   </DropdownMenuItem>
                 </Link>
                 <Link href="/settings">
                     <DropdownMenuItem>
                         <Settings />
-                        <span>{t('settings')}</span>
+                        <span>Settings</span>
                     </DropdownMenuItem>
                 </Link>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut />
-                <span>{t('logout')}</span>
+                <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -9,7 +9,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { mockClaims } from "@/lib/mock-claims";
-import { useTranslations } from "next-intl";
+import { translateDashboardContent } from "@/app/actions";
+
+const originalContent = {
+  title: "Claim Detection Dashboard",
+  subtitle: "Live feed of trending claims detected by Scout Agent.",
+};
 
 export default function DashboardPage() {
   const firestore = useFirestore();
@@ -17,7 +22,8 @@ export default function DashboardPage() {
   const router = useRouter();
   const [displayClaims, setDisplayClaims] = useState<Claim[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const t = useTranslations('DashboardPage');
+  const [dashboardContent, setDashboardContent] = useState(originalContent);
+
 
   const claimsQuery = useMemoFirebase(
     () => {
@@ -30,8 +36,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!isUserLoading && !user) {
-      const currentLocale = window.location.pathname.split('/')[1] || 'en';
-      router.push(`/${currentLocale}/login`);
+      router.push(`/login`);
     }
   }, [isUserLoading, user, router]);
 
@@ -65,6 +70,15 @@ export default function DashboardPage() {
     }
   }, [claimsQuery, user]);
 
+  useEffect(() => {
+    const preferredLanguage = localStorage.getItem('language') || 'en';
+    if (preferredLanguage !== 'en') {
+      translateDashboardContent(originalContent, preferredLanguage).then(setDashboardContent);
+    } else {
+      setDashboardContent(originalContent);
+    }
+  }, []);
+
 
   if (isUserLoading || !user) {
     return (
@@ -78,10 +92,10 @@ export default function DashboardPage() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <h1 className="font-headline text-3xl font-bold tracking-tight">
-          {t('title')}
+          {dashboardContent.title}
         </h1>
         <p className="text-muted-foreground">
-          {t('subtitle')}
+          {dashboardContent.subtitle}
         </p>
       </header>
       {isLoading && (

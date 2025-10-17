@@ -6,6 +6,7 @@ import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import { revalidatePath } from "next/cache";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 import type { Claim } from "@/lib/types";
+import { translateText } from "@/ai/flows/translate-text";
 
 // This type can be simplified as we don't need the full Claim with Timestamps
 type ClaimSummary = {
@@ -66,5 +67,28 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       message: 'An error occurred while analyzing the text. Please try again.',
       text: textToAnalyze,
     };
+  }
+}
+
+export async function translateDashboardContent(
+  content: { title: string; subtitle: string },
+  language: string
+) {
+  if (language === 'en') {
+    return content;
+  }
+  try {
+    const [translatedTitle, translatedSubtitle] = await Promise.all([
+      translateText({ text: content.title, targetLanguage: language }),
+      translateText({ text: content.subtitle, targetLanguage: language }),
+    ]);
+    return {
+      title: translatedTitle.translation,
+      subtitle: translatedSubtitle.translation,
+    };
+  } catch (error) {
+    console.error('Error translating content:', error);
+    // Return original content on error
+    return content;
   }
 }
