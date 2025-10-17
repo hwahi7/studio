@@ -223,5 +223,4 @@
       },
       "description": "Stores community feedback for a claim. Includes denormalized 'userId' and 'claimId' for authorization independence."
     }
-  }
-}
+  }}
