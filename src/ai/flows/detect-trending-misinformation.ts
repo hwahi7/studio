@@ -62,7 +62,7 @@ const factCheckSearch = ai.defineTool(
   {
     name: 'factCheckSearch',
     description: 'Searches for fact-checking information on a given topic.',
-    inputSchema: z.string().describe('The search query.'),
+    inputSchema: z.object({ query: z.string().describe('The search query.') }),
     outputSchema: z.array(
       z.object({
         title: z.string(),
@@ -71,7 +71,7 @@ const factCheckSearch = ai.defineTool(
       })
     ),
   },
-  async query => {
+  async ({query}) => {
     return await searchGoogle(query);
   }
 );
