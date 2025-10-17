@@ -95,6 +95,7 @@
     "errorMinChars": "Please enter at least 20 characters.",
     "errorInvalidInput": "Invalid input.",
     "errorApi": "An error occurred while analyzing the text. Please try again.",
+    "translatingReason": "Translating reason...",
     "alert": {
       "errorTitle": "Analysis Error",
       "potentialMisinformation": "Potential Misinformation Detected",

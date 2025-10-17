@@ -3,7 +3,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { checkTextForMisinformation } from "@/app/actions";
+import { checkTextForMisinformation, translateText } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -42,51 +42,72 @@ export function MisinformationChecker() {
   );
   const firestore = useFirestore();
   const [textareaValue, setTextareaValue] = useState('');
-  const { t } = useLanguage();
+  const { t, language, availableLanguages } = useLanguage();
+  const [translatedReason, setTranslatedReason] = useState<string | null>(null);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   useEffect(() => {
-    if (state.message === 'success' && state.data && state.text && firestore) {
-      const claimsCollection = collection(firestore, "claims");
-      const result = state.data;
-      
-      let status: ClaimStatus;
-      let confidence = result.confidenceScore;
-      const INCONCLUSIVE_THRESHOLD = 0.5;
+    if (state.message === 'success' && state.data && state.text) {
+      if (firestore) {
+        const claimsCollection = collection(firestore, "claims");
+        const result = state.data;
+        
+        let status: ClaimStatus;
+        let confidence = result.confidenceScore;
+        const INCONCLUSIVE_THRESHOLD = 0.5;
 
-      if (result.isMisinformation) {
-        if (confidence > INCONCLUSIVE_THRESHOLD) {
-          status = "False";
-        } else {
-          status = "Inconclusive";
-        }
-      } else {
-        const invertedConfidence = 1.0 - confidence;
-        if (invertedConfidence > INCONCLUSIVE_THRESHOLD) {
-            status = "Verified";
-        } else {
+        if (result.isMisinformation) {
+          if (confidence > INCONCLUSIVE_THRESHOLD) {
+            status = "False";
+          } else {
             status = "Inconclusive";
+          }
+        } else {
+          const invertedConfidence = 1.0 - confidence;
+          if (invertedConfidence > INCONCLUSIVE_THRESHOLD) {
+              status = "Verified";
+          } else {
+              status = "Inconclusive";
+          }
+          confidence = invertedConfidence;
         }
-        confidence = invertedConfidence;
+        
+        const newClaim: Omit<Claim, "id"> = {
+            content: state.text,
+            sourceUrls: ['User Input via Simulator'],
+            detectionTimestamp: Timestamp.now(),
+            lastUpdatedTimestamp: Timestamp.now(),
+            status: status,
+            confidenceScore: confidence,
+            language: "en", 
+            upvotes: 0,
+            downvotes: 0,
+            explanation: result.reason, 
+        };
+
+        addDocumentNonBlocking(claimsCollection, newClaim);
       }
       
-      const newClaim: Omit<Claim, "id"> = {
-          content: state.text,
-          sourceUrls: ['User Input via Simulator'],
-          detectionTimestamp: Timestamp.now(),
-          lastUpdatedTimestamp: Timestamp.now(),
-          status: status,
-          confidenceScore: confidence,
-          language: "en", 
-          upvotes: 0,
-          downvotes: 0,
-          explanation: result.reason, 
-      };
+      const targetLanguage = availableLanguages.find(lang => lang.code === language);
+      if (language !== 'en' && targetLanguage && state.data.reason) {
+        setIsTranslating(true);
+        translateText({
+          text: state.data.reason,
+          targetLanguage: targetLanguage.name,
+        }).then(result => {
+          setTranslatedReason(result.translatedText);
+          setIsTranslating(false);
+        }).catch(() => {
+          setTranslatedReason(state.data.reason || null);
+          setIsTranslating(false);
+        });
+      } else {
+        setTranslatedReason(state.data.reason);
+      }
 
-      addDocumentNonBlocking(claimsCollection, newClaim);
-      
       setTextareaValue('');
     }
-  }, [state, firestore]);
+  }, [state, firestore, language, availableLanguages]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(e.target.value);
@@ -107,6 +128,8 @@ export function MisinformationChecker() {
   };
 
   const errorMessage = getErrorMessage();
+
+  const reasonToDisplay = translatedReason || (isTranslating ? null : state.data?.reason);
 
   return (
     <div className="space-y-6">
@@ -138,9 +161,16 @@ export function MisinformationChecker() {
               <AlertTitle>{t('MisinformationChecker.alert.potentialMisinformation')}</AlertTitle>
               <AlertDescription>
                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
-                <p>
-                  <strong>{t('MisinformationChecker.alert.reason')}:</strong> {state.data.reason}
-                </p>
+                {isTranslating ? (
+                  <div className="flex items-center gap-2 mt-1">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>{t('MisinformationChecker.translatingReason')}</span>
+                  </div>
+                ) : (
+                  <p>
+                    <strong>{t('MisinformationChecker.alert.reason')}:</strong> {reasonToDisplay}
+                  </p>
+                )}
               </AlertDescription>
             </Alert>
           ) : (
@@ -149,9 +179,16 @@ export function MisinformationChecker() {
               <AlertTitle>{t('MisinformationChecker.alert.noMisinformation')}</AlertTitle>
               <AlertDescription>
                  <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round((1-state.data.confidenceScore) * 100)}%</p>
-                <p>
-                  <strong>{t('MisinformationChecker.alert.reason')}:</strong> {state.data.reason}
-                </p>
+                {isTranslating ? (
+                  <div className="flex items-center gap-2 mt-1">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>{t('MisinformationChecker.translatingReason')}</span>
+                  </div>
+                ) : (
+                  <p>
+                    <strong>{t('MisinformationChecker.alert.reason')}:</strong> {reasonToDisplay}
+                  </p>
+                )}
               </AlertDescription>
             </Alert>
           )}

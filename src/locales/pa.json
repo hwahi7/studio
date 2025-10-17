@@ -81,7 +81,7 @@
     "status": {
       "Verified": "ਤਸਦੀਕ ਕੀਤਾ ਗਿਆ",
       "False": "ਗਲਤ",
-      "Inconclusive": "ਬੇनਤੀਜਾ"
+      "Inconclusive": "ਬੇਨਤੀਜਾ"
     }
   },
   "ExplanationDialog": {
@@ -95,7 +95,9 @@
     "errorMinChars": "ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ 20 ਅੱਖਰ ਦਾਖਲ ਕਰੋ।",
     "errorInvalidInput": "ਅਯੋਗ ਇਨਪੁਟ।",
     "errorApi": "ਟੈਕਸਟ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਦੇ ਸਮੇਂ ਇੱਕ ਗਲਤੀ ਆਈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "translatingReason": "ਕਾਰਨ ਦਾ ਅਨੁਵਾਦ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
     "alert": {
+      "errorTitle": "ਵਿਸ਼ਲੇਸ਼ਣ ਗਲਤੀ",
       "potentialMisinformation": "ਸੰਭਾਵੀ ਗਲਤ ਜਾਣਕਾਰੀ ਦਾ ਪਤਾ ਲੱਗਾ",
       "noMisinformation": "ਕੋਈ ਗਲਤ ਜਾਣਕਾਰੀ ਨਹੀਂ ਮਿਲੀ",
       "confidence": "ਵਿਸ਼ਵਾਸ",
@@ -119,11 +121,11 @@
   },
   "ProfileUpdate": {
     "toast": {
-        "successTitle": "ਪ੍ਰੋਫਾਈਲ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
-        "successDescription": "ਤੁਹਾਡਾ ਡਿਸਪਲੇ ਨਾਮ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
-        "failTitle": "ਅੱਪਡੇਟ ਅਸਫਲ",
-        "errorTitle": "ਗਲਤੀ",
-        "nameTooShort": "ਡਿਸਪਲੇ ਨਾਮ ਘੱਟੋ-ਘੱਟ 3 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+      "successTitle": "ਪ੍ਰੋਫਾਈਲ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "successDescription": "ਤੁਹਾਡਾ ਡਿਸਪਲੇ ਨਾਮ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
+      "failTitle": "ਅੱਪਡੇਟ ਅਸਫਲ",
+      "errorTitle": "ਗਲਤੀ",
+      "nameTooShort": "ਡਿਸਪਲੇ ਨਾਮ ਘੱਟੋ-ਘੱਟ 3 ਅੱਖਰਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
     }
   }
 }
