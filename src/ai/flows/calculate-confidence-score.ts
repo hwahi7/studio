@@ -9,7 +9,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {z} from 'zod';
 
 const CalculateConfidenceScoreInputSchema = z.object({
   claim: z.string().describe('The claim to be evaluated.'),
