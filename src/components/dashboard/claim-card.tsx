@@ -135,31 +135,33 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     const VOTE_IMPACT = 0.01;
 
     try {
-      const { newUpvotes, newDownvotes, newConfidenceScore } = await runTransaction(firestore, async (transaction) => {
+      const { newUpvotes, newDownvotes, newConfidenceScore, newVotedState } = await runTransaction(firestore, async (transaction) => {
         const claimDoc = await transaction.get(claimRef);
         if (!claimDoc.exists()) {
             throw "Document does not exist!";
         }
 
-        let newUpvotes = claimDoc.data().upvotes || 0;
-        let newDownvotes = claimDoc.data().downvotes || 0;
-        let newConfidenceScore = claimDoc.data().confidenceScore || 0.5;
+        let currentUpvotes = claimDoc.data().upvotes || 0;
+        let currentDownvotes = claimDoc.data().downvotes || 0;
+        let currentConfidenceScore = claimDoc.data().confidenceScore || 0.5;
         let newVotedState: "up" | "down" | null = voted;
 
         if (voted === type) { // User is un-voting
-            if (type === 'up') newUpvotes--; else newDownvotes--;
-            newConfidenceScore += (type === 'up' ? -VOTE_IMPACT : VOTE_IMPACT);
+            if (type === 'up') currentUpvotes--; else currentDownvotes--;
+            currentConfidenceScore += (type === 'up' ? -VOTE_IMPACT : VOTE_IMPACT);
             newVotedState = null;
         } else { // User is casting a new vote or changing vote
-            if (voted === 'up') { newUpvotes--; newConfidenceScore -= VOTE_IMPACT; }
-            if (voted === 'down') { newDownvotes--; newConfidenceScore += VOTE_IMPACT; }
+            if (voted === 'up') { currentUpvotes--; currentConfidenceScore -= VOTE_IMPACT; }
+            if (voted === 'down') { currentDownvotes--; currentConfidenceScore += VOTE_IMPACT; }
 
-            if (type === 'up') newUpvotes++; else newDownvotes++;
-            newConfidenceScore += (type === 'up' ? VOTE_IMPACT : -VOTE_IMPACT);
+            if (type === 'up') currentUpvotes++; else currentDownvotes++;
+            currentConfidenceScore += (type === 'up' ? VOTE_IMPACT : -VOTE_IMPACT);
             newVotedState = type;
         }
         
-        newConfidenceScore = Math.max(0.01, Math.min(0.99, newConfidenceScore));
+        const newConfidenceScore = Math.max(0.01, Math.min(0.99, currentConfidenceScore));
+        const newUpvotes = currentUpvotes;
+        const newDownvotes = currentDownvotes;
 
         const updateData = {
             upvotes: newUpvotes,
@@ -298,5 +300,3 @@ export function ClaimCard({ claim }: { claim: Claim }) {
     </TooltipProvider>
   );
 }
-
-    
