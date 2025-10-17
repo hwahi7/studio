@@ -41,7 +41,6 @@ export function MisinformationChecker() {
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
           rows={5}
-          key={state.message === 'success' ? Date.now() : undefined}
         />
         {state?.message && state.message !== 'success' && (
             <p className="text-sm text-destructive">{state.message}</p>
