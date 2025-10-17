@@ -41,9 +41,14 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
     };
   } catch (error: any) {
     console.error("Error in checkTextForMisinformation:", error);
+    // Provide a more generic error message for API failures.
+    const errorMessage = error.message && error.message.includes('503') 
+      ? "The model is currently overloaded. Please try again later."
+      : error.message || "An unknown error occurred while analyzing the text.";
+
     return {
       message: 'error_api',
-      error: error.message || "An unknown error occurred.",
+      error: errorMessage,
       text: textToAnalyze,
     };
   }

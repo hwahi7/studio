@@ -96,6 +96,7 @@
     "errorInvalidInput": "Invalid input.",
     "errorApi": "An error occurred while analyzing the text. Please try again.",
     "alert": {
+      "errorTitle": "Analysis Error",
       "potentialMisinformation": "Potential Misinformation Detected",
       "noMisinformation": "No Misinformation Detected",
       "confidence": "Confidence",

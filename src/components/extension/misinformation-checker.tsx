@@ -93,20 +93,17 @@ export function MisinformationChecker() {
   }
   
   const getErrorMessage = () => {
-    if (!state?.message || state.message === 'success') return '';
+    if (!state?.message || state.message === 'success') return null;
 
     if (state.message === 'error_api' && state.error) {
         return state.error;
     }
 
-    switch (state.message) {
-      case 'error_min_chars':
-        return state.error || t('MisinformationChecker.errorMinChars');
-      case 'error_invalid_input':
-        return t('MisinformationChecker.errorInvalidInput');
-      default:
-        return t('MisinformationChecker.errorApi');
+    if (state.message === 'error_min_chars' && state.error) {
+      return state.error;
     }
+    
+    return t('MisinformationChecker.errorApi');
   };
 
   const errorMessage = getErrorMessage();
@@ -122,7 +119,13 @@ export function MisinformationChecker() {
           onChange={handleTextChange}
         />
         {errorMessage && (
-            <p className="text-sm text-destructive">{errorMessage}</p>
+             <Alert variant="destructive">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>{t('MisinformationChecker.alert.errorTitle') || 'Analysis Error'}</AlertTitle>
+              <AlertDescription>
+                {errorMessage}
+              </AlertDescription>
+            </Alert>
         )}
         <SubmitButton />
       </form>
