@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { checkTextForMisinformation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,7 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useFirestore, addDocumentNonBlocking } from "@/firebase";
 import { collection, Timestamp } from "firebase/firestore";
-import type { Claim } from "@/lib/types";
+import type { Claim, ClaimStatus } from "@/lib/types";
 
 const initialState = {
   message: "",
@@ -36,21 +36,35 @@ export function MisinformationChecker() {
     checkTextForMisinformation,
     initialState
   );
-  const formRef = useRef<HTMLFormElement>(null);
   const firestore = useFirestore();
+  const [textareaValue, setTextareaValue] = useState('');
 
   useEffect(() => {
     if (state.message === 'success' && state.data && state.text && firestore) {
       const claimsCollection = collection(firestore, "claims");
       const result = state.data;
       
+      let status: ClaimStatus = "Inconclusive";
+      let confidence = result.confidenceScore;
+
+      const INCONCLUSIVE_THRESHOLD = 0.6; // If confidence is below 60%, mark as Inconclusive
+
+      if (confidence < INCONCLUSIVE_THRESHOLD) {
+        status = "Inconclusive";
+      } else if (result.isMisinformation) {
+        status = "False";
+      } else {
+        status = "Verified";
+        confidence = 1 - confidence; // Invert confidence for verified claims
+      }
+      
       const newClaim: Omit<Claim, "id"> = {
           content: state.text,
           sourceUrls: ['User Input via Extension'],
           detectionTimestamp: Timestamp.now(),
           lastUpdatedTimestamp: Timestamp.now(),
-          status: result.isMisinformation ? "False" : "Verified",
-          confidenceScore: result.isMisinformation ? result.confidenceScore : 1 - result.confidenceScore,
+          status: status,
+          confidenceScore: confidence,
           language: "en", // Default language for now
           upvotes: 0,
           downvotes: 0,
@@ -58,17 +72,24 @@ export function MisinformationChecker() {
 
       addDocumentNonBlocking(claimsCollection, newClaim);
       
-      formRef.current?.reset();
+      // Clear the textarea after successful submission
+      setTextareaValue('');
     }
   }, [state, firestore]);
 
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaValue(e.target.value);
+  }
+
   return (
     <div className="space-y-6">
-      <form ref={formRef} action={formAction} className="space-y-4">
+      <form action={formAction} className="space-y-4">
         <Textarea
           name="text"
           placeholder="Paste a news headline, social media post, or any text you want to verify..."
           rows={5}
+          value={textareaValue}
+          onChange={handleTextChange}
         />
         {state?.message && state.message !== 'success' && (
             <p className="text-sm text-destructive">{state.message}</p>

@@ -9,7 +9,6 @@ import {
   Clock,
   ThumbsDown,
   ThumbsUp,
-  TrendingUp,
   XCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -63,12 +62,6 @@ const statusConfig: Record<
     color: "text-yellow-600",
     bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
     label: "Inconclusive",
-  },
-  Trending: {
-    icon: TrendingUp,
-    color: "text-blue-600",
-    bgColor: "bg-blue-100 dark:bg-blue-900/30",
-    label: "Trending",
   },
 };
 

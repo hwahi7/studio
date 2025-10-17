@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-export type ClaimStatus = "Verified" | "False" | "Inconclusive" | "Trending";
+export type ClaimStatus = "Verified" | "False" | "Inconclusive";
 
 export type Claim = {
   id: string;
