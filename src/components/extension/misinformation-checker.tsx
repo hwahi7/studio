@@ -63,14 +63,15 @@ export function MisinformationChecker() {
         }
       } else {
         // AI is confident it is NOT misinformation -> Verified
-        // We want the score to reflect confidence in the "Verified" status.
-        // If the model is 90% sure it's *not* misinformation, the confidence should be 0.9, not 0.1.
-        confidence = 1.0 - confidence;
-        if (confidence > INCONCLUSIVE_THRESHOLD) {
+        // We invert the score to reflect confidence in the "Verified" status.
+        const invertedConfidence = 1.0 - confidence;
+        if (invertedConfidence > INCONCLUSIVE_THRESHOLD) {
             status = "Verified";
         } else {
             status = "Inconclusive";
         }
+        // Use the inverted score for the new claim object
+        confidence = invertedConfidence;
       }
       
       const claimForExplanation = {
