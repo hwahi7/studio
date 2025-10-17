@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { mockClaims } from "@/lib/mock-claims";
+import { useTranslations } from "next-intl";
 
 export default function DashboardPage() {
   const firestore = useFirestore();
@@ -16,6 +17,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [displayClaims, setDisplayClaims] = useState<Claim[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const t = useTranslations('DashboardPage');
 
   const claimsQuery = useMemoFirebase(
     () => {
@@ -28,7 +30,8 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!isUserLoading && !user) {
-      router.push("/login");
+      const currentLocale = window.location.pathname.split('/')[1] || 'en';
+      router.push(`/${currentLocale}/login`);
     }
   }, [isUserLoading, user, router]);
 
@@ -75,10 +78,10 @@ export default function DashboardPage() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <h1 className="font-headline text-3xl font-bold tracking-tight">
-          Claim Detection Dashboard
+          {t('title')}
         </h1>
         <p className="text-muted-foreground">
-          Live feed of trending claims detected by Scout Agent.
+          {t('subtitle')}
         </p>
       </header>
       {isLoading && (
