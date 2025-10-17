@@ -1,13 +1,11 @@
 "use server";
 
 import { z } from "zod";
-import { Timestamp, collection, addDoc, getFirestore } from "firebase/firestore";
-import { initializeFirebase } from "@/firebase/index";
-import { calculateConfidenceScore } from "@/ai/flows/calculate-confidence-score";
-import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
+import { Timestamp } from "firebase/firestore";
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import type { Claim } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 
 const claimSchema = z.object({
   id: z.string(),
@@ -58,28 +56,9 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       webPageContent: textToAnalyze,
     });
     
-    // Save to Firestore
-    try {
-        const { firestore } = initializeFirebase();
-        const claimsCollection = collection(firestore, "claims");
-        const newClaim: Omit<Claim, "id"> = {
-            content: textToAnalyze,
-            sourceUrls: ['User Input via Extension'],
-            detectionTimestamp: Timestamp.now(),
-            lastUpdatedTimestamp: Timestamp.now(),
-            status: result.isMisinformation ? "False" : "Verified",
-            confidenceScore: result.isMisinformation ? result.confidenceScore : 1 - result.confidenceScore,
-            language: "en", // Default language for now
-            upvotes: 0,
-            downvotes: 0,
-        };
-        await addDoc(claimsCollection, newClaim);
-        revalidatePath('/');
-    } catch (dbError) {
-        console.error("Failed to save claim to Firestore:", dbError);
-        // We don't block the user response for this, just log the error
-    }
-
+    // The claim is now saved on the client-side to ensure real-time updates.
+    // We revalidate the path here just in case other parts of the app rely on it.
+    revalidatePath('/');
 
     return {
       message: 'success',
@@ -87,6 +66,7 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       text: textToAnalyze,
     };
   } catch (error) {
+    console.error("Error in checkTextForMisinformation:", error);
     return {
       message: 'An error occurred while analyzing the text. Please try again.',
       text: textToAnalyze,

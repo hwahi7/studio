@@ -7,6 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
+import { useFirestore, addDocumentNonBlocking } from "@/firebase";
+import { collection, Timestamp } from "firebase/firestore";
+import type { Claim } from "@/lib/types";
 
 const initialState = {
   message: "",
@@ -34,12 +37,30 @@ export function MisinformationChecker() {
     initialState
   );
   const formRef = useRef<HTMLFormElement>(null);
-  
+  const firestore = useFirestore();
+
   useEffect(() => {
-    if (state.message === 'success') {
+    if (state.message === 'success' && state.data && state.text && firestore) {
+      const claimsCollection = collection(firestore, "claims");
+      const result = state.data;
+      
+      const newClaim: Omit<Claim, "id"> = {
+          content: state.text,
+          sourceUrls: ['User Input via Extension'],
+          detectionTimestamp: Timestamp.now(),
+          lastUpdatedTimestamp: Timestamp.now(),
+          status: result.isMisinformation ? "False" : "Verified",
+          confidenceScore: result.isMisinformation ? result.confidenceScore : 1 - result.confidenceScore,
+          language: "en", // Default language for now
+          upvotes: 0,
+          downvotes: 0,
+      };
+
+      addDocumentNonBlocking(claimsCollection, newClaim);
+      
       formRef.current?.reset();
     }
-  }, [state]);
+  }, [state, firestore]);
 
   return (
     <div className="space-y-6">
