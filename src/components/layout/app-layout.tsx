@@ -12,9 +12,9 @@ import {
   User,
   Loader2,
 } from "lucide-react";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -82,7 +82,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2">
-            <Logo className="size-8 text-primary" />
+            <Image src="/logo.svg" alt="LocalTruth Logo" width={32} height={32} className="text-primary" />
             <span className="font-headline text-lg font-semibold">LocalTruth</span>
           </div>
         </SidebarHeader>
@@ -159,7 +159,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <SidebarInset className="p-4 md:p-6 lg:p-8">
         <header className="flex items-center justify-between md:hidden mb-4">
             <div className="flex items-center gap-2">
-                <Logo className="size-7 text-primary" />
+                <Image src="/logo.svg" alt="LocalTruth Logo" width={28} height={28} className="text-primary" />
                 <span className="font-headline text-md font-semibold">LocalTruth</span>
             </div>
             <SidebarTrigger />
