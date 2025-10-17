@@ -10,8 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { searchGoogle } from '@/services/google-search';
-import { generateSearchQuery } from './generate-search-query';
+import {searchGoogle} from '@/services/google-search';
 
 const DetectTrendingMisinformationInputSchema = z.object({
   webPageContent: z
@@ -33,7 +32,9 @@ const DetectTrendingMisinformationOutputSchema = z.object({
     ),
   reason: z
     .string()
-    .describe('The reason why the web page content is considered misinformation.'),
+    .describe(
+      'The reason why the web page content is considered misinformation.'
+    ),
 });
 export type DetectTrendingMisinformationOutput = z.infer<
   typeof DetectTrendingMisinformationOutputSchema
@@ -45,6 +46,35 @@ export async function detectTrendingMisinformation(
   return detectTrendingMisinformationFlow(input);
 }
 
+const getCurrentDate = ai.defineTool(
+  {
+    name: 'getCurrentDate',
+    description: 'Returns the current date.',
+    outputSchema: z.string(),
+  },
+  async () => {
+    return new Date().toDateString();
+  }
+);
+
+const factCheckSearch = ai.defineTool(
+  {
+    name: 'factCheckSearch',
+    description: 'Searches for fact-checking information on a given topic.',
+    inputSchema: z.string().describe('The search query.'),
+    outputSchema: z.array(
+      z.object({
+        title: z.string(),
+        link: z.string(),
+        snippet: z.string(),
+      })
+    ),
+  },
+  async query => {
+    return await searchGoogle(query);
+  }
+);
+
 const detectTrendingMisinformationFlow = ai.defineFlow(
   {
     name: 'detectTrendingMisinformationFlow',
@@ -52,47 +82,23 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
     outputSchema: DetectTrendingMisinformationOutputSchema,
   },
   async ({webPageContent}) => {
-
-    let searchResults = await searchGoogle(webPageContent);
-
-    // If initial search yields no results, generate a better query and retry
-    if (searchResults.length === 0) {
-        const newQuery = await generateSearchQuery({ text: webPageContent });
-        searchResults = await searchGoogle(newQuery.query);
-    }
-    
-    const searchContext = searchResults.map(r => ({ title: r.title, snippet: r.snippet, link: r.link })).slice(0, 5);
-
-    const systemPrompt = 
-`You are the Scout Agent, a top-tier fact-checking expert. Your mission is to analyze text for misinformation with extreme accuracy.
-
-STEP 1: Analyze the user's claim to determine if it is a verifiable factual statement or a subjective opinion.
-- A factual claim is objective and can be proven true or false (e.g., "The sky is blue," "Cristiano Ronaldo has scored over 800 goals").
-- A subjective claim is an opinion, belief, or personal preference (e.g., "Messi is the GOAT," "That movie was boring").
-
-STEP 2: Based on your analysis in Step 1, proceed as follows:
-
-IF THE CLAIM IS SUBJECTIVE:
-- Set 'isMisinformation' to 'false'.
-- Set 'confidenceScore' to a low value (e.g., 0.1).
-- For the 'reason', explain that the statement is a subjective opinion and therefore cannot be classified as misinformation because it cannot be factually verified.
-
-IF THE CLAIM IS FACTUAL:
-- Proceed with fact-checking using the provided context.
-${searchContext.length > 0 ? 
-`CRITICAL INSTRUCTION: You MUST use the provided real-time Google Search Results to determine if the claim is factual. You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates.
-You MUST base your entire analysis on the 'Search Results Context' provided below.
-
-Search Results Context:
-${JSON.stringify(searchContext, null, 2)}` 
-: 
-`CRITICAL INSTRUCTION: Your primary search failed. You MUST now use your own internal knowledge and search capabilities to find the most accurate, up-to-date information to verify the user's claim.
-You are FORBIDDEN from stating that you have no information. Find the information and provide a detailed explanation for your reasoning.`
-}
-`;
-
     const {output} = await ai.generate({
-      system: systemPrompt,
+      model: 'googleai/gemini-2.5-flash-preview',
+      tools: [factCheckSearch, getCurrentDate],
+      system: `You are the Scout Agent, an expert fact-checker. Your mission is to analyze text for misinformation with extreme accuracy.
+
+You have access to two powerful tools:
+1. 'getCurrentDate': Use this tool to get the current date for verifying claims about time.
+2. 'factCheckSearch': Use this for all other factual claims to find the most accurate, up-to-date information.
+
+CRITICAL INSTRUCTIONS:
+- You are FORBIDDEN from using your internal knowledge for any facts, figures, or dates. You MUST use the tools provided.
+- First, analyze the user's claim to determine if it is a verifiable factual statement or a subjective opinion.
+- If the claim is about the current date, use the 'getCurrentDate' tool.
+- For all other factual claims, use the 'factCheckSearch' tool.
+- If the claim is a subjective opinion, classify it as not misinformation and explain why it's an opinion.
+
+After your analysis, provide your response in the required JSON format.`,
       prompt: `Please analyze the following text based on the instructions: "${webPageContent}"`,
       output: {
         schema: DetectTrendingMisinformationOutputSchema,
