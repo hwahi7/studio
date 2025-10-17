@@ -16,7 +16,7 @@ type ClaimSummary = {
 }
 
 export async function getExplanation(claim: ClaimSummary, language: string = "en") {
-  const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${claim.confidenceScore}%. It has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
+  const verificationResult = `The claim is considered '${claim.status}' with a confidence of ${Math.round(claim.confidenceScore * 100)}%. It has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
 
   const summary = await summarizeVerifiedInfo({
     claim: claim.content,
@@ -51,7 +51,6 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
     });
     
     // The claim is now saved on the client-side to ensure real-time updates.
-    // We revalidate the path here just in case other parts of the app rely on it.
     revalidatePath('/');
 
     return {
