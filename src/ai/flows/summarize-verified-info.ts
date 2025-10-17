@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -51,13 +52,18 @@ const summarizeVerifiedInfoFlow = ai.defineFlow(
     outputSchema: SummarizeVerifiedInfoOutputSchema,
   },
   async input => {
-    const {output} = await summarizeVerifiedInfoPrompt(input);
-    
-    // Add a fallback to prevent schema validation errors if the model returns null/empty
-    if (!output) {
-      return "An explanation could not be generated at this time.";
+    try {
+      const {output} = await summarizeVerifiedInfoPrompt(input);
+      
+      if (!output) {
+        return "An explanation could not be generated at this time.";
+      }
+      
+      return output;
+    } catch (error) {
+      console.error("Error in summarizeVerifiedInfoFlow:", error);
+      // Return a user-friendly error message if the API call fails
+      return "An explanation could not be generated due to a temporary issue. Please try again later.";
     }
-    
-    return output;
   }
 );
