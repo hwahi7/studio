@@ -84,7 +84,6 @@ const detectTrendingMisinformationFlow = ai.defineFlow(
   },
   async ({webPageContent}) => {
     const {output} = await ai.generate({
-      model: 'googleai/gemini-1.5-flash-latest',
       tools: [factCheckSearch, getCurrentDate],
       system: `You are the Scout Agent, an expert fact-checker. Your mission is to analyze text for misinformation with extreme accuracy.
 
