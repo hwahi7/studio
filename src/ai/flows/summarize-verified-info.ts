@@ -1,7 +1,7 @@
 'use server';
 
 /**
- * @fileOverview Summarizes verified information about a claim in multiple languages using the Explainer Agent.
+ * @fileOverview Summarizes verified information about a claim in a specific language using the Explainer Agent.
  *
  * - summarizeVerifiedInfo - A function that handles the summarization of verified information.
  * - SummarizeVerifiedInfoInput - The input type for the summarizeVerifiedInfo function.
@@ -13,13 +13,14 @@ import {z} from 'genkit';
 
 const SummarizeVerifiedInfoInputSchema = z.object({
   claim: z.string().describe('The claim to be verified.'),
-  verificationResult: z.string().describe('The verification result of the claim.'),
+  verificationResult: z.string().describe('A sentence describing the verification result and community feedback.'),
   confidenceScore: z.number().describe('The confidence score of the verification.'),
-  languages: z.array(z.string()).describe('The languages in which the summary should be generated.'),
+  language: z.string().describe('The language in which the summary should be generated (e.g., "English", "Español").'),
 });
 export type SummarizeVerifiedInfoInput = z.infer<typeof SummarizeVerifiedInfoInputSchema>;
 
-const SummarizeVerifiedInfoOutputSchema = z.record(z.string(), z.string()).describe('A map of language codes to summaries.');
+// The output is now a simple string.
+const SummarizeVerifiedInfoOutputSchema = z.string().describe('The generated summary in the requested language.');
 export type SummarizeVerifiedInfoOutput = z.infer<typeof SummarizeVerifiedInfoOutputSchema>;
 
 export async function summarizeVerifiedInfo(input: SummarizeVerifiedInfoInput): Promise<SummarizeVerifiedInfoOutput> {
@@ -30,24 +31,16 @@ const summarizeVerifiedInfoPrompt = ai.definePrompt({
   name: 'summarizeVerifiedInfoPrompt',
   input: {schema: SummarizeVerifiedInfoInputSchema},
   output: {schema: SummarizeVerifiedInfoOutputSchema},
-  prompt: `You are an Explainer Agent that summarizes verified information about a claim in multiple languages.
+  prompt: `You are an Explainer Agent. Your task is to provide a clear, neutral, and easy-to-understand explanation for why a claim has been classified in a certain way.
 
-  Claim: {{{claim}}}
-  Verification Result: {{{verificationResult}}}
-  Confidence Score: {{{confidenceScore}}}
+  Analyze the following information:
+  - The Claim: "{{{claim}}}"
+  - Verification & Community Feedback: "{{{verificationResult}}}"
+  - AI Confidence Score: {{{confidenceScore}}}
 
-  Generate a summary of the verified information in the following languages:
-  {{#each languages}}
-  - {{this}}
-  {{/each}}
-
-  Return a JSON object where the keys are the language codes and the values are the summaries in the corresponding languages.
-  For example:
-  {
-    "en": "Summary in English",
-    "es": "Summary in Spanish",
-    "fr": "Summary in French"
-  }
+  Based on all of this information, generate a concise summary (2-3 sentences) that explains the outcome. Write the entire summary in the following language: {{{language}}}.
+  
+  Do not just repeat the inputs. Synthesize them into a coherent explanation.
 `,
 });
 

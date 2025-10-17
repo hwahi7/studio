@@ -59,14 +59,15 @@ export function ExplanationDialog({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const [explanation, setExplanation] = React.useState<Record<string, string> | null>(null);
+  const [explanation, setExplanation] = React.useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = React.useState("en");
 
   React.useEffect(() => {
     if (isOpen) {
       setIsLoading(true);
       setError(null);
-      // Create a plain object without the unserializable Timestamp
+      setExplanation(null);
+      
       const claimSummary = {
         content: claim.content,
         status: claim.status,
@@ -75,16 +76,21 @@ export function ExplanationDialog({
         downvotes: claim.downvotes,
       };
 
-      getExplanation(claimSummary, selectedLanguage)
+      const selectedLangName = supportedLanguages.find(l => l.code === selectedLanguage)?.name || "English";
+
+      getExplanation(claimSummary, selectedLangName)
         .then(setExplanation)
-        .catch((e) => setError("Failed to generate explanation. Please try again."))
+        .catch((e) => {
+          console.error("Failed to generate explanation:", e);
+          setError("Failed to generate explanation. Please try again.");
+        })
         .finally(() => setIsLoading(false));
     }
   }, [isOpen, claim, selectedLanguage]);
 
   const handleLanguageChange = (langCode: string) => {
     setSelectedLanguage(langCode);
-    setExplanation(null); // Clear previous explanation to trigger refetch
+    setExplanation(null); 
   };
 
   return (
@@ -120,9 +126,11 @@ export function ExplanationDialog({
             </Select>
           </div>
 
-          {isLoading && (
+          {(isLoading || !explanation) && !error && (
             <div className="space-y-3 pt-4">
-              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
             </div>
           )}
 
@@ -130,7 +138,7 @@ export function ExplanationDialog({
           
           {explanation && (
             <div className="pt-4">
-               <p className="text-sm leading-relaxed">{explanation[selectedLanguage]}</p>
+               <p className="text-sm leading-relaxed">{explanation}</p>
             </div>
           )}
         </div>

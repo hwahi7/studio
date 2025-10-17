@@ -22,9 +22,10 @@ export async function getExplanation(claim: ClaimSummary, language: string = "en
     claim: claim.content,
     verificationResult: verificationResult,
     confidenceScore: claim.confidenceScore,
-    languages: [language],
+    language: language,
   });
 
+  // The flow now returns a string directly.
   return summary;
 }
 
@@ -50,7 +51,7 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       webPageContent: textToAnalyze,
     });
     
-    // The claim is now saved on the client-side to ensure real-time updates.
+    // Revalidate the path to trigger a data refresh on the dashboard.
     revalidatePath('/');
 
     return {
