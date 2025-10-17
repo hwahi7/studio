@@ -11,7 +11,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { Claim } from "@/lib/types";
-import { useLanguage } from "@/context/language-context";
+import { useLanguage, type Language } from "@/context/language-context";
+import { translateText } from "@/app/actions";
+import { Loader2 } from "lucide-react";
 
 export function ExplanationDialog({
   children,
@@ -21,10 +23,37 @@ export function ExplanationDialog({
   claim: Claim;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { t } = useLanguage();
+  const [translatedExplanation, setTranslatedExplanation] = React.useState<string | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { t, language, availableLanguages } = useLanguage();
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (open) {
+      // Reset on open
+      setTranslatedExplanation(null);
+      
+      const targetLanguage = availableLanguages.find(lang => lang.code === language);
+
+      if (claim.explanation && language !== 'en' && targetLanguage) {
+        setIsLoading(true);
+        translateText({
+          text: claim.explanation,
+          targetLanguage: targetLanguage.name,
+        }).then(result => {
+          setTranslatedExplanation(result.translatedText);
+          setIsLoading(false);
+        });
+      } else {
+        setTranslatedExplanation(claim.explanation || null);
+      }
+    }
+  };
+
+  const explanationToDisplay = translatedExplanation || claim.explanation;
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
@@ -40,13 +69,17 @@ export function ExplanationDialog({
             "{claim.content}"
           </p>
 
-          {claim.explanation ? (
-            <div className="pt-4">
-               <p className="text-sm leading-relaxed">{claim.explanation}</p>
-            </div>
-          ) : (
-             <p className="text-sm text-muted-foreground">{t('ExplanationDialog.notAvailable')}</p>
-          )}
+          <div className="pt-4">
+            {isLoading ? (
+                <div className="flex items-center justify-center h-20">
+                    <Loader2 className="h-6 w-6 animate-spin" />
+                </div>
+            ) : explanationToDisplay ? (
+              <p className="text-sm leading-relaxed">{explanationToDisplay}</p>
+            ) : (
+              <p className="text-sm text-muted-foreground">{t('ExplanationDialog.notAvailable')}</p>
+            )}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

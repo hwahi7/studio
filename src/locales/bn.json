@@ -36,13 +36,13 @@
     "title": "সেটিংস",
     "subtitle": "আপনার অ্যাকাউন্ট এবং অ্যাপ্লিকেশন সেটিংস পরিচালনা করুন।",
     "preferences": {
-      "title": "पছন্দ",
-      "description": "আপনার অভিজ্ঞতা কাস্টמাইজ করুন।"
+      "title": "পছন্দ",
+      "description": "আপনার অভিজ্ঞতা কাস্টমাইজ করুন।"
     },
     "language": {
       "label": "ভাষা",
       "placeholder": "ভাষা নির্বাচন করুন",
-      "description": "অ্যাপ্লিকেশনের प्रदर्शन भाषा নির্বাচন করুন।"
+      "description": "অ্যাপ্লিকেশনের প্রদর্শন ভাষা নির্বাচন করুন।"
     },
     "password": {
       "label": "পাসওয়ার্ড",
@@ -68,12 +68,12 @@
     "languagePlaceholder": "একটি ভাষা নির্বাচন করুন",
     "signUpButton": "সাইন আপ",
     "haveAccount": "이미 অ্যাকাউন্ট আছে?",
-    "loginLink": "লgইন"
+    "loginLink": "লগইন"
   },
   "ClaimCard": {
     "unknownSource": "অজানা উৎস",
     "verifiedIn": "{minutes} মিনিটে যাচাই করা হয়েছে",
-    "confidenceScore": "आत्मविश्वास স্কোর",
+    "confidenceScore": "আত্মবিশ্বাস স্কোর",
     "communityAgreesTooltip": "קהילה מסכימה",
     "communityDisagreesTooltip": "קהילה לא מסכימה",
     "cannotVoteOnMock": "মক দাবিতে ভোট দেওয়া যাবে না",
@@ -113,13 +113,13 @@
       "successTitle": "পাসওয়ার্ড আপডেট করা হয়েছে",
       "successDescription": "আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।",
       "failTitle": "আপডেট 실패",
-      "failDescription": "আপনার સત્ર মেয়াদ শেষ হয়ে যেতে পারে। পাসওয়ার্ড পরিবর্তন করতে অনুগ্রহ করে আবার লগইন করুন।",
+      "failDescription": "আপনার সত্র মেয়াদ শেষ হয়ে যেতে পারে। পাসওয়ার্ড পরিবর্তন করতে অনুগ্রহ করে আবার লগইন করুন।",
       "errorTitle": "ত্রুটি"
     }
   },
   "ProfileUpdate": {
     "toast": {
-        "successTitle": "প্রୋفایل আপডেট করা হয়েছে",
+        "successTitle": "প্রোফাইল আপডেট করা হয়েছে",
         "successDescription": "আপনার प्रदर्शन নাম সফলভাবে আপডেট করা হয়েছে।",
         "failTitle": "আপডেট 실패",
         "errorTitle": "ত্রুটি",

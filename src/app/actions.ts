@@ -5,6 +5,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 import type { Claim } from "@/lib/types";
+import { translateText as translateTextFlow, type TranslateTextInput } from "@/ai/flows/translate-text";
 
 
 const misinformationSchema = z.object({
@@ -44,4 +45,18 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       text: textToAnalyze,
     };
   }
+}
+
+export async function translateText(input: TranslateTextInput) {
+    if (!input.text) {
+        return { translatedText: '' };
+    }
+    try {
+        const result = await translateTextFlow(input);
+        return result;
+    } catch (error) {
+        console.error("Error in translateText:", error);
+        // Return original text in case of an error
+        return { translatedText: input.text };
+    }
 }
