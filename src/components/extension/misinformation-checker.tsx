@@ -47,19 +47,25 @@ export function MisinformationChecker() {
       
       let status: ClaimStatus;
       let confidence = result.confidenceScore;
-      const INCONCLUSIVE_THRESHOLD = 0.4; 
+      const INCONCLUSIVE_THRESHOLD = 0.5;
 
       if (result.isMisinformation) {
-          if (confidence > INCONCLUSIVE_THRESHOLD) {
-            status = "False";
-          } else {
-            status = "Inconclusive";
-          }
+        // AI thinks it IS misinformation.
+        // If confidence is high, it's "False". Otherwise, "Inconclusive".
+        if (confidence > INCONCLUSIVE_THRESHOLD) {
+          status = "False";
+        } else {
+          status = "Inconclusive";
+        }
       } else {
-          // If it's not misinformation, it should be Verified,
-          // regardless of confidence, as low confidence means "uncertain if it's NOT misinformation"
-          // which still leans towards verified until proven otherwise.
+        // AI thinks it is NOT misinformation.
+        // The confidence score reflects certainty in this truthfulness.
+        // If confidence is low, it's "Inconclusive". Otherwise, it's "Verified".
+        if (confidence < INCONCLUSIVE_THRESHOLD) {
+          status = "Inconclusive";
+        } else {
           status = "Verified";
+        }
       }
       
       const claimForExplanation: Pick<Claim, 'content' | 'status' | 'confidenceScore' | 'upvotes' | 'downvotes'> = {

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import { ChangePasswordDialog } from "@/components/settings/change-password-dialog";
 
 export default function SettingsPage() {
     const router = useRouter();
@@ -94,10 +95,12 @@ export default function SettingsPage() {
            <div className="grid gap-2">
             <Label>Password</Label>
             <div className="flex items-center gap-4">
-                <Button variant="outline">Change Password</Button>
+                <ChangePasswordDialog>
+                    <Button variant="outline">Change Password</Button>
+                </ChangePasswordDialog>
             </div>
              <p className="text-sm text-muted-foreground">
-              Update your account password (functionality coming soon).
+              Update your account password.
             </p>
           </div>
 
