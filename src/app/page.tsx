@@ -71,6 +71,7 @@ export default function DashboardPage() {
   }, [claimsQuery, user]);
 
   useEffect(() => {
+    // This code runs only on the client, after the component has mounted.
     const preferredLanguage = localStorage.getItem('language') || 'en';
     if (preferredLanguage !== 'en') {
       translateDashboardContent(originalContent, preferredLanguage).then(setDashboardContent);

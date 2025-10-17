@@ -26,6 +26,7 @@ export default function SettingsPage() {
     const [selectedLocale, setSelectedLocale] = useState('en');
 
     useEffect(() => {
+        // This effect runs only on the client, so localStorage is safe to use.
         const storedLocale = localStorage.getItem('language');
         if (storedLocale) {
             setSelectedLocale(storedLocale);
@@ -36,6 +37,7 @@ export default function SettingsPage() {
         localStorage.setItem('language', newLocale);
         setSelectedLocale(newLocale);
         // We can optionally force a reload to see changes immediately on other pages
+        // This is a simple way to ensure all components re-render with the new language preference.
         window.location.reload(); 
     };
 
