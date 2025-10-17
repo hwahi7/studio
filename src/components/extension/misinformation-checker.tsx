@@ -120,9 +120,7 @@ export function MisinformationChecker() {
   const errorMessage = getErrorMessage();
 
   const reasonToDisplay = translatedReason || (isTranslating ? null : state.data?.reason);
-  const displayConfidence = state.data?.isMisinformation 
-    ? state.data.confidenceScore 
-    : 1.0 - state.data.confidenceScore;
+  const displayConfidence = state.data ? state.data.confidenceScore : 0;
 
 
   return (
@@ -154,7 +152,7 @@ export function MisinformationChecker() {
               <AlertTriangle className="h-4 w-4" />
               <AlertTitle>{t('MisinformationChecker.alert.potentialMisinformation')}</AlertTitle>
               <AlertDescription>
-                <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
+                <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(displayConfidence * 100)}%</p>
                 {isTranslating ? (
                   <div className="flex items-center gap-2 mt-1">
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -172,7 +170,7 @@ export function MisinformationChecker() {
                <CheckCircle2 className="h-4 w-4" />
               <AlertTitle>{t('MisinformationChecker.alert.noMisinformation')}</AlertTitle>
               <AlertDescription>
-                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
+                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(displayConfidence * 100)}%</p>
                 {isTranslating ? (
                   <div className="flex items-center gap-2 mt-1">
                     <Loader2 className="h-4 w-4 animate-spin" />
