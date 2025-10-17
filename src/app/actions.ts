@@ -5,6 +5,7 @@ import { z } from "zod";
 import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import { revalidatePath } from "next/cache";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
+import type { Claim } from "@/lib/types";
 
 // This type can be simplified as we don't need the full Claim with Timestamps
 type ClaimSummary = {
@@ -16,16 +17,16 @@ type ClaimSummary = {
 }
 
 export async function getExplanation(claim: ClaimSummary, language: string = "en") {
-  const verificationResult = `This claim is considered '${claim.status}'. It has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
+  const communityFeedback = `This claim has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
 
   const summary = await summarizeVerifiedInfo({
     claim: claim.content,
-    verificationResult: verificationResult,
+    verificationResult: claim.status,
     confidenceScore: claim.confidenceScore,
     language: language,
+    communityFeedback: communityFeedback
   });
 
-  // The flow now returns a string directly.
   return summary;
 }
 

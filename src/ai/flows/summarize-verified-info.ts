@@ -13,13 +13,13 @@ import {z} from 'genkit';
 
 const SummarizeVerifiedInfoInputSchema = z.object({
   claim: z.string().describe('The claim to be verified.'),
-  verificationResult: z.string().describe('A sentence describing the verification result and community feedback.'),
+  verificationResult: z.string().describe('The verification result (e.g., "False", "Verified", "Inconclusive").'),
   confidenceScore: z.number().describe('The confidence score of the verification.'),
   language: z.string().describe('The language in which the summary should be generated (e.g., "English", "Español").'),
+  communityFeedback: z.string().describe('A summary of community feedback (votes).')
 });
 export type SummarizeVerifiedInfoInput = z.infer<typeof SummarizeVerifiedInfoInputSchema>;
 
-// The output is now a simple string.
 const SummarizeVerifiedInfoOutputSchema = z.string().describe('The generated summary in the requested language.');
 export type SummarizeVerifiedInfoOutput = z.infer<typeof SummarizeVerifiedInfoOutputSchema>;
 
@@ -30,13 +30,13 @@ export async function summarizeVerifiedInfo(input: SummarizeVerifiedInfoInput): 
 const summarizeVerifiedInfoPrompt = ai.definePrompt({
   name: 'summarizeVerifiedInfoPrompt',
   input: {schema: SummarizeVerifiedInfoInputSchema},
-  output: {schema: SummarizeVerifiedInfoOutputSchema},
   prompt: `You are an Explainer Agent. Your task is to provide a clear, neutral, and easy-to-understand explanation for why a claim has been classified in a certain way.
 
   Analyze the following information:
   - The Claim: "{{{claim}}}"
-  - Verification & Community Feedback: "{{{verificationResult}}}"
+  - AI Verification Status: "{{{verificationResult}}}"
   - AI Confidence Score: {{{confidenceScore}}}
+  - Community Feedback: "{{{communityFeedback}}}"
 
   Based on all of this information, generate a concise summary (2-3 sentences) that explains the outcome. Write the entire summary in the following language: {{{language}}}.
   
