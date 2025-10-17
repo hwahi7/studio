@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/context/language-context";
 
 const initialState = {
   message: "",
@@ -28,10 +29,11 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const { t } = useLanguage();
   return (
     <Button type="submit" disabled={pending}>
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      Update Password
+      {t('ChangePasswordDialog.updateButton')}
     </Button>
   );
 }
@@ -41,57 +43,58 @@ export function ChangePasswordDialog({ children }: { children: React.ReactNode }
   const [state, formAction] = useActionState(changePassword, initialState);
   const auth = useAuth();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (state.message === "success" && state.data?.password && auth?.currentUser) {
       updatePassword(auth.currentUser, state.data.password)
         .then(() => {
           toast({
-            title: "Password Updated",
-            description: "Your password has been successfully changed.",
+            title: t('ChangePasswordDialog.toast.successTitle'),
+            description: t('ChangePasswordDialog.toast.successDescription'),
           });
           setIsOpen(false);
         })
         .catch((error) => {
           toast({
             variant: "destructive",
-            title: "Update Failed",
-            description: "Your session may have expired. Please log in again to change your password.",
+            title: t('ChangePasswordDialog.toast.failTitle'),
+            description: t('ChangePasswordDialog.toast.failDescription'),
           });
         });
     } else if (state.message && state.message !== "success") {
       toast({
         variant: "destructive",
-        title: "Error",
+        title: t('ChangePasswordDialog.toast.errorTitle'),
         description: state.message,
       });
     }
-  }, [state, auth, toast]);
+  }, [state, auth, toast, t]);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Change Password</DialogTitle>
+          <DialogTitle>{t('ChangePasswordDialog.title')}</DialogTitle>
           <DialogDescription>
-            Enter your new password below.
+            {t('ChangePasswordDialog.description')}
           </DialogDescription>
         </DialogHeader>
         <form action={formAction}>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="password">New Password</Label>
+              <Label htmlFor="password">{t('ChangePasswordDialog.newPassword')}</Label>
               <Input id="password" name="password" type="password" required />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="confirmPassword">Confirm New Password</Label>
+              <Label htmlFor="confirmPassword">{t('ChangePasswordDialog.confirmNewPassword')}</Label>
               <Input id="confirmPassword" name="confirmPassword" type="password" required />
             </div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline">{t('ChangePasswordDialog.cancelButton')}</Button>
             </DialogClose>
             <SubmitButton />
           </DialogFooter>

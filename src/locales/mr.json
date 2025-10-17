@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "डॅशबोर्ड",
+    "dashboardTooltip": "डॅशबोर्ड",
+    "chromeExtension": "क्रोम विस्तार",
+    "extensionTooltip": "क्रोम विस्तार",
+    "myAccount": "माझे खाते",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिंग्ज",
+    "logout": "लॉग आउट",
+    "userRole": "वापरकर्ता"
+  },
+  "DashboardPage": {
+    "title": "दावा ओळख डॅशबोर्ड",
+    "subtitle": "स्काउट एजंटद्वारे ओळखलेल्या ट्रेंडिंग दाव्यांची थेट फीड."
+  },
+  "ExtensionPage": {
+    "title": "लोकलट्रुथ क्रोम विस्तार",
+    "description": "लोकलट्रुथच्या AI पडताळणीची शक्ती थेट तुमच्या ब्राउझरवर आणा. सोशल मीडिया, ईमेल आणि बातम्यांच्या लेखांवर रिअल-टाइममध्ये संभाव्य चुकीच्या माहितीचा शोध घ्या.",
+    "installButton": "क्रोम विस्तार स्थापित करा",
+    "comingSoon": "लवकरच येत आहे",
+    "simulatorTitle": "विस्तार सिम्युलेटर",
+    "simulatorDescription": "शोध इंजिनची चाचणी घ्या. खाली कोणताही मजकूर पेस्ट करा आणि आमचा स्काऊट एजंट संभाव्य चुकीच्या माहितीसाठी त्याचे विश्लेषण करेल."
+  },
+  "ProfilePage": {
+    "title": "प्रोफाइल",
+    "subtitle": "तुमचे सार्वजनिक प्रोफाइल आणि खाते तपशील व्यवस्थापित करा.",
+    "accountInfoTitle": "खाते माहिती",
+    "accountInfoDescription": "तुमचे प्रदर्शन नाव अद्यतनित करा आणि तुमचा खाते ईमेल पहा.",
+    "emailLabel": "ईमेल",
+    "displayNameLabel": "प्रदर्शन नाव",
+    "saveButton": "बदल जतन करा"
+  },
+  "SettingsPage": {
+    "title": "सेटिंग्ज",
+    "subtitle": "तुमचे खाते आणि अनुप्रयोग सेटिंग्ज व्यवस्थापित करा.",
+    "preferences": {
+      "title": "प्राधान्ये",
+      "description": "तुमचा अनुभव सानुकूलित करा."
+    },
+    "language": {
+      "label": "भाषा",
+      "placeholder": "भाषा निवडा",
+      "description": "अनुप्रयोगासाठी प्रदर्शन भाषा निवडा."
+    },
+    "password": {
+      "label": "पासवर्ड",
+      "button": "पासवर्ड बदला",
+      "description": "तुमचा खाते पासवर्ड अद्यतनित करा."
+    }
+  },
+  "LoginPage": {
+    "title": "लॉगिन",
+    "description": "तुमच्या खात्यात लॉगिन करण्यासाठी खाली तुमचा ईमेल प्रविष्ट करा.",
+    "emailLabel": "ईमेल",
+    "passwordLabel": "पासवर्ड",
+    "signInButton": "साइन इन करा",
+    "noAccount": "खाते नाही?",
+    "signUpLink": "साइन अप करा"
+  },
+  "SignupPage": {
+    "title": "साइन अप करा",
+    "description": "खाते तयार करण्यासाठी तुमची माहिती प्रविष्ट करा.",
+    "emailLabel": "ईमेल",
+    "passwordLabel": "पासवर्ड",
+    "languageLabel": "भाषा",
+    "languagePlaceholder": "एक भाषा निवडा",
+    "signUpButton": "साइन अप करा",
+    "haveAccount": "आधीच खाते आहे?",
+    "loginLink": "लॉगिन"
+  },
+  "ClaimCard": {
+    "unknownSource": "अज्ञात स्त्रोत",
+    "verifiedIn": "{minutes} मिनिटांत सत्यापित",
+    "confidenceScore": "आत्मविश्वास गुण",
+    "communityAgreesTooltip": "समुदाय सहमत आहे",
+    "communityDisagreesTooltip": "समुदाय असहमत आहे",
+    "cannotVoteOnMock": "बनावट दाव्यांवर मत देऊ शकत नाही",
+    "explainButton": "स्पष्ट करा",
+    "status": {
+      "Verified": "सत्यापित",
+      "False": "खोटे",
+      "Inconclusive": "अनिर्णित"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI स्पष्टीकरण",
+    "description": "सत्यापित माहितीवर आधारित स्पष्टीकरण एजंटद्वारे व्युत्पन्न.",
+    "notAvailable": "या दाव्यासाठी कोणतेही स्पष्टीकरण उपलब्ध नाही."
+  },
+  "MisinformationChecker": {
+    "placeholder": "एक बातमी मथळा, सोशल मीडिया पोस्ट किंवा तुम्हाला सत्यापित करायचा असलेला कोणताही मजकूर पेस्ट करा...",
+    "buttonText": "चुकीच्या माहितीसाठी तपासा",
+    "errorMinChars": "कृपया किमान 20 वर्ण प्रविष्ट करा.",
+    "errorInvalidInput": "अवैध इनपुट.",
+    "errorApi": "मजकूराचे विश्लेषण करताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा.",
+    "alert": {
+      "potentialMisinformation": "संभाव्य चुकीची माहिती आढळली",
+      "noMisinformation": "कोणतीही चुकीची माहिती आढळली नाही",
+      "confidence": "आत्मविश्वास",
+      "reason": "कारण"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "पासवर्ड बदला",
+    "description": "खाली तुमचा नवीन पासवर्ड प्रविष्ट करा.",
+    "newPassword": "नवीन पासवर्ड",
+    "confirmNewPassword": "नवीन पासवर्डची पुष्टी करा",
+    "updateButton": "पासवर्ड अद्यतनित करा",
+    "cancelButton": "रद्द करा",
+    "toast": {
+      "successTitle": "पासवर्ड अद्यतनित",
+      "successDescription": "तुमचा पासवर्ड यशस्वीरित्या बदलला आहे.",
+      "failTitle": "अद्यतन अयशस्वी",
+      "failDescription": "तुमचे सत्र कालबाह्य झाले असावे. तुमचा पासवर्ड बदलण्यासाठी कृपया पुन्हा लॉगिन करा.",
+      "errorTitle": "त्रुटी"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "प्रोफाइल अद्यतनित",
+        "successDescription": "तुमचे प्रदर्शन नाव यशस्वीरित्या अद्यतनित केले आहे.",
+        "failTitle": "अद्यतन अयशस्वी",
+        "errorTitle": "त्रुटी",
+        "nameTooShort": "प्रदर्शन नाव किमान 3 वर्णांचे असणे आवश्यक आहे."
+    }
+  }
+}

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Painel",
+    "dashboardTooltip": "Painel",
+    "chromeExtension": "Extensão do Chrome",
+    "extensionTooltip": "Extensão do Chrome",
+    "myAccount": "Minha conta",
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "userRole": "Usuário"
+  },
+  "DashboardPage": {
+    "title": "Painel de Detecção de Reivindicações",
+    "subtitle": "Feed ao vivo de reivindicações em alta detectadas pelo Agente Scout."
+  },
+  "ExtensionPage": {
+    "title": "Extensão do Chrome LocalTruth",
+    "description": "Leve o poder da verificação de IA do LocalTruth diretamente para o seu navegador. Detecte desinformação em potencial em tempo real nas redes sociais, e-mails e artigos de notícias.",
+    "installButton": "Instalar extensão do Chrome",
+    "comingSoon": "Em breve",
+    "simulatorTitle": "Simulador de Extensão",
+    "simulatorDescription": "Teste o motor de detecção. Cole qualquer texto abaixo e nosso Agente Scout o analisará em busca de desinformação em potencial."
+  },
+  "ProfilePage": {
+    "title": "Perfil",
+    "subtitle": "Gerencie seu perfil público e os detalhes da sua conta.",
+    "accountInfoTitle": "Informações da conta",
+    "accountInfoDescription": "Atualize seu nome de exibição e veja o e-mail da sua conta.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Nome de exibição",
+    "saveButton": "Salvar alterações"
+  },
+  "SettingsPage": {
+    "title": "Configurações",
+    "subtitle": "Gerencie sua conta e as configurações do aplicativo.",
+    "preferences": {
+      "title": "Preferências",
+      "description": "Personalize sua experiência."
+    },
+    "language": {
+      "label": "Idioma",
+      "placeholder": "Selecione o idioma",
+      "description": "Escolha o idioma de exibição do aplicativo."
+    },
+    "password": {
+      "label": "Senha",
+      "button": "Alterar senha",
+      "description": "Atualize a senha da sua conta."
+    }
+  },
+  "LoginPage": {
+    "title": "Login",
+    "description": "Digite seu e-mail abaixo para fazer login na sua conta.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Senha",
+    "signInButton": "Entrar",
+    "noAccount": "Não tem uma conta?",
+    "signUpLink": "Cadastre-se"
+  },
+  "SignupPage": {
+    "title": "Cadastre-se",
+    "description": "Digite suas informações para criar uma conta.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Senha",
+    "languageLabel": "Idioma",
+    "languagePlaceholder": "Selecione um idioma",
+    "signUpButton": "Cadastre-se",
+    "haveAccount": "Já tem uma conta?",
+    "loginLink": "Login"
+  },
+  "ClaimCard": {
+    "unknownSource": "Fonte desconhecida",
+    "verifiedIn": "Verificado em {minutes} minutos",
+    "confidenceScore": "Pontuação de confiança",
+    "communityAgreesTooltip": "A comunidade concorda",
+    "communityDisagreesTooltip": "A comunidade discorda",
+    "cannotVoteOnMock": "Não é possível votar em reivindicações simuladas",
+    "explainButton": "Explicar",
+    "status": {
+      "Verified": "Verificado",
+      "False": "Falso",
+      "Inconclusive": "Inconclusivo"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Explicação da IA",
+    "description": "Gerado pelo Agente Explicador com base em informações verificadas.",
+    "notAvailable": "Não há explicação disponível para esta reivindicação."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Cole uma manchete de notícia, uma postagem de rede social ou qualquer texto que você queira verificar...",
+    "buttonText": "Verificar desinformação",
+    "errorMinChars": "Digite pelo menos 20 caracteres.",
+    "errorInvalidInput": "Entrada inválida.",
+    "errorApi": "Ocorreu um erro ao analisar o texto. Tente novamente.",
+    "alert": {
+      "potentialMisinformation": "Potencial desinformação detectada",
+      "noMisinformation": "Nenhuma desinformação detectada",
+      "confidence": "Confiança",
+      "reason": "Motivo"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Alterar senha",
+    "description": "Digite sua nova senha abaixo.",
+    "newPassword": "Nova senha",
+    "confirmNewPassword": "Confirme a nova senha",
+    "updateButton": "Atualizar senha",
+    "cancelButton": "Cancelar",
+    "toast": {
+      "successTitle": "Senha atualizada",
+      "successDescription": "Sua senha foi alterada com sucesso.",
+      "failTitle": "Falha na atualização",
+      "failDescription": "Sua sessão pode ter expirado. Faça login novamente para alterar sua senha.",
+      "errorTitle": "Erro"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Perfil atualizado",
+        "successDescription": "Seu nome de exibição foi atualizado com sucesso.",
+        "failTitle": "Falha na atualização",
+        "errorTitle": "Erro",
+        "nameTooShort": "O nome de exibição deve ter pelo menos 3 caracteres."
+    }
+  }
+}

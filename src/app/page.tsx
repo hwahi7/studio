@@ -9,12 +9,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { mockClaims } from "@/lib/mock-claims";
-import { translateDashboardContent } from "@/app/actions";
+import { useLanguage } from "@/context/language-context";
 
-const originalContent = {
-  title: "Claim Detection Dashboard",
-  subtitle: "Live feed of trending claims detected by Scout Agent.",
-};
 
 export default function DashboardPage() {
   const firestore = useFirestore();
@@ -22,8 +18,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [displayClaims, setDisplayClaims] = useState<Claim[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [dashboardContent, setDashboardContent] = useState(originalContent);
-
+  const { t } = useLanguage();
 
   const claimsQuery = useMemoFirebase(
     () => {
@@ -70,16 +65,6 @@ export default function DashboardPage() {
     }
   }, [claimsQuery, user]);
 
-  useEffect(() => {
-    // This code runs only on the client, after the component has mounted.
-    const preferredLanguage = localStorage.getItem('language') || 'en';
-    if (preferredLanguage !== 'en') {
-      translateDashboardContent(originalContent, preferredLanguage).then(setDashboardContent);
-    } else {
-      setDashboardContent(originalContent);
-    }
-  }, []);
-
 
   if (isUserLoading || !user) {
     return (
@@ -93,10 +78,10 @@ export default function DashboardPage() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <h1 className="font-headline text-3xl font-bold tracking-tight">
-          {dashboardContent.title}
+          {t('DashboardPage.title')}
         </h1>
         <p className="text-muted-foreground">
-          {dashboardContent.subtitle}
+          {t('DashboardPage.subtitle')}
         </p>
       </header>
       {isLoading && (

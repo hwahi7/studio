@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Панель управления",
+    "dashboardTooltip": "Панель управления",
+    "chromeExtension": "Расширение Chrome",
+    "extensionTooltip": "Расширение Chrome",
+    "myAccount": "Моя учетная запись",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "userRole": "Пользователь"
+  },
+  "DashboardPage": {
+    "title": "Панель управления обнаружением заявлений",
+    "subtitle": "Прямая трансляция трендовых заявлений, обнаруженных агентом Scout."
+  },
+  "ExtensionPage": {
+    "title": "Расширение LocalTruth для Chrome",
+    "description": "Используйте возможности проверки AI LocalTruth прямо в браузере. Обнаруживайте потенциальную дезинформацию в режиме реального времени в социальных сетях, электронной почте и новостных статьях.",
+    "installButton": "Установить расширение Chrome",
+    "comingSoon": "Скоро",
+    "simulatorTitle": "Симулятор расширения",
+    "simulatorDescription": "Проверьте механизм обнаружения. Вставьте любой текст ниже, и наш агент Scout проанализирует его на предмет потенциальной дезинформации."
+  },
+  "ProfilePage": {
+    "title": "Профиль",
+    "subtitle": "Управляйте своим общедоступным профилем и данными учетной записи.",
+    "accountInfoTitle": "Информация об учетной записи",
+    "accountInfoDescription": "Обновите свое отображаемое имя и просмотрите электронную почту своей учетной записи.",
+    "emailLabel": "Электронная почта",
+    "displayNameLabel": "Отображаемое имя",
+    "saveButton": "Сохранить изменения"
+  },
+  "SettingsPage": {
+    "title": "Настройки",
+    "subtitle": "Управляйте настройками своей учетной записи и приложения.",
+    "preferences": {
+      "title": "Предпочтения",
+      "description": "Настройте свой опыт."
+    },
+    "language": {
+      "label": "Язык",
+      "placeholder": "Выберите язык",
+      "description": "Выберите язык отображения приложения."
+    },
+    "password": {
+      "label": "Пароль",
+      "button": "Изменить пароль",
+      "description": "Обновите пароль своей учетной записи."
+    }
+  },
+  "LoginPage": {
+    "title": "Вход",
+    "description": "Введите свой адрес электронной почты ниже, чтобы войти в свою учетную запись.",
+    "emailLabel": "Электронная почта",
+    "passwordLabel": "Пароль",
+    "signInButton": "Войти",
+    "noAccount": "Нет учетной записи?",
+    "signUpLink": "Зарегистрироваться"
+  },
+  "SignupPage": {
+    "title": "Зарегистрироваться",
+    "description": "Введите свою информацию, чтобы создать учетную запись.",
+    "emailLabel": "Электронная почта",
+    "passwordLabel": "Пароль",
+    "languageLabel": "Язык",
+    "languagePlaceholder": "Выберите язык",
+    "signUpButton": "Зарегистрироваться",
+    "haveAccount": "Уже есть учетная запись?",
+    "loginLink": "Вход"
+  },
+  "ClaimCard": {
+    "unknownSource": "Неизвестный источник",
+    "verifiedIn": "Проверено за {minutes} минут",
+    "confidenceScore": "Оценка уверенности",
+    "communityAgreesTooltip": "Сообщество согласно",
+    "communityDisagreesTooltip": "Сообщество не согласно",
+    "cannotVoteOnMock": "Нельзя голосовать за фиктивные заявления",
+    "explainButton": "Объяснить",
+    "status": {
+      "Verified": "Проверено",
+      "False": "Ложь",
+      "Inconclusive": "Неокончательный"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Объяснение AI",
+    "description": "Сгенерировано агентом-объяснителем на основе проверенной информации.",
+    "notAvailable": "Для этого заявления объяснение недоступно."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Вставьте заголовок новости, сообщение в социальных сетях или любой текст, который вы хотите проверить...",
+    "buttonText": "Проверить на дезинформацию",
+    "errorMinChars": "Введите не менее 20 символов.",
+    "errorInvalidInput": "Неверный ввод.",
+    "errorApi": "Произошла ошибка при анализе текста. Повторите попытку.",
+    "alert": {
+      "potentialMisinformation": "Обнаружена потенциальная дезинформация",
+      "noMisinformation": "Дезинформация не обнаружена",
+      "confidence": "Уверенность",
+      "reason": "Причина"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Изменить пароль",
+    "description": "Введите новый пароль ниже.",
+    "newPassword": "Новый пароль",
+    "confirmNewPassword": "Подтвердите новый пароль",
+    "updateButton": "Обновить пароль",
+    "cancelButton": "Отмена",
+    "toast": {
+      "successTitle": "Пароль обновлен",
+      "successDescription": "Ваш пароль успешно изменен.",
+      "failTitle": "Ошибка обновления",
+      "failDescription": "Ваша сессия могла истечь. Пожалуйста, войдите снова, чтобы изменить пароль.",
+      "errorTitle": "Ошибка"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Профиль обновлен",
+        "successDescription": "Ваше отображаемое имя успешно обновлено.",
+        "failTitle": "Ошибка обновления",
+        "errorTitle": "Ошибка",
+        "nameTooShort": "Отображаемое имя должно содержать не менее 3 символов."
+    }
+  }
+}

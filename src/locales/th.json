@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "แดชบอร์ด",
+    "dashboardTooltip": "แดชบอร์ด",
+    "chromeExtension": "ส่วนขยาย Chrome",
+    "extensionTooltip": "ส่วนขยาย Chrome",
+    "myAccount": "บัญชีของฉัน",
+    "profile": "โปรไฟล์",
+    "settings": "การตั้งค่า",
+    "logout": "ออกจากระบบ",
+    "userRole": "ผู้ใช้"
+  },
+  "DashboardPage": {
+    "title": "แดชบอร์ดการตรวจจับการอ้างสิทธิ์",
+    "subtitle": "ฟีดสดของการอ้างสิทธิ์ที่กำลังเป็นที่นิยมซึ่งตรวจพบโดย Scout Agent"
+  },
+  "ExtensionPage": {
+    "title": "ส่วนขยาย LocalTruth Chrome",
+    "description": "นำพลังของการตรวจสอบ AI ของ LocalTruth มาสู่เบราว์เซอร์ของคุณโดยตรง ตรวจจับข้อมูลที่อาจเป็นเท็จแบบเรียลไทม์บนโซเชียลมีเดีย อีเมล และบทความข่าว",
+    "installButton": "ติดตั้งส่วนขยาย Chrome",
+    "comingSoon": "เร็ว ๆ นี้",
+    "simulatorTitle": "เครื่องจำลองส่วนขยาย",
+    "simulatorDescription": "ทดสอบเครื่องมือตรวจจับ วางข้อความใด ๆ ด้านล่างแล้ว Scout Agent ของเราจะวิเคราะห์หาข้อมูลที่อาจเป็นเท็จ"
+  },
+  "ProfilePage": {
+    "title": "โปรไฟล์",
+    "subtitle": "จัดการโปรไฟล์สาธารณะและรายละเอียดบัญชีของคุณ",
+    "accountInfoTitle": "ข้อมูลบัญชี",
+    "accountInfoDescription": "อัปเดตชื่อที่แสดงของคุณและดูอีเมลบัญชีของคุณ",
+    "emailLabel": "อีเมล",
+    "displayNameLabel": "ชื่อที่แสดง",
+    "saveButton": "บันทึกการเปลี่ยนแปลง"
+  },
+  "SettingsPage": {
+    "title": "การตั้งค่า",
+    "subtitle": "จัดการบัญชีและการตั้งค่าแอปพลิเคชันของคุณ",
+    "preferences": {
+      "title": "การตั้งค่า",
+      "description": "ปรับแต่งประสบการณ์ของคุณ"
+    },
+    "language": {
+      "label": "ภาษา",
+      "placeholder": "เลือกภาษา",
+      "description": "เลือกภาษาที่แสดงสำหรับแอปพลิเคชัน"
+    },
+    "password": {
+      "label": "รหัสผ่าน",
+      "button": "เปลี่ยนรหัสผ่าน",
+      "description": "อัปเดตรหัสผ่านบัญชีของคุณ"
+    }
+  },
+  "LoginPage": {
+    "title": "เข้าสู่ระบบ",
+    "description": "ป้อนอีเมลของคุณด้านล่างเพื่อเข้าสู่ระบบบัญชีของคุณ",
+    "emailLabel": "อีเมล",
+    "passwordLabel": "รหัสผ่าน",
+    "signInButton": "เข้าสู่ระบบ",
+    "noAccount": "ไม่มีบัญชี?",
+    "signUpLink": "สมัครสมาชิก"
+  },
+  "SignupPage": {
+    "title": "สมัครสมาชิก",
+    "description": "ป้อนข้อมูลของคุณเพื่อสร้างบัญชี",
+    "emailLabel": "อีเมล",
+    "passwordLabel": "รหัสผ่าน",
+    "languageLabel": "ภาษา",
+    "languagePlaceholder": "เลือกภาษา",
+    "signUpButton": "สมัครสมาชิก",
+    "haveAccount": "มีบัญชีอยู่แล้ว?",
+    "loginLink": "เข้าสู่ระบบ"
+  },
+  "ClaimCard": {
+    "unknownSource": "ไม่ทราบแหล่งที่มา",
+    "verifiedIn": "ตรวจสอบแล้วใน {minutes} นาที",
+    "confidenceScore": "คะแนนความเชื่อมั่น",
+    "communityAgreesTooltip": "ชุมชนเห็นด้วย",
+    "communityDisagreesTooltip": "ชุมชนไม่เห็นด้วย",
+    "cannotVoteOnMock": "ไม่สามารถโหวตการอ้างสิทธิ์จำลองได้",
+    "explainButton": "อธิบาย",
+    "status": {
+      "Verified": "ตรวจสอบแล้ว",
+      "False": "เท็จ",
+      "Inconclusive": "สรุปไม่ได้"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "คำอธิบาย AI",
+    "description": "สร้างโดย Explainer Agent ตามข้อมูลที่ตรวจสอบแล้ว",
+    "notAvailable": "ไม่มีคำอธิบายสำหรับการอ้างสิทธิ์นี้"
+  },
+  "MisinformationChecker": {
+    "placeholder": "วางหัวข้อข่าว โพสต์บนโซเชียลมีเดีย หรือข้อความใด ๆ ที่คุณต้องการตรวจสอบ...",
+    "buttonText": "ตรวจสอบข้อมูลเท็จ",
+    "errorMinChars": "โปรดป้อนอย่างน้อย 20 ตัวอักษร",
+    "errorInvalidInput": "ข้อมูลที่ป้อนไม่ถูกต้อง",
+    "errorApi": "เกิดข้อผิดพลาดขณะวิเคราะห์ข้อความ โปรดลองอีกครั้ง",
+    "alert": {
+      "potentialMisinformation": "ตรวจพบข้อมูลที่อาจเป็นเท็จ",
+      "noMisinformation": "ไม่พบข้อมูลเท็จ",
+      "confidence": "ความเชื่อมั่น",
+      "reason": "เหตุผล"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "เปลี่ยนรหัสผ่าน",
+    "description": "ป้อนรหัสผ่านใหม่ของคุณด้านล่าง",
+    "newPassword": "รหัสผ่านใหม่",
+    "confirmNewPassword": "ยืนยันรหัสผ่านใหม่",
+    "updateButton": "อัปเดตรหัสผ่าน",
+    "cancelButton": "ยกเลิก",
+    "toast": {
+      "successTitle": "อัปเดตรหัสผ่านแล้ว",
+      "successDescription": "รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อยแล้ว",
+      "failTitle": "การอัปเดตล้มเหลว",
+      "failDescription": "เซสชันของคุณอาจหมดอายุแล้ว โปรดเข้าสู่ระบบอีกครั้งเพื่อเปลี่ยนรหัสผ่าน",
+      "errorTitle": "ข้อผิดพลาด"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "อัปเดตโปรไฟล์แล้ว",
+        "successDescription": "ชื่อที่แสดงของคุณได้รับการอัปเดตเรียบร้อยแล้ว",
+        "failTitle": "การอัปเดตล้มเหลว",
+        "errorTitle": "ข้อผิดพลาด",
+        "nameTooShort": "ชื่อที่แสดงต้องมีอย่างน้อย 3 ตัวอักษร"
+    }
+  }
+}

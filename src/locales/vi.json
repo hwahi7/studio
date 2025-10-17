@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Bảng điều khiển",
+    "dashboardTooltip": "Bảng điều khiển",
+    "chromeExtension": "Tiện ích mở rộng của Chrome",
+    "extensionTooltip": "Tiện ích mở rộng của Chrome",
+    "myAccount": "Tài khoản của tôi",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất",
+    "userRole": "Người dùng"
+  },
+  "DashboardPage": {
+    "title": "Bảng điều khiển phát hiện xác nhận quyền sở hữu",
+    "subtitle": "Nguồn cấp dữ liệu trực tiếp về các xác nhận quyền sở hữu đang thịnh hành được phát hiện bởi Scout Agent."
+  },
+  "ExtensionPage": {
+    "title": "Tiện ích mở rộng của LocalTruth trên Chrome",
+    "description": "Mang sức mạnh xác minh bằng AI của LocalTruth trực tiếp vào trình duyệt của bạn. Phát hiện thông tin sai lệch tiềm ẩn trong thời gian thực trên mạng xã hội, email và các bài báo.",
+    "installButton": "Cài đặt tiện ích mở rộng của Chrome",
+    "comingSoon": "Sắp có",
+    "simulatorTitle": "Trình mô phỏng tiện ích mở rộng",
+    "simulatorDescription": "Kiểm tra công cụ phát hiện. Dán bất kỳ văn bản nào bên dưới và Scout Agent của chúng tôi sẽ phân tích văn bản đó để tìm thông tin sai lệch tiềm ẩn."
+  },
+  "ProfilePage": {
+    "title": "Hồ sơ",
+    "subtitle": "Quản lý hồ sơ công khai và chi tiết tài khoản của bạn.",
+    "accountInfoTitle": "Thông tin tài khoản",
+    "accountInfoDescription": "Cập nhật tên hiển thị và xem email tài khoản của bạn.",
+    "emailLabel": "Email",
+    "displayNameLabel": "Tên hiển thị",
+    "saveButton": "Lưu thay đổi"
+  },
+  "SettingsPage": {
+    "title": "Cài đặt",
+    "subtitle": "Quản lý tài khoản và cài đặt ứng dụng của bạn.",
+    "preferences": {
+      "title": "Tùy chọn",
+      "description": "Tùy chỉnh trải nghiệm của bạn."
+    },
+    "language": {
+      "label": "Ngôn ngữ",
+      "placeholder": "Chọn ngôn ngữ",
+      "description": "Chọn ngôn ngữ hiển thị cho ứng dụng."
+    },
+    "password": {
+      "label": "Mật khẩu",
+      "button": "Thay đổi mật khẩu",
+      "description": "Cập nhật mật khẩu tài khoản của bạn."
+    }
+  },
+  "LoginPage": {
+    "title": "Đăng nhập",
+    "description": "Nhập email của bạn bên dưới để đăng nhập vào tài khoản của bạn.",
+    "emailLabel": "Email",
+    "passwordLabel": "Mật khẩu",
+    "signInButton": "Đăng nhập",
+    "noAccount": "Chưa có tài khoản?",
+    "signUpLink": "Đăng ký"
+  },
+  "SignupPage": {
+    "title": "Đăng ký",
+    "description": "Nhập thông tin của bạn để tạo tài khoản.",
+    "emailLabel": "Email",
+    "passwordLabel": "Mật khẩu",
+    "languageLabel": "Ngôn ngữ",
+    "languagePlaceholder": "Chọn một ngôn ngữ",
+    "signUpButton": "Đăng ký",
+    "haveAccount": "Đã có tài khoản?",
+    "loginLink": "Đăng nhập"
+  },
+  "ClaimCard": {
+    "unknownSource": "Nguồn không xác định",
+    "verifiedIn": "Đã xác minh trong {minutes} phút",
+    "confidenceScore": "Điểm tin cậy",
+    "communityAgreesTooltip": "Cộng đồng đồng ý",
+    "communityDisagreesTooltip": "Cộng đồng không đồng ý",
+    "cannotVoteOnMock": "Không thể bỏ phiếu cho các xác nhận quyền sở hữu giả",
+    "explainButton": "Giải thích",
+    "status": {
+      "Verified": "Đã xác minh",
+      "False": "Sai",
+      "Inconclusive": "Không kết luận"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Giải thích của AI",
+    "description": "Được tạo bởi Đại lý giải thích dựa trên thông tin đã được xác minh.",
+    "notAvailable": "Không có lời giải thích nào cho xác nhận quyền sở hữu này."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Dán một tiêu đề tin tức, một bài đăng trên mạng xã hội hoặc bất kỳ văn bản nào bạn muốn xác minh...",
+    "buttonText": "Kiểm tra thông tin sai lệch",
+    "errorMinChars": "Vui lòng nhập ít nhất 20 ký tự.",
+    "errorInvalidInput": "Đầu vào không hợp lệ.",
+    "errorApi": "Đã xảy ra lỗi khi phân tích văn bản. Vui lòng thử lại.",
+    "alert": {
+      "potentialMisinformation": "Đã phát hiện thông tin sai lệch tiềm ẩn",
+      "noMisinformation": "Không phát hiện thông tin sai lệch",
+      "confidence": "Độ tin cậy",
+      "reason": "Lý do"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Thay đổi mật khẩu",
+    "description": "Nhập mật khẩu mới của bạn bên dưới.",
+    "newPassword": "Mật khẩu mới",
+    "confirmNewPassword": "Xác nhận mật khẩu mới",
+    "updateButton": "Cập nhật mật khẩu",
+    "cancelButton": "Hủy",
+    "toast": {
+      "successTitle": "Đã cập nhật mật khẩu",
+      "successDescription": "Mật khẩu của bạn đã được thay đổi thành công.",
+      "failTitle": "Cập nhật không thành công",
+      "failDescription": "Phiên của bạn có thể đã hết hạn. Vui lòng đăng nhập lại để thay đổi mật khẩu.",
+      "errorTitle": "Lỗi"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Đã cập nhật hồ sơ",
+        "successDescription": "Tên hiển thị của bạn đã được cập nhật thành công.",
+        "failTitle": "Cập nhật không thành công",
+        "errorTitle": "Lỗi",
+        "nameTooShort": "Tên hiển thị phải có ít nhất 3 ký tự."
+    }
+  }
+}

@@ -3,7 +3,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { checkTextForMisinformation, getExplanation } from "@/app/actions";
+import { checkTextForMisinformation } from "@/app/actions";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -11,6 +11,8 @@ import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useFirestore, addDocumentNonBlocking } from "@/firebase";
 import { collection, Timestamp } from "firebase/firestore";
 import type { Claim, ClaimStatus } from "@/lib/types";
+import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
+import { useLanguage } from "@/context/language-context";
 
 const initialState = {
   message: "",
@@ -20,6 +22,7 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const { t } = useLanguage();
   return (
     <Button type="submit" disabled={pending}>
       {pending ? (
@@ -27,7 +30,7 @@ function SubmitButton() {
       ) : (
         <Send className="mr-2 h-4 w-4" />
       )}
-      Check for Misinformation
+      {t('MisinformationChecker.buttonText')}
     </Button>
   );
 }
@@ -39,6 +42,7 @@ export function MisinformationChecker() {
   );
   const firestore = useFirestore();
   const [textareaValue, setTextareaValue] = useState('');
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (state.message === 'success' && state.data && state.text && firestore) {
@@ -50,25 +54,17 @@ export function MisinformationChecker() {
       const INCONCLUSIVE_THRESHOLD = 0.5;
 
       if (result.isMisinformation) {
-        // AI thinks it IS misinformation.
-        // If confidence is high, it's "False". Otherwise, "Inconclusive".
         if (confidence > INCONCLUSIVE_THRESHOLD) {
           status = "False";
         } else {
           status = "Inconclusive";
         }
       } else {
-        // AI thinks it is NOT misinformation.
-        // The confidence score reflects certainty in this truthfulness.
-        // If confidence is low, it's "Inconclusive". Otherwise, it's "Verified".
-        if (confidence < INCONCLUSIVE_THRESHOLD) {
-          status = "Inconclusive";
-        } else {
-          status = "Verified";
-        }
+        // If the model is confident it's NOT misinformation, it should be Verified.
+        status = "Verified";
       }
       
-      const claimForExplanation: Pick<Claim, 'content' | 'status' | 'confidenceScore' | 'upvotes' | 'downvotes'> = {
+      const claimForExplanation = {
         content: state.text,
         status: status,
         confidenceScore: confidence,
@@ -76,8 +72,15 @@ export function MisinformationChecker() {
         downvotes: 0,
       };
 
-      // Generate the explanation now, to be stored with the claim.
-      getExplanation(claimForExplanation).then(explanation => {
+      const communityFeedback = `This claim has received ${claimForExplanation.upvotes || 0} positive community votes and ${claimForExplanation.downvotes || 0} negative votes.`;
+
+      summarizeVerifiedInfo({
+        claim: claimForExplanation.content,
+        verificationResult: claimForExplanation.status,
+        confidenceScore: claimForExplanation.confidenceScore,
+        language: "en", // Explanations are stored in English
+        communityFeedback: communityFeedback
+      }).then(explanation => {
         const newClaim: Omit<Claim, "id"> = {
             content: state.text,
             sourceUrls: ['User Input via Extension'],
@@ -88,7 +91,7 @@ export function MisinformationChecker() {
             language: "en", 
             upvotes: 0,
             downvotes: 0,
-            explanation: explanation, // Store the generated explanation
+            explanation: explanation, 
         };
 
         addDocumentNonBlocking(claimsCollection, newClaim);
@@ -101,19 +104,35 @@ export function MisinformationChecker() {
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(e.target.value);
   }
+  
+  const getErrorMessage = (message: string | undefined) => {
+    if (!message || message === 'success') return '';
+    switch (message) {
+      case 'error_min_chars':
+        return t('MisinformationChecker.errorMinChars');
+      case 'error_invalid_input':
+        return t('MisinformationChecker.errorInvalidInput');
+      case 'error_api':
+        return t('MisinformationChecker.errorApi');
+      default:
+        return t('MisinformationChecker.errorApi');
+    }
+  };
+
+  const errorMessage = getErrorMessage(state?.message);
 
   return (
     <div className="space-y-6">
       <form action={formAction} className="space-y-4">
         <Textarea
           name="text"
-          placeholder="Paste a news headline, social media post, or any text you want to verify..."
+          placeholder={t('MisinformationChecker.placeholder')}
           rows={5}
           value={textareaValue}
           onChange={handleTextChange}
         />
-        {state?.message && state.message !== 'success' && (
-            <p className="text-sm text-destructive">{state.message}</p>
+        {errorMessage && (
+            <p className="text-sm text-destructive">{errorMessage}</p>
         )}
         <SubmitButton />
       </form>
@@ -123,22 +142,22 @@ export function MisinformationChecker() {
           {state.data.isMisinformation ? (
             <Alert variant="destructive">
               <AlertTriangle className="h-4 w-4" />
-              <AlertTitle>Potential Misinformation Detected</AlertTitle>
+              <AlertTitle>{t('MisinformationChecker.alert.potentialMisinformation')}</AlertTitle>
               <AlertDescription>
-                <p className="font-semibold">Confidence: {Math.round(state.data.confidenceScore * 100)}%</p>
+                <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
                 <p>
-                  <strong>Reason:</strong> {state.data.reason}
+                  <strong>{t('MisinformationChecker.alert.reason')}:</strong> {state.data.reason}
                 </p>
               </AlertDescription>
             </Alert>
           ) : (
             <Alert className="border-green-600/50 text-green-700 dark:border-green-600 [&>svg]:text-green-700">
                <CheckCircle2 className="h-4 w-4" />
-              <AlertTitle>No Misinformation Detected</AlertTitle>
+              <AlertTitle>{t('MisinformationChecker.alert.noMisinformation')}</AlertTitle>
               <AlertDescription>
-                 <p className="font-semibold">Confidence: {Math.round(state.data.confidenceScore * 100)}%</p>
+                 <p className="font-semibold">{t('MisinformationChecker.alert.confidence')}: {Math.round(state.data.confidenceScore * 100)}%</p>
                 <p>
-                  <strong>Reason:</strong> {state.data.reason}
+                  <strong>{t('MisinformationChecker.alert.reason')}:</strong> {state.data.reason}
                 </p>
               </AlertDescription>
             </Alert>

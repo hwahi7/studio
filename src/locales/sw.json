@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Dashibodi",
+    "dashboardTooltip": "Dashibodi",
+    "chromeExtension": "Kiendelezi cha Chrome",
+    "extensionTooltip": "Kiendelezi cha Chrome",
+    "myAccount": "Akaunti Yangu",
+    "profile": "Wasifu",
+    "settings": "Mipangilio",
+    "logout": "Ondoka",
+    "userRole": "Mtumiaji"
+  },
+  "DashboardPage": {
+    "title": "Dashibodi ya Ugunduzi wa Madai",
+    "subtitle": "Mlisho wa moja kwa moja wa madai yanayovuma yaliyogunduliwa na Wakala wa Skauti."
+  },
+  "ExtensionPage": {
+    "title": "Kiendelezi cha Chrome cha LocalTruth",
+    "description": "Leta nguvu ya uthibitishaji wa AI wa LocalTruth moja kwa moja kwenye kivinjari chako. Gundua habari potofu zinazowezekana katika muda halisi kwenye mitandao ya kijamii, barua pepe, na makala za habari.",
+    "installButton": "Sakinisha Kiendelezi cha Chrome",
+    "comingSoon": "Inakuja Hivi Karibuni",
+    "simulatorTitle": "Kiigaji cha Kiendelezi",
+    "simulatorDescription": "Jaribu injini ya ugunduzi. Bandika maandishi yoyote hapa chini na Wakala wetu wa Skauti atayachambua kwa habari potofu zinazowezekana."
+  },
+  "ProfilePage": {
+    "title": "Wasifu",
+    "subtitle": "Dhibiti wasifu wako wa umma na maelezo ya akaunti.",
+    "accountInfoTitle": "Maelezo ya Akaunti",
+    "accountInfoDescription": "Sasisha jina lako la kuonyesha na uangalie barua pepe ya akaunti yako.",
+    "emailLabel": "Barua pepe",
+    "displayNameLabel": "Jina la Kuonyesha",
+    "saveButton": "Hifadhi Mabadiliko"
+  },
+  "SettingsPage": {
+    "title": "Mipangilio",
+    "subtitle": "Dhibiti akaunti yako na mipangilio ya programu.",
+    "preferences": {
+      "title": "Mapendeleo",
+      "description": "Binafsisha uzoefu wako."
+    },
+    "language": {
+      "label": "Lugha",
+      "placeholder": "Chagua lugha",
+      "description": "Chagua lugha ya kuonyesha ya programu."
+    },
+    "password": {
+      "label": "Nenosiri",
+      "button": "Badilisha Nenosiri",
+      "description": "Sasisha nenosiri la akaunti yako."
+    }
+  },
+  "LoginPage": {
+    "title": "Ingia",
+    "description": "Ingiza barua pepe yako hapa chini ili kuingia kwenye akaunti yako.",
+    "emailLabel": "Barua pepe",
+    "passwordLabel": "Nenosiri",
+    "signInButton": "Ingia",
+    "noAccount": "Huna akaunti?",
+    "signUpLink": "Jisajili"
+  },
+  "SignupPage": {
+    "title": "Jisajili",
+    "description": "Ingiza maelezo yako ili kufungua akaunti.",
+    "emailLabel": "Barua pepe",
+    "passwordLabel": "Nenosiri",
+    "languageLabel": "Lugha",
+    "languagePlaceholder": "Chagua lugha",
+    "signUpButton": "Jisajili",
+    "haveAccount": "Tayari una akaunti?",
+    "loginLink": "Ingia"
+  },
+  "ClaimCard": {
+    "unknownSource": "Chanzo Hakijulikani",
+    "verifiedIn": "Imethibitishwa ndani ya dakika {minutes}",
+    "confidenceScore": "Alama ya Kujiamini",
+    "communityAgreesTooltip": "Jumuiya inakubali",
+    "communityDisagreesTooltip": "Jumuiya haikubali",
+    "cannotVoteOnMock": "Haiwezi kupiga kura kwenye madai ya kubebea",
+    "explainButton": "Eleza",
+    "status": {
+      "Verified": "Imethibitishwa",
+      "False": "Uongo",
+      "Inconclusive": "Isiyo na hitimisho"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Maelezo ya AI",
+    "description": "Imetolewa na Wakala wa Mfafanuzi kulingana na taarifa zilizothibitishwa.",
+    "notAvailable": "Hakuna maelezo yanayopatikana kwa dai hili."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Bandika kichwa cha habari, chapisho la mtandao wa kijamii, au maandishi yoyote unayotaka kuthibitisha...",
+    "buttonText": "Angalia Habari Potofu",
+    "errorMinChars": "Tafadhali ingiza angalau herufi 20.",
+    "errorInvalidInput": "Ingizo si sahihi.",
+    "errorApi": "Hitilafu ilitokea wakati wa kuchambua maandishi. Tafadhali jaribu tena.",
+    "alert": {
+      "potentialMisinformation": "Habari Potofu Zinazowezekana Zimegunduliwa",
+      "noMisinformation": "Hakuna Habari Potofu Zilizogunduliwa",
+      "confidence": "Kujiamini",
+      "reason": "Sababu"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Badilisha Nenosiri",
+    "description": "Ingiza nenosiri lako jipya hapa chini.",
+    "newPassword": "Nenosiri Jipya",
+    "confirmNewPassword": "Thibitisha Nenosiri Jipya",
+    "updateButton": "Sasisha Nenosiri",
+    "cancelButton": "Ghairi",
+    "toast": {
+      "successTitle": "Nenosiri Limesasishwa",
+      "successDescription": "Nenosiri lako limebadilishwa kwa mafanikio.",
+      "failTitle": "Usasishaji Umeshindwa",
+      "failDescription": "Kipindi chako kinaweza kuwa kimeisha. Tafadhali ingia tena ili kubadilisha nenosiri lako.",
+      "errorTitle": "Hitilafu"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Wasifu Umesasishwa",
+        "successDescription": "Jina lako la kuonyesha limesasishwa kwa mafanikio.",
+        "failTitle": "Usasishaji Umeshindwa",
+        "errorTitle": "Hitilafu",
+        "nameTooShort": "Jina la kuonyesha lazima liwe na angalau herufi 3."
+    }
+  }
+}

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Cruscotto",
+    "dashboardTooltip": "Cruscotto",
+    "chromeExtension": "Estensione Chrome",
+    "extensionTooltip": "Estensione Chrome",
+    "myAccount": "Il mio account",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "logout": "Esci",
+    "userRole": "Utente"
+  },
+  "DashboardPage": {
+    "title": "Cruscotto di rilevamento delle richieste",
+    "subtitle": "Feed in tempo reale delle richieste di tendenza rilevate da Scout Agent."
+  },
+  "ExtensionPage": {
+    "title": "Estensione Chrome LocalTruth",
+    "description": "Porta la potenza della verifica AI di LocalTruth direttamente nel tuo browser. Rileva potenziali disinformazioni in tempo reale sui social media, e-mail e articoli di notizie.",
+    "installButton": "Installa estensione Chrome",
+    "comingSoon": "Prossimamente",
+    "simulatorTitle": "Simulatore di estensione",
+    "simulatorDescription": "Testa il motore di rilevamento. Incolla qualsiasi testo qui sotto e il nostro agente Scout lo analizzerà per individuare potenziali disinformazioni."
+  },
+  "ProfilePage": {
+    "title": "Profilo",
+    "subtitle": "Gestisci il tuo profilo pubblico e i dettagli dell'account.",
+    "accountInfoTitle": "Informazioni sull'account",
+    "accountInfoDescription": "Aggiorna il tuo nome visualizzato e visualizza l'e-mail del tuo account.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Nome visualizzato",
+    "saveButton": "Salva modifiche"
+  },
+  "SettingsPage": {
+    "title": "Impostazioni",
+    "subtitle": "Gestisci le impostazioni del tuo account e dell'applicazione.",
+    "preferences": {
+      "title": "Preferenze",
+      "description": "Personalizza la tua esperienza."
+    },
+    "language": {
+      "label": "Lingua",
+      "placeholder": "Seleziona lingua",
+      "description": "Scegli la lingua di visualizzazione dell'applicazione."
+    },
+    "password": {
+      "label": "Password",
+      "button": "Cambia password",
+      "description": "Aggiorna la password del tuo account."
+    }
+  },
+  "LoginPage": {
+    "title": "Accesso",
+    "description": "Inserisci la tua e-mail qui sotto per accedere al tuo account.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Password",
+    "signInButton": "Accedi",
+    "noAccount": "Non hai un account?",
+    "signUpLink": "Iscriviti"
+  },
+  "SignupPage": {
+    "title": "Iscriviti",
+    "description": "Inserisci le tue informazioni per creare un account.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Password",
+    "languageLabel": "Lingua",
+    "languagePlaceholder": "Seleziona una lingua",
+    "signUpButton": "Iscriviti",
+    "haveAccount": "Hai già un account?",
+    "loginLink": "Accesso"
+  },
+  "ClaimCard": {
+    "unknownSource": "Fonte sconosciuta",
+    "verifiedIn": "Verificato in {minutes} minuti",
+    "confidenceScore": "Punteggio di affidabilità",
+    "communityAgreesTooltip": "La comunità è d'accordo",
+    "communityDisagreesTooltip": "La comunità non è d'accordo",
+    "cannotVoteOnMock": "Impossibile votare su richieste fittizie",
+    "explainButton": "Spiega",
+    "status": {
+      "Verified": "Verificato",
+      "False": "Falso",
+      "Inconclusive": "Non conclusivo"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Spiegazione AI",
+    "description": "Generato dall'agente esplicativo sulla base di informazioni verificate.",
+    "notAvailable": "Non è disponibile una spiegazione per questa richiesta."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Incolla un titolo di giornale, un post sui social media o qualsiasi testo che desideri verificare...",
+    "buttonText": "Verifica la presenza di disinformazione",
+    "errorMinChars": "Inserisci almeno 20 caratteri.",
+    "errorInvalidInput": "Input non valido.",
+    "errorApi": "Si è verificato un errore durante l'analisi del testo. Riprova.",
+    "alert": {
+      "potentialMisinformation": "Potenziale disinformazione rilevata",
+      "noMisinformation": "Nessuna disinformazione rilevata",
+      "confidence": "Affidabilità",
+      "reason": "Motivo"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Cambia password",
+    "description": "Inserisci la tua nuova password qui sotto.",
+    "newPassword": "Nuova password",
+    "confirmNewPassword": "Conferma nuova password",
+    "updateButton": "Aggiorna password",
+    "cancelButton": "Annulla",
+    "toast": {
+      "successTitle": "Password aggiornata",
+      "successDescription": "La tua password è stata modificata correttamente.",
+      "failTitle": "Aggiornamento non riuscito",
+      "failDescription": "La sessione potrebbe essere scaduta. Accedi di nuovo per modificare la password.",
+      "errorTitle": "Errore"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profilo aggiornato",
+        "successDescription": "Il tuo nome visualizzato è stato aggiornato correttamente.",
+        "failTitle": "Aggiornamento non riuscito",
+        "errorTitle": "Errore",
+        "nameTooShort": "Il nome visualizzato deve contenere almeno 3 caratteri."
+    }
+  }
+}

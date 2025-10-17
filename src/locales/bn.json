@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ড্যাশবোর্ড",
+    "dashboardTooltip": "ড্যাশবোর্ড",
+    "chromeExtension": "ক্রোম এক্সটেনশন",
+    "extensionTooltip": "ক্রোম এক্সটেনশন",
+    "myAccount": "আমার অ্যাকাউন্ট",
+    "profile": "প্রোফাইল",
+    "settings": "সেটিংস",
+    "logout": "লগ আউট",
+    "userRole": "ব্যবহারকারী"
+  },
+  "DashboardPage": {
+    "title": "দাবি সনাক্তকরণ ড্যাশবোর্ড",
+    "subtitle": "স্কাउट এজেন্ট দ্বারা সনাক্ত করা ট্রেন্ডিং দাবির লাইভ ফিড।"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth ক্রোম এক্সটেনশন",
+    "description": "LocalTruth-এর AI যাচাইকরণের শক্তি সরাসরি আপনার ব্রাউজারে আনুন। সোশ্যাল মিডিয়া, ইমেল এবং সংবাদ নিবন্ধে রিয়েল-টাইমে সম্ভাব্য ভুল তথ্য সনাক্ত করুন।",
+    "installButton": "ক্রোম এক্সটেনশন ইনস্টল করুন",
+    "comingSoon": "скоро আসছে",
+    "simulatorTitle": "এক্সটেনশন симулятор",
+    "simulatorDescription": "সনাক্তকরণ ইঞ্জিন পরীক্ষা করুন। নীচে যেকোনো পাঠ্য আটকান এবং আমাদের স্কাউট এজেন্ট সম্ভাব্য ভুল তথ্যের জন্য এটি বিশ্লেষণ করবে।"
+  },
+  "ProfilePage": {
+    "title": "প্রোফাইল",
+    "subtitle": "আপনার পাবলিক প্রোফাইল এবং অ্যাকাউন্ট ವಿವರ পরিচালনা করুন।",
+    "accountInfoTitle": "অ্যাকাউন্ট ಮಾಹಿತಿ",
+    "accountInfoDescription": "আপনার प्रदर्शन নাম আপডেট করুন এবং আপনার অ্যাকাউন্ট ইমেল দেখুন।",
+    "emailLabel": "ইমেল",
+    "displayNameLabel": "प्रदर्शन নাম",
+    "saveButton": "পরিবর্তনগুলি সংরক্ষণ করুন"
+  },
+  "SettingsPage": {
+    "title": "সেটিংস",
+    "subtitle": "আপনার অ্যাকাউন্ট এবং অ্যাপ্লিকেশন সেটিংস পরিচালনা করুন।",
+    "preferences": {
+      "title": "पছন্দ",
+      "description": "আপনার অভিজ্ঞতা কাস্টמাইজ করুন।"
+    },
+    "language": {
+      "label": "ভাষা",
+      "placeholder": "ভাষা নির্বাচন করুন",
+      "description": "অ্যাপ্লিকেশনের प्रदर्शन भाषा নির্বাচন করুন।"
+    },
+    "password": {
+      "label": "পাসওয়ার্ড",
+      "button": "পাসওয়ার্ড পরিবর্তন করুন",
+      "description": "আপনার অ্যাকাউন্ট পাসওয়ার্ড আপডেট করুন।"
+    }
+  },
+  "LoginPage": {
+    "title": "লগইন",
+    "description": "আপনার অ্যাকাউন্টে লগইন করতে নীচে আপনার ইমেল লিখুন।",
+    "emailLabel": "ইমেল",
+    "passwordLabel": "পাসওয়ার্ড",
+    "signInButton": "সাইন ইন",
+    "noAccount": "অ্যাকাউন্ট নেই?",
+    "signUpLink": "সাইন আপ"
+  },
+  "SignupPage": {
+    "title": "সাইন আপ",
+    "description": "অ্যাকাউন্ট তৈরি করতে আপনার তথ্য লিখুন।",
+    "emailLabel": "ইমেল",
+    "passwordLabel": "পাসওয়ার্ড",
+    "languageLabel": "ভাষা",
+    "languagePlaceholder": "একটি ভাষা নির্বাচন করুন",
+    "signUpButton": "সাইন আপ",
+    "haveAccount": "이미 অ্যাকাউন্ট আছে?",
+    "loginLink": "লgইন"
+  },
+  "ClaimCard": {
+    "unknownSource": "অজানা উৎস",
+    "verifiedIn": "{minutes} মিনিটে যাচাই করা হয়েছে",
+    "confidenceScore": "आत्मविश्वास স্কোর",
+    "communityAgreesTooltip": "קהילה מסכימה",
+    "communityDisagreesTooltip": "קהילה לא מסכימה",
+    "cannotVoteOnMock": "মক দাবিতে ভোট দেওয়া যাবে না",
+    "explainButton": "ব্যাখ্যা করুন",
+    "status": {
+      "Verified": "যাচাই করা হয়েছে",
+      "False": "মিথ্যা",
+      "Inconclusive": "অমীমাংসিত"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI ব্যাখ্যা",
+    "description": "যাচাই করা তথ্যের ভিত্তিতে ব্যাখ্যাকারী এজেন্ট দ্বারা उत्पन्न।",
+    "notAvailable": "এই দাবির জন্য একটি ব্যাখ্যা उपलब्ध নেই।"
+  },
+  "MisinformationChecker": {
+    "placeholder": "একটি সংবাদ শিরোনাম, সোশ্যাল মিডিয়া পোস্ট, বা যাচাই করতে চান এমন যেকোনো পাঠ্য আটকান...",
+    "buttonText": "ভুল তথ্যের জন্য পরীক্ষা করুন",
+    "errorMinChars": "অনুগ্রহ করে কমপক্ষে ২০টি অক্ষর লিখুন।",
+    "errorInvalidInput": "অবৈধ ইনপুট।",
+    "errorApi": "पाठ্য বিশ্লেষণ করার সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "alert": {
+      "potentialMisinformation": "সম্ভাব্য ভুল তথ্য সনাক্ত করা হয়েছে",
+      "noMisinformation": "কোনো ভুল তথ্য সনাক্ত করা হয়নি",
+      "confidence": "आत्मविश्वास",
+      "reason": "কারণ"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "পাসওয়ার্ড পরিবর্তন করুন",
+    "description": "নীচে আপনার নতুন পাসওয়ার্ড লিখুন।",
+    "newPassword": "নতুন পাসওয়ার্ড",
+    "confirmNewPassword": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+    "updateButton": "পাসওয়ার্ড আপডেট করুন",
+    "cancelButton": "বাতিল",
+    "toast": {
+      "successTitle": "পাসওয়ার্ড আপডেট করা হয়েছে",
+      "successDescription": "আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।",
+      "failTitle": "আপডেট 실패",
+      "failDescription": "আপনার સત્ર মেয়াদ শেষ হয়ে যেতে পারে। পাসওয়ার্ড পরিবর্তন করতে অনুগ্রহ করে আবার লগইন করুন।",
+      "errorTitle": "ত্রুটি"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "প্রୋفایل আপডেট করা হয়েছে",
+        "successDescription": "আপনার प्रदर्शन নাম সফলভাবে আপডেট করা হয়েছে।",
+        "failTitle": "আপডেট 실패",
+        "errorTitle": "ত্রুটি",
+        "nameTooShort": "प्रदर्शन নাম কমপক্ষে ৩টি অক্ষর হতে হবে।"
+    }
+  }
+}

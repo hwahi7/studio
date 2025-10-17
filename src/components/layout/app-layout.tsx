@@ -40,12 +40,14 @@ import {
 } from "@/components/ui/sidebar";
 import { useAuth, useUser } from "@/firebase";
 import { signOut } from "firebase/auth";
+import { useLanguage } from "@/context/language-context";
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
+  const { t } = useLanguage();
 
   const handleLogout = async () => {
     if (auth) {
@@ -90,11 +92,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <SidebarMenuButton
                 asChild
                 isActive={pathname.endsWith("/")}
-                tooltip="Dashboard"
+                tooltip={t('AppLayout.dashboardTooltip')}
               >
                 <Link href="/">
                   <LayoutDashboard />
-                  <span>Dashboard</span>
+                  <span>{t('AppLayout.dashboard')}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -102,11 +104,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <SidebarMenuButton
                 asChild
                 isActive={pathname.endsWith("/extension")}
-                tooltip="Chrome Extension"
+                tooltip={t('AppLayout.extensionTooltip')}
               >
                 <Link href="/extension">
                   <Chrome />
-                  <span>Chrome Extension</span>
+                  <span>{t('AppLayout.chromeExtension')}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -123,32 +125,32 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   </Avatar>
                   <div className="flex flex-col items-start text-sm">
                     <span className="font-medium">{user?.displayName || user?.email}</span>
-                    <span className="text-muted-foreground">User</span>
+                    <span className="text-muted-foreground">{t('AppLayout.userRole')}</span>
                   </div>
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 mb-2" side="top" align="start">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{t('AppLayout.myAccount')}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <Link href="/profile">
                   <DropdownMenuItem>
                     <User />
-                    <span>Profile</span>
+                    <span>{t('AppLayout.profile')}</span>
                   </DropdownMenuItem>
                 </Link>
                 <Link href="/settings">
                     <DropdownMenuItem>
                         <Settings />
-                        <span>Settings</span>
+                        <span>{t('AppLayout.settings')}</span>
                     </DropdownMenuItem>
                 </Link>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut />
-                <span>Log out</span>
+                <span>{t('AppLayout.logout')}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Pulpit",
+    "dashboardTooltip": "Pulpit",
+    "chromeExtension": "Rozszerzenie Chrome",
+    "extensionTooltip": "Rozszerzenie Chrome",
+    "myAccount": "Moje konto",
+    "profile": "Profil",
+    "settings": "Ustawienia",
+    "logout": "Wyloguj",
+    "userRole": "Użytkownik"
+  },
+  "DashboardPage": {
+    "title": "Pulpit wykrywania roszczeń",
+    "subtitle": "Kanał na żywo z popularnymi roszczeniami wykrytymi przez Agenta Scout."
+  },
+  "ExtensionPage": {
+    "title": "Rozszerzenie Chrome LocalTruth",
+    "description": "Wprowadź moc weryfikacji AI LocalTruth bezpośrednio do przeglądarki. Wykrywaj potencjalne dezinformacje w czasie rzeczywistym w mediach społecznościowych, e-mailach i artykułach informacyjnych.",
+    "installButton": "Zainstaluj rozszerzenie Chrome",
+    "comingSoon": "Wkrótce",
+    "simulatorTitle": "Symulator rozszerzenia",
+    "simulatorDescription": "Przetestuj silnik wykrywania. Wklej dowolny tekst poniżej, a nasz Agent Scout przeanalizuje go pod kątem potencjalnej dezinformacji."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Zarządzaj swoim publicznym profilem i danymi konta.",
+    "accountInfoTitle": "Informacje o koncie",
+    "accountInfoDescription": "Zaktualizuj свою wyświetlaną nazwę i wyświetl swój adres e-mail konta.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Wyświetlana nazwa",
+    "saveButton": "Zapisz zmiany"
+  },
+  "SettingsPage": {
+    "title": "Ustawienia",
+    "subtitle": "Zarządzaj swoim kontem i ustawieniami aplikacji.",
+    "preferences": {
+      "title": "Preferencje",
+      "description": "Dostosuj swoje wrażenia."
+    },
+    "language": {
+      "label": "Język",
+      "placeholder": "Wybierz język",
+      "description": "Wybierz język wyświetlania aplikacji."
+    },
+    "password": {
+      "label": "Hasło",
+      "button": "Zmień hasło",
+      "description": "Zaktualizuj hasło do swojego konta."
+    }
+  },
+  "LoginPage": {
+    "title": "Logowanie",
+    "description": "Wprowadź poniżej swój adres e-mail, aby zalogować się na swoje konto.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Hasło",
+    "signInButton": "Zaloguj się",
+    "noAccount": "Nie masz konta?",
+    "signUpLink": "Zarejestruj się"
+  },
+  "SignupPage": {
+    "title": "Zarejestruj się",
+    "description": "Wprowadź swoje dane, aby utworzyć konto.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Hasło",
+    "languageLabel": "Język",
+    "languagePlaceholder": "Wybierz język",
+    "signUpButton": "Zarejestruj się",
+    "haveAccount": "Masz już konto?",
+    "loginLink": "Zaloguj się"
+  },
+  "ClaimCard": {
+    "unknownSource": "Nieznane źródło",
+    "verifiedIn": "Zweryfikowano w {minutes} min",
+    "confidenceScore": "Ocena pewności",
+    "communityAgreesTooltip": "Społeczność się zgadza",
+    "communityDisagreesTooltip": "Społeczność się nie zgadza",
+    "cannotVoteOnMock": "Nie można głosować na fałszywe roszczenia",
+    "explainButton": "Wyjaśnij",
+    "status": {
+      "Verified": "Zweryfikowano",
+      "False": "Fałsz",
+      "Inconclusive": "Nierozstrzygające"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Wyjaśnienie AI",
+    "description": "Wygenerowane przez Agenta Wyjaśniającego na podstawie zweryfikowanych informacji.",
+    "notAvailable": "Dla tego roszczenia nie ma dostępnego wyjaśnienia."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Wklej nagłówek wiadomości, post w mediach społecznościowych lub dowolny tekst, który chcesz zweryfikować...",
+    "buttonText": "Sprawdź dezinformację",
+    "errorMinChars": "Wprowadź co najmniej 20 znaków.",
+    "errorInvalidInput": "Nieprawidłowe dane wejściowe.",
+    "errorApi": "Wystąpił błąd podczas analizowania tekstu. Spróbuj ponownie.",
+    "alert": {
+      "potentialMisinformation": "Wykryto potencjalną dezinformację",
+      "noMisinformation": "Nie wykryto dezinformacji",
+      "confidence": "Pewność",
+      "reason": "Powód"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Zmień hasło",
+    "description": "Wprowadź poniżej swoje nowe hasło.",
+    "newPassword": "Nowe hasło",
+    "confirmNewPassword": "Potwierdź nowe hasło",
+    "updateButton": "Zaktualizuj hasło",
+    "cancelButton": "Anuluj",
+    "toast": {
+      "successTitle": "Hasło zaktualizowane",
+      "successDescription": "Twoje hasło zostało pomyślnie zmienione.",
+      "failTitle": "Aktualizacja nie powiodła się",
+      "failDescription": "Twoja sesja mogła wygasnąć. Zaloguj się ponownie, aby zmienić hasło.",
+      "errorTitle": "Błąd"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil zaktualizowany",
+        "successDescription": "Twoja wyświetlana nazwa została pomyślnie zaktualizowana.",
+        "failTitle": "Aktualizacja nie powiodła się",
+        "errorTitle": "Błąd",
+        "nameTooShort": "Wyświetlana nazwa musi mieć co najmniej 3 znaki."
+    }
+  }
+}

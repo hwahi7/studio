@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Dashboard",
+    "dashboardTooltip": "Dashboard",
+    "chromeExtension": "Chrome-Erweiterung",
+    "extensionTooltip": "Chrome-Erweiterung",
+    "myAccount": "Mein Konto",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "userRole": "Benutzer"
+  },
+  "DashboardPage": {
+    "title": "Dashboard zur Anspruchserkennung",
+    "subtitle": "Live-Feed von Trendansprüchen, die vom Scout-Agenten erkannt wurden."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome-Erweiterung",
+    "description": "Bringen Sie die Leistungsfähigkeit der KI-Verifizierung von LocalTruth direkt in Ihren Browser. Erkennen Sie potenzielle Fehlinformationen in Echtzeit in sozialen Medien, E-Mails und Nachrichtenartikeln.",
+    "installButton": "Chrome-Erweiterung installieren",
+    "comingSoon": "Demnächst",
+    "simulatorTitle": "Erweiterungssimulator",
+    "simulatorDescription": "Testen Sie die Erkennungs-Engine. Fügen Sie einen beliebigen Text unten ein und unser Scout-Agent wird ihn auf potenzielle Fehlinformationen analysieren."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Verwalten Sie Ihr öffentliches Profil und Ihre Kontodetails.",
+    "accountInfoTitle": "Kontoinformationen",
+    "accountInfoDescription": "Aktualisieren Sie Ihren Anzeigenamen und zeigen Sie Ihre Konto-E-Mail an.",
+    "emailLabel": "E-Mail",
+    "displayNameLabel": "Anzeigename",
+    "saveButton": "Änderungen speichern"
+  },
+  "SettingsPage": {
+    "title": "Einstellungen",
+    "subtitle": "Verwalten Sie Ihr Konto und Ihre Anwendungseinstellungen.",
+    "preferences": {
+      "title": "Einstellungen",
+      "description": "Passen Sie Ihre Erfahrung an."
+    },
+    "language": {
+      "label": "Sprache",
+      "placeholder": "Sprache auswählen",
+      "description": "Wählen Sie die Anzeigesprache für die Anwendung."
+    },
+    "password": {
+      "label": "Passwort",
+      "button": "Passwort ändern",
+      "description": "Aktualisieren Sie Ihr Kontopasswort."
+    }
+  },
+  "LoginPage": {
+    "title": "Anmelden",
+    "description": "Geben Sie Ihre E-Mail-Adresse unten ein, um sich bei Ihrem Konto anzumelden.",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "signInButton": "Anmelden",
+    "noAccount": "Sie haben noch kein Konto?",
+    "signUpLink": "Registrieren"
+  },
+  "SignupPage": {
+    "title": "Registrieren",
+    "description": "Geben Sie Ihre Informationen ein, um ein Konto zu erstellen.",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "languageLabel": "Sprache",
+    "languagePlaceholder": "Wählen Sie eine Sprache",
+    "signUpButton": "Registrieren",
+    "haveAccount": "Sie haben bereits ein Konto?",
+    "loginLink": "Anmelden"
+  },
+  "ClaimCard": {
+    "unknownSource": "Unbekannte Quelle",
+    "verifiedIn": "Verifiziert in {minutes} Minuten",
+    "confidenceScore": "Konfidenzwert",
+    "communityAgreesTooltip": "Community stimmt zu",
+    "communityDisagreesTooltip": "Community stimmt nicht zu",
+    "cannotVoteOnMock": "Abstimmung über Scheinansprüche nicht möglich",
+    "explainButton": "Erklären",
+    "status": {
+      "Verified": "Verifiziert",
+      "False": "Falsch",
+      "Inconclusive": "Nicht schlüssig"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "KI-Erklärung",
+    "description": "Generiert vom Erklärungsagenten auf der Grundlage verifizierter Informationen.",
+    "notAvailable": "Für diesen Anspruch ist keine Erklärung verfügbar."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Fügen Sie eine Schlagzeile, einen Social-Media-Beitrag oder einen beliebigen Text ein, den Sie überprüfen möchten...",
+    "buttonText": "Auf Fehlinformationen prüfen",
+    "errorMinChars": "Bitte geben Sie mindestens 20 Zeichen ein.",
+    "errorInvalidInput": "Ungültige Eingabe.",
+    "errorApi": "Beim Analysieren des Textes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "alert": {
+      "potentialMisinformation": "Potenzielle Fehlinformationen erkannt",
+      "noMisinformation": "Keine Fehlinformationen erkannt",
+      "confidence": "Konfidenz",
+      "reason": "Grund"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Passwort ändern",
+    "description": "Geben Sie unten Ihr neues Passwort ein.",
+    "newPassword": "Neues Passwort",
+    "confirmNewPassword": "Neues Passwort bestätigen",
+    "updateButton": "Passwort aktualisieren",
+    "cancelButton": "Abbrechen",
+    "toast": {
+      "successTitle": "Passwort aktualisiert",
+      "successDescription": "Ihr Passwort wurde erfolgreich geändert.",
+      "failTitle": "Aktualisierung fehlgeschlagen",
+      "failDescription": "Ihre Sitzung ist möglicherweise abgelaufen. Bitte melden Sie sich erneut an, um Ihr Passwort zu ändern.",
+      "errorTitle": "Fehler"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil aktualisiert",
+        "successDescription": "Ihr Anzeigename wurde erfolgreich aktualisiert.",
+        "failTitle": "Aktualisierung fehlgeschlagen",
+        "errorTitle": "Fehler",
+        "nameTooShort": "Der Anzeigename muss mindestens 3 Zeichen lang sein."
+    }
+  }
+}

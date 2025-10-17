@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Panou de bord",
+    "dashboardTooltip": "Panou de bord",
+    "chromeExtension": "Extensie Chrome",
+    "extensionTooltip": "Extensie Chrome",
+    "myAccount": "Contul meu",
+    "profile": "Profil",
+    "settings": "Setări",
+    "logout": "Deconectare",
+    "userRole": "Utilizator"
+  },
+  "DashboardPage": {
+    "title": "Panou de bord pentru detectarea revendicărilor",
+    "subtitle": "Flux live al revendicărilor în tendințe detectate de Agentul Scout."
+  },
+  "ExtensionPage": {
+    "title": "Extensia LocalTruth pentru Chrome",
+    "description": "Aduceți puterea verificării AI a LocalTruth direct în browserul dvs. Detectați potențiala dezinformare în timp real pe rețelele sociale, e-mailuri și articole de știri.",
+    "installButton": "Instalați extensia Chrome",
+    "comingSoon": "În curând",
+    "simulatorTitle": "Simulator de extensii",
+    "simulatorDescription": "Testați motorul de detectare. Lipiți orice text mai jos și agentul nostru Scout îl va analiza pentru potențiala dezinformare."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Gestionați-vă profilul public și detaliile contului.",
+    "accountInfoTitle": "Informații despre cont",
+    "accountInfoDescription": "Actualizați-vă numele de afișare și vizualizați e-mailul contului.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Nume de afișare",
+    "saveButton": "Salvați modificările"
+  },
+  "SettingsPage": {
+    "title": "Setări",
+    "subtitle": "Gestionați-vă contul și setările aplicației.",
+    "preferences": {
+      "title": "Preferințe",
+      "description": "Personalizați-vă experiența."
+    },
+    "language": {
+      "label": "Limbă",
+      "placeholder": "Selectați limba",
+      "description": "Alegeți limba de afișare pentru aplicație."
+    },
+    "password": {
+      "label": "Parolă",
+      "button": "Schimbați parola",
+      "description": "Actualizați parola contului."
+    }
+  },
+  "LoginPage": {
+    "title": "Autentificare",
+    "description": "Introduceți e-mailul de mai jos pentru a vă autentifica în cont.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Parolă",
+    "signInButton": "Autentificare",
+    "noAccount": "Nu aveți cont?",
+    "signUpLink": "Înscrieți-vă"
+  },
+  "SignupPage": {
+    "title": "Înscrieți-vă",
+    "description": "Introduceți informațiile pentru a crea un cont.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Parolă",
+    "languageLabel": "Limbă",
+    "languagePlaceholder": "Selectați o limbă",
+    "signUpButton": "Înscrieți-vă",
+    "haveAccount": "Aveți deja un cont?",
+    "loginLink": "Autentificare"
+  },
+  "ClaimCard": {
+    "unknownSource": "Sursă necunoscută",
+    "verifiedIn": "Verificat în {minutes} minute",
+    "confidenceScore": "Scor de încredere",
+    "communityAgreesTooltip": "Comunitatea este de acord",
+    "communityDisagreesTooltip": "Comunitatea nu este de acord",
+    "cannotVoteOnMock": "Nu se poate vota pe revendicări simulate",
+    "explainButton": "Explicați",
+    "status": {
+      "Verified": "Verificat",
+      "False": "Fals",
+      "Inconclusive": "Neconcludent"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Explicație AI",
+    "description": "Generat de Agentul Explicator pe baza informațiilor verificate.",
+    "notAvailable": "Nu este disponibilă nicio explicație pentru această revendicare."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Lipiți un titlu de știre, o postare pe rețelele sociale sau orice text pe care doriți să-l verificați...",
+    "buttonText": "Verificați dezinformarea",
+    "errorMinChars": "Vă rugăm să introduceți cel puțin 20 de caractere.",
+    "errorInvalidInput": "Intrare nevalidă.",
+    "errorApi": "A apărut o eroare la analizarea textului. Vă rugăm să reîncercați.",
+    "alert": {
+      "potentialMisinformation": "Dezinformare potențială detectată",
+      "noMisinformation": "Nicio dezinformare detectată",
+      "confidence": "Încredere",
+      "reason": "Motiv"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Schimbați parola",
+    "description": "Introduceți noua parolă mai jos.",
+    "newPassword": "Parolă nouă",
+    "confirmNewPassword": "Confirmați noua parolă",
+    "updateButton": "Actualizați parola",
+    "cancelButton": "Anulare",
+    "toast": {
+      "successTitle": "Parolă actualizată",
+      "successDescription": "Parola dvs. a fost schimbată cu succes.",
+      "failTitle": "Actualizare eșuată",
+      "failDescription": "Sesiunea dvs. a expirat. Vă rugăm să vă autentificați din nou pentru a schimba parola.",
+      "errorTitle": "Eroare"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil actualizat",
+        "successDescription": "Numele dvs. de afișare a fost actualizat cu succes.",
+        "failTitle": "Actualizare eșuată",
+        "errorTitle": "Eroare",
+        "nameTooShort": "Numele de afișare trebuie să aibă cel puțin 3 caractere."
+    }
+  }
+}

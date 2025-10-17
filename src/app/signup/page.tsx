@@ -27,6 +27,8 @@ import Link from "next/link";
 import { useUser, useAuth } from "@/firebase";
 import { initiateEmailSignUp } from "@/firebase/non-blocking-login";
 import { redirect } from "next/navigation";
+import { useLanguage } from "@/context/language-context";
+import { languages } from "@/locales/languages";
 
 const initialState = {
   message: "",
@@ -39,10 +41,11 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const { t } = useLanguage();
   return (
     <Button className="w-full" type="submit" disabled={pending}>
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      Sign Up
+      {t('SignupPage.signUpButton')}
     </Button>
   );
 }
@@ -51,6 +54,7 @@ export default function SignupPage() {
   const [state, formAction] = useActionState(signup, initialState);
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
+  const { t, setLanguage } = useLanguage();
 
   useEffect(() => {
     if (user) {
@@ -67,6 +71,11 @@ export default function SignupPage() {
       );
     }
   }, [state, auth]);
+  
+  const handleLanguageChange = (langCode: string) => {
+      localStorage.setItem('language', langCode);
+      setLanguage(langCode);
+  };
 
   if (isUserLoading || user) {
     return (
@@ -80,15 +89,15 @@ export default function SignupPage() {
     <div className="flex items-center justify-center min-h-screen bg-background p-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Sign Up</CardTitle>
+          <CardTitle className="text-2xl">{t('SignupPage.title')}</CardTitle>
           <CardDescription>
-            Enter your information to create an account.
+            {t('SignupPage.description')}
           </CardDescription>
         </CardHeader>
         <form action={formAction}>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('SignupPage.emailLabel')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -101,7 +110,7 @@ export default function SignupPage() {
               )}
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('SignupPage.passwordLabel')}</Label>
               <Input id="password" type="password" name="password" required />
               {state.errors?.password && (
                 <p className="text-sm text-destructive">
@@ -110,37 +119,15 @@ export default function SignupPage() {
               )}
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="language">Language</Label>
-              <Select name="language" defaultValue="en">
+              <Label htmlFor="language">{t('SignupPage.languageLabel')}</Label>
+              <Select name="language" defaultValue="en" onValueChange={handleLanguageChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a language" />
+                  <SelectValue placeholder={t('SignupPage.languagePlaceholder')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="es">Español (Spanish)</SelectItem>
-                  <SelectItem value="fr">Français (French)</SelectItem>
-                  <SelectItem value="de">Deutsch (German)</SelectItem>
-                  <SelectItem value="hi">हिंदी (Hindi)</SelectItem>
-                  <SelectItem value="mr">मराठी (Marathi)</SelectItem>
-                  <SelectItem value="zh">中文 (Chinese)</SelectItem>
-                  <SelectItem value="ja">日本語 (Japanese)</SelectItem>
-                  <SelectItem value="ar">العربية (Arabic)</SelectItem>
-                  <SelectItem value="pt">Português (Portuguese)</SelectItem>
-                  <SelectItem value="ru">Русский (Russian)</SelectItem>
-                  <SelectItem value="bn">বাংলা (Bengali)</SelectItem>
-                  <SelectItem value="id">Bahasa Indonesia (Indonesian)</SelectItem>
-                  <SelectItem value="ur">اردو (Urdu)</SelectItem>
-                  <SelectItem value="sw">Kiswahili (Swahili)</SelectItem>
-                  <SelectItem value="ko">한국어 (Korean)</SelectItem>
-                  <SelectItem value="it">Italiano (Italian)</SelectItem>
-                  <SelectItem value="nl">Nederlands (Dutch)</SelectItem>
-                  <SelectItem value="tr">Türkçe (Turkish)</SelectItem>
-                  <SelectItem value="vi">Tiếng Việt (Vietnamese)</SelectItem>
-                  <SelectItem value="pl">Polski (Polish)</SelectItem>
-                  <SelectItem value="th">ไทย (Thai)</SelectItem>
-                  <SelectItem value="uk">Українська (Ukrainian)</SelectItem>
-                  <SelectItem value="ro">Română (Romanian)</SelectItem>
-                  <SelectItem value="el">Ελληνικά (Greek)</SelectItem>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.code} value={lang.code}>{lang.name}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -153,13 +140,13 @@ export default function SignupPage() {
           <CardFooter className="flex flex-col gap-4">
             <SubmitButton />
             <div className="text-sm text-muted-foreground">
-              Already have an account?{" "}
+              {t('SignupPage.haveAccount')}{" "}
               <Link
                 href="/login"
                 className="text-primary hover:underline"
                 prefetch={false}
               >
-                Login
+                {t('SignupPage.loginLink')}
               </Link>
             </div>
           </CardFooter>

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Dashboard",
+    "dashboardTooltip": "Dashboard",
+    "chromeExtension": "Chrome-extensie",
+    "extensionTooltip": "Chrome-extensie",
+    "myAccount": "Mijn account",
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "logout": "Uitloggen",
+    "userRole": "Gebruiker"
+  },
+  "DashboardPage": {
+    "title": "Claimdetectie Dashboard",
+    "subtitle": "Live feed van trending claims gedetecteerd door Scout Agent."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome-extensie",
+    "description": "Breng de kracht van de AI-verificatie van LocalTruth rechtstreeks naar uw browser. Detecteer potentiële desinformatie in realtime op sociale media, e-mails en nieuwsartikelen.",
+    "installButton": "Chrome-extensie installeren",
+    "comingSoon": "Binnenkort beschikbaar",
+    "simulatorTitle": "Extensiesimulator",
+    "simulatorDescription": "Test de detectie-engine. Plak hieronder een willekeurige tekst en onze Scout Agent zal deze analyseren op mogelijke desinformatie."
+  },
+  "ProfilePage": {
+    "title": "Profiel",
+    "subtitle": "Beheer uw openbare profiel en accountgegevens.",
+    "accountInfoTitle": "Accountgegevens",
+    "accountInfoDescription": "Werk uw weergavenaam bij en bekijk uw account-e-mail.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Weergavenaam",
+    "saveButton": "Wijzigingen opslaan"
+  },
+  "SettingsPage": {
+    "title": "Instellingen",
+    "subtitle": "Beheer uw account- en applicatie-instellingen.",
+    "preferences": {
+      "title": "Voorkeuren",
+      "description": "Pas uw ervaring aan."
+    },
+    "language": {
+      "label": "Taal",
+      "placeholder": "Selecteer taal",
+      "description": "Kies de weergavetaal voor de applicatie."
+    },
+    "password": {
+      "label": "Wachtwoord",
+      "button": "Wachtwoord wijzigen",
+      "description": "Werk uw accountwachtwoord bij."
+    }
+  },
+  "LoginPage": {
+    "title": "Inloggen",
+    "description": "Voer hieronder uw e-mailadres in om in te loggen op uw account.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Wachtwoord",
+    "signInButton": "Inloggen",
+    "noAccount": "Heeft u geen account?",
+    "signUpLink": "Aanmelden"
+  },
+  "SignupPage": {
+    "title": "Aanmelden",
+    "description": "Voer uw gegevens in om een account aan te maken.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Wachtwoord",
+    "languageLabel": "Taal",
+    "languagePlaceholder": "Selecteer een taal",
+    "signUpButton": "Aanmelden",
+    "haveAccount": "Heeft u al een account?",
+    "loginLink": "Inloggen"
+  },
+  "ClaimCard": {
+    "unknownSource": "Onbekende bron",
+    "verifiedIn": "Geverifieerd in {minutes} minuten",
+    "confidenceScore": "Betrouwbaarheidsscore",
+    "communityAgreesTooltip": "Community is het ermee eens",
+    "communityDisagreesTooltip": "Community is het er niet mee eens",
+    "cannotVoteOnMock": "Kan niet stemmen op mock-claims",
+    "explainButton": "Uitleggen",
+    "status": {
+      "Verified": "Geverifieerd",
+      "False": "Onwaar",
+      "Inconclusive": "Niet overtuigend"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI-uitleg",
+    "description": "Gegenereerd door de Explainer Agent op basis van geverifieerde informatie.",
+    "notAvailable": "Er is geen uitleg beschikbaar for deze claim."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Plak een nieuwskop, een social media-bericht of een andere tekst die u wilt verifiëren...",
+    "buttonText": "Controleren op desinformatie",
+    "errorMinChars": "Voer minimaal 20 tekens in.",
+    "errorInvalidInput": "Ongeldige invoer.",
+    "errorApi": "Er is een fout opgetreden bij het analyseren van de tekst. Probeer het opnieuw.",
+    "alert": {
+      "potentialMisinformation": "Mogelijke desinformatie gedetecteerd",
+      "noMisinformation": "Geen desinformatie gedetecteerd",
+      "confidence": "Betrouwbaarheid",
+      "reason": "Reden"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Wachtwoord wijzigen",
+    "description": "Voer hieronder uw nieuwe wachtwoord in.",
+    "newPassword": "Nieuw wachtwoord",
+    "confirmNewPassword": "Bevestig nieuw wachtwoord",
+    "updateButton": "Wachtwoord bijwerken",
+    "cancelButton": "Annuleren",
+    "toast": {
+      "successTitle": "Wachtwoord bijgewerkt",
+      "successDescription": "Uw wachtwoord is succesvol gewijzigd.",
+      "failTitle": "Update mislukt",
+      "failDescription": "Uw sessie is mogelijk verlopen. Log opnieuw in om uw wachtwoord te wijzigen.",
+      "errorTitle": "Fout"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profiel bijgewerkt",
+        "successDescription": "Uw weergavenaam is succesvol bijgewerkt.",
+        "failTitle": "Update mislukt",
+        "errorTitle": "Fout",
+        "nameTooShort": "De weergavenaam moet minimaal 3 tekens lang zijn."
+    }
+  }
+}

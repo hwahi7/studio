@@ -3,6 +3,7 @@ import { AppLayout } from '@/components/layout/app-layout';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
+import { LanguageProvider } from '@/context/language-context';
 
 export const metadata: Metadata = {
   title: 'LocalTruth | AI for Real-Time Misinformation Detection',
@@ -23,12 +24,14 @@ export default async function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body">
+        <LanguageProvider>
           <FirebaseClientProvider>
             <AppLayout>
               {children}
             </AppLayout>
           </FirebaseClientProvider>
-          <Toaster />
+        </LanguageProvider>
+        <Toaster />
       </body>
     </html>
   );

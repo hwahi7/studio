@@ -35,6 +35,7 @@ import { doc, runTransaction, Timestamp } from "firebase/firestore";
 import { formatDistanceToNow } from 'date-fns';
 import { errorEmitter } from "@/firebase/error-emitter";
 import { FirestorePermissionError } from "@/firebase/errors";
+import { useLanguage } from "@/context/language-context";
 
 const statusConfig: Record<
   ClaimStatus,
@@ -42,26 +43,26 @@ const statusConfig: Record<
     icon: React.ElementType;
     color: string;
     bgColor: string;
-    label: string;
+    labelKey: 'Verified' | 'False' | 'Inconclusive';
   }
 > = {
   Verified: {
     icon: CheckCircle2,
     color: "text-green-600",
     bgColor: "bg-green-100 dark:bg-green-900/30",
-    label: "Verified",
+    labelKey: "Verified",
   },
   False: {
     icon: XCircle,
     color: "text-red-600",
     bgColor: "bg-red-100 dark:bg-red-900/30",
-    label: "False",
+    labelKey: "False",
   },
   Inconclusive: {
     icon: AlertTriangle,
     color: "text-yellow-600",
     bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
-    label: "Inconclusive",
+    labelKey: "Inconclusive",
   },
 };
 
@@ -69,23 +70,22 @@ function toDate(timestamp: Timestamp | { seconds: number; nanoseconds: number })
   if (timestamp instanceof Timestamp) {
     return timestamp.toDate();
   }
-  // Handle the plain object case from mock data or non-hydrated server components
   return new Timestamp(timestamp.seconds, timestamp.nanoseconds).toDate();
 }
 
 
 export function ClaimCard({ claim }: { claim: Claim }) {
   const firestore = useFirestore();
+  const { t } = useLanguage();
   const [voted, setVoted] = React.useState<"up" | "down" | null>(null);
   const isMock = claim.id.startsWith('mock-');
   
-  // State to force re-render for timestamp update
   const [_, setTick] = React.useState(0);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
       setTick(prev => prev + 1);
-    }, 60000); // Update every minute
+    }, 60000); 
     return () => clearInterval(timer);
   }, []);
 
@@ -104,11 +104,11 @@ export function ClaimCard({ claim }: { claim: Claim }) {
       let newDownvotes = claimDoc.data().downvotes || 0;
       const currentStatus = claimDoc.data().status;
 
-      if (voted === type) { // un-voting
+      if (voted === type) { 
         if (type === 'up') newUpvotes--;
         else newDownvotes--;
         setVoted(null);
-      } else { // new vote or changing vote
+      } else { 
         if (voted === 'up') newUpvotes--;
         if (voted === 'down') newDownvotes--;
         if (type === 'up') newUpvotes++;
@@ -146,13 +146,14 @@ export function ClaimCard({ claim }: { claim: Claim }) {
 
   const currentStatus = statusConfig[claim.status];
   const StatusIcon = currentStatus.icon;
+  const translatedStatus = t(`ClaimCard.status.${currentStatus.labelKey}`);
 
   return (
     <TooltipProvider>
       <Card className="flex flex-col">
         <CardHeader>
           <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>{claim.sourceUrls?.[0] || 'Unknown Source'}</span>
+            <span>{claim.sourceUrls?.[0] || t('ClaimCard.unknownSource')}</span>
             {detectionTimeAgo && <span>{detectionTimeAgo}</span>}
           </div>
         </CardHeader>
@@ -170,7 +171,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                 )}
               >
                 <StatusIcon className="h-4 w-4" />
-                <span>{currentStatus.label}</span>
+                <span>{translatedStatus}</span>
               </Badge>
               {timeToVerify !== undefined && timeToVerify >= 0 && (
                 <Badge
@@ -178,13 +179,13 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   className="gap-1.5 border-brand-accent/50 bg-brand-accent/10 text-brand-accent"
                 >
                   <Clock className="h-3.5 w-3.5" />
-                  Verified in {timeToVerify} mins
+                  {t('ClaimCard.verifiedIn', { minutes: timeToVerify })}
                 </Badge>
               )}
             </div>
             <div className="space-y-1">
               <div className="flex justify-between text-sm text-muted-foreground">
-                <span>Confidence Score</span>
+                <span>{t('ClaimCard.confidenceScore')}</span>
                 <span>{Math.round(claim.confidenceScore * 100)}%</span>
               </div>
               <Progress value={claim.confidenceScore * 100} aria-label={`${claim.confidenceScore * 100}% confidence`} />
@@ -206,7 +207,7 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  {isMock ? <p>Cannot vote on mock claims</p> : <p>Community agrees</p>}
+                  {isMock ? <p>{t('ClaimCard.cannotVoteOnMock')}</p> : <p>{t('ClaimCard.communityAgreesTooltip')}</p>}
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -223,12 +224,12 @@ export function ClaimCard({ claim }: { claim: Claim }) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                   {isMock ? <p>Cannot vote on mock claims</p> : <p>Community disagrees</p>}
+                   {isMock ? <p>{t('ClaimCard.cannotVoteOnMock')}</p> : <p>{t('ClaimCard.communityDisagreesTooltip')}</p>}
                 </TooltipContent>
               </Tooltip>
             </div>
             <ExplanationDialog claim={claim}>
-              <Button>Explain</Button>
+              <Button>{t('ClaimCard.explainButton')}</Button>
             </ExplanationDialog>
           </div>
         </CardFooter>

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Dasbor",
+    "dashboardTooltip": "Dasbor",
+    "chromeExtension": "Ekstensi Chrome",
+    "extensionTooltip": "Ekstensi Chrome",
+    "myAccount": "Akun Saya",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "logout": "Keluar",
+    "userRole": "Pengguna"
+  },
+  "DashboardPage": {
+    "title": "Dasbor Deteksi Klaim",
+    "subtitle": "Umpan langsung dari klaim yang sedang tren yang terdeteksi oleh Agen Scout."
+  },
+  "ExtensionPage": {
+    "title": "Ekstensi Chrome LocalTruth",
+    "description": "Bawa kekuatan verifikasi AI LocalTruth langsung ke browser Anda. Deteksi potensi misinformasi secara real-time di media sosial, email, dan artikel berita.",
+    "installButton": "Instal Ekstensi Chrome",
+    "comingSoon": "Segera Hadir",
+    "simulatorTitle": "Simulator Ekstensi",
+    "simulatorDescription": "Uji mesin deteksi. Tempel teks apa pun di bawah ini dan Agen Scout kami akan menganalisisnya untuk potensi misinformasi."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Kelola profil publik dan detail akun Anda.",
+    "accountInfoTitle": "Informasi Akun",
+    "accountInfoDescription": "Perbarui nama tampilan Anda dan lihat email akun Anda.",
+    "emailLabel": "Email",
+    "displayNameLabel": "Nama Tampilan",
+    "saveButton": "Simpan Perubahan"
+  },
+  "SettingsPage": {
+    "title": "Pengaturan",
+    "subtitle": "Kelola akun dan pengaturan aplikasi Anda.",
+    "preferences": {
+      "title": "Preferensi",
+      "description": "Sesuaikan pengalaman Anda."
+    },
+    "language": {
+      "label": "Bahasa",
+      "placeholder": "Pilih bahasa",
+      "description": "Pilih bahasa tampilan untuk aplikasi."
+    },
+    "password": {
+      "label": "Kata Sandi",
+      "button": "Ubah Kata Sandi",
+      "description": "Perbarui kata sandi akun Anda."
+    }
+  },
+  "LoginPage": {
+    "title": "Masuk",
+    "description": "Masukkan email Anda di bawah ini untuk masuk ke akun Anda.",
+    "emailLabel": "Email",
+    "passwordLabel": "Kata Sandi",
+    "signInButton": "Masuk",
+    "noAccount": "Belum punya akun?",
+    "signUpLink": "Daftar"
+  },
+  "SignupPage": {
+    "title": "Daftar",
+    "description": "Masukkan informasi Anda untuk membuat akun.",
+    "emailLabel": "Email",
+    "passwordLabel": "Kata Sandi",
+    "languageLabel": "Bahasa",
+    "languagePlaceholder": "Pilih bahasa",
+    "signUpButton": "Daftar",
+    "haveAccount": "Sudah punya akun?",
+    "loginLink": "Masuk"
+  },
+  "ClaimCard": {
+    "unknownSource": "Sumber Tidak Dikenal",
+    "verifiedIn": "Diverifikasi dalam {minutes} menit",
+    "confidenceScore": "Skor Keyakinan",
+    "communityAgreesTooltip": "Komunitas setuju",
+    "communityDisagreesTooltip": "Komunitas tidak setuju",
+    "cannotVoteOnMock": "Tidak dapat memberikan suara pada klaim tiruan",
+    "explainButton": "Jelaskan",
+    "status": {
+      "Verified": "Diverifikasi",
+      "False": "Salah",
+      "Inconclusive": "Tidak Meyakinkan"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Penjelasan AI",
+    "description": "Dihasilkan oleh Agen Penjelas berdasarkan informasi yang diverifikasi.",
+    "notAvailable": "Penjelasan tidak tersedia untuk klaim ini."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Tempel judul berita, postingan media sosial, atau teks apa pun yang ingin Anda verifikasi...",
+    "buttonText": "Periksa Misinformasi",
+    "errorMinChars": "Harap masukkan setidaknya 20 karakter.",
+    "errorInvalidInput": "Input tidak valid.",
+    "errorApi": "Terjadi kesalahan saat menganalisis teks. Silakan coba lagi.",
+    "alert": {
+      "potentialMisinformation": "Potensi Misinformasi Terdeteksi",
+      "noMisinformation": "Tidak Ada Misinformasi yang Terdeteksi",
+      "confidence": "Keyakinan",
+      "reason": "Alasan"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Ubah Kata Sandi",
+    "description": "Masukkan kata sandi baru Anda di bawah ini.",
+    "newPassword": "Kata Sandi Baru",
+    "confirmNewPassword": "Konfirmasi Kata Sandi Baru",
+    "updateButton": "Perbarui Kata Sandi",
+    "cancelButton": "Batal",
+    "toast": {
+      "successTitle": "Kata Sandi Diperbarui",
+      "successDescription": "Kata sandi Anda telah berhasil diubah.",
+      "failTitle": "Pembaruan Gagal",
+      "failDescription": "Sesi Anda mungkin telah berakhir. Silakan masuk lagi untuk mengubah kata sandi Anda.",
+      "errorTitle": "Kesalahan"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil Diperbarui",
+        "successDescription": "Nama tampilan Anda telah berhasil diperbarui.",
+        "failTitle": "Pembaruan Gagal",
+        "errorTitle": "Kesalahan",
+        "nameTooShort": "Nama tampilan harus terdiri dari minimal 3 karakter."
+    }
+  }
+}

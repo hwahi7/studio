@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "仪表板",
+    "dashboardTooltip": "仪表板",
+    "chromeExtension": "Chrome 扩展程序",
+    "extensionTooltip": "Chrome 扩展程序",
+    "myAccount": "我的帐户",
+    "profile": "个人资料",
+    "settings": "设置",
+    "logout": "注销",
+    "userRole": "用户"
+  },
+  "DashboardPage": {
+    "title": "声明检测仪表板",
+    "subtitle": "由 Scout Agent 检测到的热门声明的实时摘要。"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome 扩展程序",
+    "description": "将 LocalTruth 的 AI 验证功能直接引入您的浏览器。实时检测社交媒体、电子邮件和新闻文章中的潜在虚假信息。",
+    "installButton": "安装 Chrome 扩展程序",
+    "comingSoon": "即将推出",
+    "simulatorTitle": "扩展程序模拟器",
+    "simulatorDescription": "测试检测引擎。在下方粘贴任何文本，我们的 Scout Agent 将分析其中是否存在潜在的虚假信息。"
+  },
+  "ProfilePage": {
+    "title": "个人资料",
+    "subtitle": "管理您的公开个人资料和帐户详细信息。",
+    "accountInfoTitle": "帐户信息",
+    "accountInfoDescription": "更新您的显示名称并查看您的帐户电子邮件。",
+    "emailLabel": "电子邮件",
+    "displayNameLabel": "显示名称",
+    "saveButton": "保存更改"
+  },
+  "SettingsPage": {
+    "title": "设置",
+    "subtitle": "管理您的帐户和应用程序设置。",
+    "preferences": {
+      "title": "首选项",
+      "description": "自定义您的体验。"
+    },
+    "language": {
+      "label": "语言",
+      "placeholder": "选择语言",
+      "description": "选择应用程序的显示语言。"
+    },
+    "password": {
+      "label": "密码",
+      "button": "更改密码",
+      "description": "更新您的帐户密码。"
+    }
+  },
+  "LoginPage": {
+    "title": "登录",
+    "description": "在下方输入您的电子邮件以登录您的帐户。",
+    "emailLabel": "电子邮件",
+    "passwordLabel": "密码",
+    "signInButton": "登录",
+    "noAccount": "没有帐户？",
+    "signUpLink": "注册"
+  },
+  "SignupPage": {
+    "title": "注册",
+    "description": "输入您的信息以创建帐户。",
+    "emailLabel": "电子邮件",
+    "passwordLabel": "密码",
+    "languageLabel": "语言",
+    "languagePlaceholder": "选择一种语言",
+    "signUpButton": "注册",
+    "haveAccount": "已有帐户？",
+    "loginLink": "登录"
+  },
+  "ClaimCard": {
+    "unknownSource": "未知来源",
+    "verifiedIn": "在 {minutes} 分钟内验证",
+    "confidenceScore": "置信度分数",
+    "communityAgreesTooltip": "社区同意",
+    "communityDisagreesTooltip": "社区不同意",
+    "cannotVoteOnMock": "无法对模拟声明进行投票",
+    "explainButton": "解释",
+    "status": {
+      "Verified": "已验证",
+      "False": "虚假",
+      "Inconclusive": "无定论"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI 解释",
+    "description": "由解释器代理根据已验证的信息生成。",
+    "notAvailable": "此声明没有可用的解释。"
+  },
+  "MisinformationChecker": {
+    "placeholder": "粘贴您要验证的新闻标题、社交媒体帖子或任何文本...",
+    "buttonText": "检查虚假信息",
+    "errorMinChars": "请输入至少 20 个字符。",
+    "errorInvalidInput": "输入无效。",
+    "errorApi": "分析文本时出错。请重试。",
+    "alert": {
+      "potentialMisinformation": "检测到潜在的虚假信息",
+      "noMisinformation": "未检测到虚假信息",
+      "confidence": "置信度",
+      "reason": "原因"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "更改密码",
+    "description": "在下方输入您的新密码。",
+    "newPassword": "新密码",
+    "confirmNewPassword": "确认新密码",
+    "updateButton": "更新密码",
+    "cancelButton": "取消",
+    "toast": {
+      "successTitle": "密码已更新",
+      "successDescription": "您的密码已成功更改。",
+      "failTitle": "更新失败",
+      "failDescription": "您的会话可能已过期。请重新登录以更改密码。",
+      "errorTitle": "错误"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "个人资料已更新",
+        "successDescription": "您的显示名称已成功更新。",
+        "failTitle": "更新失败",
+        "errorTitle": "错误",
+        "nameTooShort": "显示名称必须至少包含 3 个字符。"
+    }
+  }
+}

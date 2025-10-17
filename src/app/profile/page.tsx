@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/context/language-context";
 
 const initialState = {
   message: "",
@@ -19,10 +20,11 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const { t } = useLanguage();
   return (
     <Button type="submit" disabled={pending}>
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      Save Changes
+      {t('ProfilePage.saveButton')}
     </Button>
   );
 }
@@ -33,6 +35,7 @@ export default function ProfilePage() {
   const [state, formAction] = useActionState(updateProfileAction, initialState);
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (user) {
@@ -41,29 +44,43 @@ export default function ProfilePage() {
   }, [user]);
 
   useEffect(() => {
+    const showToast = (message: string, isError: boolean = false) => {
+        let title;
+        let description;
+
+        switch (message) {
+            case "success":
+                title = t('ProfileUpdate.toast.successTitle');
+                description = t('ProfileUpdate.toast.successDescription');
+                break;
+            case "Display name must be at least 3 characters long.":
+                 title = t('ProfileUpdate.toast.errorTitle');
+                 description = t('ProfileUpdate.toast.nameTooShort');
+                 break;
+            default:
+                title = t('ProfileUpdate.toast.failTitle');
+                description = message;
+        }
+
+        toast({
+            variant: isError ? "destructive" : "default",
+            title,
+            description,
+        });
+    }
+
     if (state.message === "success" && state.data?.displayName && auth?.currentUser) {
       updateAuthProfile(auth.currentUser, { displayName: state.data.displayName })
         .then(() => {
-          toast({
-            title: "Profile Updated",
-            description: "Your display name has been successfully updated.",
-          });
+          showToast("success");
         })
         .catch((error) => {
-          toast({
-            variant: "destructive",
-            title: "Update Failed",
-            description: error.message,
-          });
+          showToast(error.message, true);
         });
     } else if (state.message && state.message !== "success") {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: state.message,
-      });
+      showToast(state.message, true);
     }
-  }, [state, auth, toast]);
+  }, [state, auth, toast, t]);
 
   if (isUserLoading) {
     return (
@@ -77,24 +94,24 @@ export default function ProfilePage() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-2">
         <h1 className="font-headline text-3xl font-bold tracking-tight">
-          Profile
+          {t('ProfilePage.title')}
         </h1>
         <p className="text-muted-foreground">
-          Manage your public profile and account details.
+          {t('ProfilePage.subtitle')}
         </p>
       </header>
 
       <Card>
         <form action={formAction}>
           <CardHeader>
-            <CardTitle>Account Information</CardTitle>
+            <CardTitle>{t('ProfilePage.accountInfoTitle')}</CardTitle>
             <CardDescription>
-              Update your display name and view your account email.
+              {t('ProfilePage.accountInfoDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('ProfilePage.emailLabel')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -103,7 +120,7 @@ export default function ProfilePage() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="displayName">Display Name</Label>
+              <Label htmlFor="displayName">{t('ProfilePage.displayNameLabel')}</Label>
               <Input
                 id="displayName"
                 name="displayName"

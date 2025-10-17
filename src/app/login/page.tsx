@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useUser, useAuth } from "@/firebase";
 import { initiateEmailSignIn } from "@/firebase/non-blocking-login";
 import { redirect } from "next/navigation";
+import { useLanguage } from "@/context/language-context";
 
 const initialState = {
   message: "",
@@ -31,10 +32,11 @@ const initialState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const { t } = useLanguage();
   return (
     <Button className="w-full" type="submit" disabled={pending}>
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      Sign In
+      {t('LoginPage.signInButton')}
     </Button>
   );
 }
@@ -43,6 +45,7 @@ export default function LoginPage() {
   const [state, formAction] = useActionState(login, initialState);
   const { user, isUserLoading } = useUser();
   const auth = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (user) {
@@ -68,15 +71,15 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-screen bg-background p-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">{t('LoginPage.title')}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account.
+            {t('LoginPage.description')}
           </CardDescription>
         </CardHeader>
         <form action={formAction}>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('LoginPage.emailLabel')}</Label>
               <Input
                 id="email"
                 type="email"
@@ -89,7 +92,7 @@ export default function LoginPage() {
               )}
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('LoginPage.passwordLabel')}</Label>
               <Input id="password" type="password" name="password" required />
               {state.errors?.password && (
                 <p className="text-sm text-destructive">
@@ -104,13 +107,13 @@ export default function LoginPage() {
           <CardFooter className="flex flex-col gap-4">
             <SubmitButton />
             <div className="text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
+              {t('LoginPage.noAccount')}{" "}
               <Link
                 href="/signup"
                 className="text-primary hover:underline"
                 prefetch={false}
               >
-                Sign up
+                {t('LoginPage.signUpLink')}
               </Link>
             </div>
           </CardFooter>

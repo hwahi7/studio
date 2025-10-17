@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Tableau de bord",
+    "dashboardTooltip": "Tableau de bord",
+    "chromeExtension": "Extension Chrome",
+    "extensionTooltip": "Extension Chrome",
+    "myAccount": "Mon compte",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter",
+    "userRole": "Utilisateur"
+  },
+  "DashboardPage": {
+    "title": "Tableau de bord de détection des réclamations",
+    "subtitle": "Flux en direct des réclamations tendance détectées par l'agent Scout."
+  },
+  "ExtensionPage": {
+    "title": "Extension Chrome LocalTruth",
+    "description": "Apportez la puissance de la vérification par IA de LocalTruth directly dans votre navigateur. Détectez les fausses informations potentielles en temps réel sur les réseaux sociaux, les e-mails et les articles de presse.",
+    "installButton": "Installer l'extension Chrome",
+    "comingSoon": "Bientôt disponible",
+    "simulatorTitle": "Simulateur d'extension",
+    "simulatorDescription": "Testez le moteur de détection. Collez n'importe quel texte ci-dessous et notre agent Scout l'analysera pour détecter d'éventuelles fausses informations."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Gérez votre profil public et les détails de votre compte.",
+    "accountInfoTitle": "Informations du compte",
+    "accountInfoDescription": "Mettez à jour votre nom d'affichage et consultez l'e-mail de votre compte.",
+    "emailLabel": "E-mail",
+    "displayNameLabel": "Nom d'affichage",
+    "saveButton": "Enregistrer les modifications"
+  },
+  "SettingsPage": {
+    "title": "Paramètres",
+    "subtitle": "Gérez votre compte et les paramètres de l'application.",
+    "preferences": {
+      "title": "Préférences",
+      "description": "Personnalisez votre expérience."
+    },
+    "language": {
+      "label": "Langue",
+      "placeholder": "Sélectionner la langue",
+      "description": "Choisissez la langue d'affichage de l'application."
+    },
+    "password": {
+      "label": "Mot de passe",
+      "button": "Changer le mot de passe",
+      "description": "Mettez à jour le mot de passe de votre compte."
+    }
+  },
+  "LoginPage": {
+    "title": "Connexion",
+    "description": "Entrez votre e-mail ci-dessous pour vous connecter à votre compte.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Mot de passe",
+    "signInButton": "Se connecter",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUpLink": "S'inscrire"
+  },
+  "SignupPage": {
+    "title": "S'inscrire",
+    "description": "Entrez vos informations pour créer un compte.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Mot de passe",
+    "languageLabel": "Langue",
+    "languagePlaceholder": "Sélectionnez une langue",
+    "signUpButton": "S'inscrire",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "loginLink": "Connexion"
+  },
+  "ClaimCard": {
+    "unknownSource": "Source inconnue",
+    "verifiedIn": "Vérifié en {minutes} minutes",
+    "confidenceScore": "Score de confiance",
+    "communityAgreesTooltip": "La communauté est d'accord",
+    "communityDisagreesTooltip": "La communauté n'est pas d'accord",
+    "cannotVoteOnMock": "Impossible de voter sur les réclamations factices",
+    "explainButton": "Expliquer",
+    "status": {
+      "Verified": "Vérifié",
+      "False": "Faux",
+      "Inconclusive": "Non concluant"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Explication de l'IA",
+    "description": "Généré par l'agent explicateur sur la base d'informations vérifiées.",
+    "notAvailable": "Aucune explication n'est disponible pour cette réclamation."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Collez un titre d'actualité, une publication sur les réseaux sociaux ou tout texte que vous souhaitez vérifier...",
+    "buttonText": "Vérifier la désinformation",
+    "errorMinChars": "Veuillez saisir au moins 20 caractères.",
+    "errorInvalidInput": "Entrée invalide.",
+    "errorApi": "Une erreur est survenue lors de l'analyse du texte. Veuillez réessayer.",
+    "alert": {
+      "potentialMisinformation": "Désinformation potentielle détectée",
+      "noMisinformation": "Aucune désinformation détectée",
+      "confidence": "Confiance",
+      "reason": "Raison"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Changer le mot de passe",
+    "description": "Entrez votre nouveau mot de passe ci-dessous.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmNewPassword": "Confirmer le nouveau mot de passe",
+    "updateButton": "Mettre à jour le mot de passe",
+    "cancelButton": "Annuler",
+    "toast": {
+      "successTitle": "Mot de passe mis à jour",
+      "successDescription": "Votre mot de passe a été modifié avec succès.",
+      "failTitle": "Échec de la mise à jour",
+      "failDescription": "Votre session a peut-être expiré. Veuillez vous reconnecter pour changer votre mot de passe.",
+      "errorTitle": "Erreur"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil mis à jour",
+        "successDescription": "Votre nom d'affichage a été mis à jour avec succès.",
+        "failTitle": "Échec de la mise à jour",
+        "errorTitle": "Erreur",
+        "nameTooShort": "Le nom d'affichage doit comporter au moins 3 caractères."
+    }
+  }
+}

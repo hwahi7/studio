@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "डैशबोर्ड",
+    "dashboardTooltip": "डैशबोर्ड",
+    "chromeExtension": "क्रोम एक्सटेंशन",
+    "extensionTooltip": "क्रोम एक्सटेंशन",
+    "myAccount": "मेरा खाता",
+    "profile": "प्रोफ़ाइल",
+    "settings": "सेटिंग्स",
+    "logout": "लॉग आउट",
+    "userRole": "उपयोगकर्ता"
+  },
+  "DashboardPage": {
+    "title": "दावा पहचान डैशबोर्ड",
+    "subtitle": "स्काउट एजेंट द्वारा पहचाने गए ट्रेंडिंग दावों का लाइव फ़ीड।"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth क्रोम एक्सटेंशन",
+    "description": "LocalTruth की AI सत्यापन की शक्ति सीधे अपने ब्राउज़र में लाएँ। सोशल मीडिया, ईमेल और समाचार लेखों पर रीयल-टाइम में संभावित गलत सूचना का पता लगाएँ।",
+    "installButton": "क्रोम एक्सटेंशन इंस्टॉल करें",
+    "comingSoon": "जल्द आ रहा है",
+    "simulatorTitle": "एक्सटेंशन सिम्युलेटर",
+    "simulatorDescription": "पहचान इंजन का परीक्षण करें। नीचे कोई भी टेक्स्ट पेस्ट करें और हमारा स्काउट एजेंट संभावित गलत सूचना के लिए उसका विश्लेषण करेगा।"
+  },
+  "ProfilePage": {
+    "title": "प्रोफ़ाइल",
+    "subtitle": "अपनी सार्वजनिक प्रोफ़ाइल और खाता विवरण प्रबंधित करें।",
+    "accountInfoTitle": "खाता जानकारी",
+    "accountInfoDescription": "अपना प्रदर्शन नाम अपडेट करें और अपना खाता ईमेल देखें।",
+    "emailLabel": "ईमेल",
+    "displayNameLabel": "प्रदर्शन नाम",
+    "saveButton": "परिवर्तन सहेजें"
+  },
+  "SettingsPage": {
+    "title": "सेटिंग्स",
+    "subtitle": "अपना खाता और एप्लिकेशन सेटिंग्स प्रबंधित करें।",
+    "preferences": {
+      "title": "वरीयताएँ",
+      "description": "अपने अनुभव को حسب ضرورت بنائیں۔"
+    },
+    "language": {
+      "label": "भाषा",
+      "placeholder": "भाषा चुनें",
+      "description": "एप्लिकेशन के लिए प्रदर्शन भाषा चुनें।"
+    },
+    "password": {
+      "label": "पासवर्ड",
+      "button": "पासवर्ड बदलें",
+      "description": "अपना खाता पासवर्ड अपडेट करें।"
+    }
+  },
+  "LoginPage": {
+    "title": "लॉगिन",
+    "description": "अपने खाते में लॉगिन करने के लिए नीचे अपना ईमेल दर्ज करें।",
+    "emailLabel": "ईमेल",
+    "passwordLabel": "पासवर्ड",
+    "signInButton": "साइन इन करें",
+    "noAccount": "खाता नहीं है?",
+    "signUpLink": "साइन अप करें"
+  },
+  "SignupPage": {
+    "title": "साइन अप करें",
+    "description": "खाता बनाने के लिए अपनी जानकारी दर्ज करें।",
+    "emailLabel": "ईमेल",
+    "passwordLabel": "पासवर्ड",
+    "languageLabel": "भाषा",
+    "languagePlaceholder": "एक भाषा चुनें",
+    "signUpButton": "साइन अप करें",
+    "haveAccount": "पहले से खाता है?",
+    "loginLink": "लॉगिन करें"
+  },
+  "ClaimCard": {
+    "unknownSource": "अज्ञात स्रोत",
+    "verifiedIn": "{minutes} मिनट में सत्यापित",
+    "confidenceScore": "आत्मविश्वास स्कोर",
+    "communityAgreesTooltip": "समुदाय सहमत है",
+    "communityDisagreesTooltip": "समुदाय असहमत है",
+    "cannotVoteOnMock": "नकली दावों पर वोट नहीं कर सकते",
+    "explainButton": "समझाएँ",
+    "status": {
+      "Verified": "सत्यापित",
+      "False": "झूठा",
+      "Inconclusive": "अनिर्णायक"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI स्पष्टीकरण",
+    "description": "सत्यापित जानकारी के आधार पर व्याख्याता एजेंट द्वारा उत्पन्न।",
+    "notAvailable": "इस दावे के लिए कोई स्पष्टीकरण उपलब्ध नहीं है।"
+  },
+  "MisinformationChecker": {
+    "placeholder": "एक समाचार शीर्षक, सोशल मीडिया पोस्ट, या कोई भी टेक्स्ट पेस्ट करें जिसे आप सत्यापित करना चाहते हैं...",
+    "buttonText": "गलत सूचना के लिए जाँच करें",
+    "errorMinChars": "कृपया कम से कम 20 वर्ण दर्ज करें।",
+    "errorInvalidInput": "अमान्य इनपुट।",
+    "errorApi": "टेक्स्ट का विश्लेषण करते समय एक त्रुटि हुई। कृपया पुन: प्रयास करें।",
+    "alert": {
+      "potentialMisinformation": "संभावित गलत सूचना का पता चला",
+      "noMisinformation": "कोई गलत सूचना नहीं मिली",
+      "confidence": "आत्मविश्वास",
+      "reason": "कारण"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "पासवर्ड बदलें",
+    "description": "नीचे अपना नया पासवर्ड दर्ज करें।",
+    "newPassword": "नया पासवर्ड",
+    "confirmNewPassword": "नए पासवर्ड की पुष्टि करें",
+    "updateButton": "पासवर्ड अपडेट करें",
+    "cancelButton": "रद्द करें",
+    "toast": {
+      "successTitle": "पासवर्ड अपडेट किया गया",
+      "successDescription": " आपका पासवर्ड सफलतापूर्वक बदल दिया गया है।",
+      "failTitle": "अपडेट विफल",
+      "failDescription": "आपका सत्र समाप्त हो गया हो सकता है। अपना पासवर्ड बदलने के लिए कृपया फिर से लॉगिन करें।",
+      "errorTitle": "त्रुटि"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "प्रोफ़ाइल अपडेट की गई",
+        "successDescription": "आपका प्रदर्शन नाम सफलतापूर्वक अपडेट कर दिया गया है।",
+        "failTitle": "अपडेट विफल",
+        "errorTitle": "त्रुटि",
+        "nameTooShort": "प्रदर्शन नाम में कम से कम 3 वर्ण होने चाहिए।"
+    }
+  }
+}

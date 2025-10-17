@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Tablero",
+    "dashboardTooltip": "Tablero",
+    "chromeExtension": "Extensión de Chrome",
+    "extensionTooltip": "Extensión de Chrome",
+    "myAccount": "Mi cuenta",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "userRole": "Usuario"
+  },
+  "DashboardPage": {
+    "title": "Tablero de Detección de Reclamaciones",
+    "subtitle": "Transmisión en vivo de las reclamaciones de tendencia detectadas por el Agente Scout."
+  },
+  "ExtensionPage": {
+    "title": "Extensión de Chrome de LocalTruth",
+    "description": "Lleva el poder de la verificación de IA de LocalTruth directamente a tu navegador. Detecta posible desinformación en tiempo real en redes sociales, correos electrónicos y artículos de noticias.",
+    "installButton": "Instalar Extensión de Chrome",
+    "comingSoon": "Próximamente",
+    "simulatorTitle": "Simulador de Extensión",
+    "simulatorDescription": "Prueba el motor de detección. Pega cualquier texto a continuación y nuestro Agente Scout lo analizará en busca de posible desinformación."
+  },
+  "ProfilePage": {
+    "title": "Perfil",
+    "subtitle": "Administra tu perfil público y los detalles de tu cuenta.",
+    "accountInfoTitle": "Información de la Cuenta",
+    "accountInfoDescription": "Actualiza tu nombre de usuario y ve el correo electrónico de tu cuenta.",
+    "emailLabel": "Correo electrónico",
+    "displayNameLabel": "Nombre de usuario",
+    "saveButton": "Guardar cambios"
+  },
+  "SettingsPage": {
+    "title": "Configuración",
+    "subtitle": "Administra la configuración de tu cuenta y de la aplicación.",
+    "preferences": {
+      "title": "Preferencias",
+      "description": "Personaliza tu experiencia."
+    },
+    "language": {
+      "label": "Idioma",
+      "placeholder": "Seleccionar idioma",
+      "description": "Elige el idioma de visualización de la aplicación."
+    },
+    "password": {
+      "label": "Contraseña",
+      "button": "Cambiar contraseña",
+      "description": "Actualiza la contraseña de tu cuenta."
+    }
+  },
+  "LoginPage": {
+    "title": "Iniciar sesión",
+    "description": "Introduce tu correo electrónico a continuación para iniciar sesión en tu cuenta.",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "signInButton": "Iniciar sesión",
+    "noAccount": "¿No tienes una cuenta?",
+    "signUpLink": "Regístrate"
+  },
+  "SignupPage": {
+    "title": "Regístrate",
+    "description": "Introduce tu información para crear una cuenta.",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "languageLabel": "Idioma",
+    "languagePlaceholder": "Selecciona un idioma",
+    "signUpButton": "Regístrate",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "loginLink": "Iniciar sesión"
+  },
+  "ClaimCard": {
+    "unknownSource": "Fuente desconocida",
+    "verifiedIn": "Verificado en {minutes} minutos",
+    "confidenceScore": "Puntuación de confianza",
+    "communityAgreesTooltip": "La comunidad está de acuerdo",
+    "communityDisagreesTooltip": "La comunidad no está de acuerdo",
+    "cannotVoteOnMock": "No se puede votar en reclamaciones de prueba",
+    "explainButton": "Explicar",
+    "status": {
+      "Verified": "Verificado",
+      "False": "Falso",
+      "Inconclusive": "No concluyente"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Explicación de la IA",
+    "description": "Generado por el Agente Explicador basado en información verificada.",
+    "notAvailable": "No hay una explicación disponible para esta reclamación."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Pega un titular de noticia, una publicación de redes sociales o cualquier texto que quieras verificar...",
+    "buttonText": "Comprobar si hay desinformación",
+    "errorMinChars": "Por favor, introduce al menos 20 caracteres.",
+    "errorInvalidInput": "Entrada no válida.",
+    "errorApi": "Ocurrió un error al analizar el texto. Por favor, inténtalo de nuevo.",
+    "alert": {
+      "potentialMisinformation": "Posible desinformación detectada",
+      "noMisinformation": "No se ha detectado desinformación",
+      "confidence": "Confianza",
+      "reason": "Razón"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Cambiar contraseña",
+    "description": "Introduce tu nueva contraseña a continuación.",
+    "newPassword": "Nueva contraseña",
+    "confirmNewPassword": "Confirmar nueva contraseña",
+    "updateButton": "Actualizar contraseña",
+    "cancelButton": "Cancelar",
+    "toast": {
+      "successTitle": "Contraseña actualizada",
+      "successDescription": "Tu contraseña se ha cambiado correctamente.",
+      "failTitle": "Error al actualizar",
+      "failDescription": "Puede que tu sesión haya caducado. Por favor, inicia sesión de nuevo para cambiar tu contraseña.",
+      "errorTitle": "Error"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Perfil actualizado",
+        "successDescription": "Tu nombre de usuario se ha actualizado correctamente.",
+        "failTitle": "Error al actualizar",
+        "errorTitle": "Error",
+        "nameTooShort": "El nombre de usuario debe tener al menos 3 caracteres."
+    }
+  }
+}

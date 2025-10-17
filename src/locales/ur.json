@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ڈیش بورڈ",
+    "dashboardTooltip": "ڈیش بورڈ",
+    "chromeExtension": "کروم ایکسٹینشن",
+    "extensionTooltip": "کروم ایکسٹینشن",
+    "myAccount": "میرا اکاؤنٹ",
+    "profile": "پروفائل",
+    "settings": "ترتیبات",
+    "logout": "لاگ آؤٹ",
+    "userRole": "صارف"
+  },
+  "DashboardPage": {
+    "title": "دعوی کا पता लगाने والا ڈیش بورڈ",
+    "subtitle": "اسکاؤٹ ایجنٹ کے ذریعہ پتہ لگائے گئے ٹرینڈنگ دعووں کا لائیو فیڈ۔"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth کروم ایکسٹینشن",
+    "description": "LocalTruth کی AI تصدیق کی طاقت کو براہ راست اپنے براؤزر میں لائیں۔ سوشل میڈیا، ای میلز اور نیوز آرٹیکلز پر ریئل ٹائم میں ممکنہ غلط معلومات کا پتہ لگائیں۔",
+    "installButton": "کروم ایکسٹینشن انسٹال کریں",
+    "comingSoon": "جلد آرہا ہے",
+    "simulatorTitle": "ایکسٹینشن سمیلیٹر",
+    "simulatorDescription": "پتہ लगाने वाले انجن کی جانچ کریں۔ نیچے کوئی بھی متن پیسٹ کریں اور ہمارا اسکاؤٹ ایجنٹ ممکنہ غلط معلومات کے لئے اس کا تجزیہ کرے گا۔"
+  },
+  "ProfilePage": {
+    "title": "پروفائل",
+    "subtitle": "اپنے عوامی پروفائل اور اکاؤنٹ کی تفصیلات کا نظم کریں۔",
+    "accountInfoTitle": "اکاؤنٹ کی معلومات",
+    "accountInfoDescription": "اپنا ڈسپلے نام اپ ڈیٹ کریں اور اپنے اکاؤنٹ کا ای میل دیکھیں۔",
+    "emailLabel": "ای میل",
+    "displayNameLabel": "ڈسپلے نام",
+    "saveButton": "تبدیلیاں محفوظ کریں"
+  },
+  "SettingsPage": {
+    "title": "ترتیبات",
+    "subtitle": "اپنے اکاؤنٹ اور ایپلیکیشن کی ترتیبات کا نظم کریں۔",
+    "preferences": {
+      "title": "ترجیحات",
+      "description": "اپنے تجربے کو حسب ضرورت بنائیں۔"
+    },
+    "language": {
+      "label": "زبان",
+      "placeholder": "زبان منتخب کریں",
+      "description": "ایپلیکیشن کے لئے ڈسپلے زبان منتخب کریں۔"
+    },
+    "password": {
+      "label": "پاس ورڈ",
+      "button": "پاس ورڈ تبدیل करें",
+      "description": "اپنے اکاؤنٹ کا پاس ورڈ اپ ڈیٹ کریں۔"
+    }
+  },
+  "LoginPage": {
+    "title": "لاگ ان",
+    "description": "اپنے اکاؤنٹ میں لاگ ان کرنے کے لئے نیچے اپنا ای میل درج کریں۔",
+    "emailLabel": "ای میل",
+    "passwordLabel": "پاس ورڈ",
+    "signInButton": "سائن ان کریں",
+    "noAccount": "اکاؤنٹ نہیں ہے؟",
+    "signUpLink": "سائن اپ کریں"
+  },
+  "SignupPage": {
+    "title": "سائن اپ کریں",
+    "description": "اکاؤنٹ بنانے کے لئے اپنی معلومات درج کریں۔",
+    "emailLabel": "ای میل",
+    "passwordLabel": "پاس ورڈ",
+    "languageLabel": "زبان",
+    "languagePlaceholder": "ایک زبان منتخب کریں",
+    "signUpButton": "سائن اپ کریں",
+    "haveAccount": "پہلے سے اکاؤنٹ ہے؟",
+    "loginLink": "لاگ ان करें"
+  },
+  "ClaimCard": {
+    "unknownSource": "نامعلوم ذریعہ",
+    "verifiedIn": "{minutes} منٹ میں تصدیق شدہ",
+    "confidenceScore": "اعتماد کا اسکور",
+    "communityAgreesTooltip": "کمیونٹی متفق ہے",
+    "communityDisagreesTooltip": "کمیونٹی متفق نہیں ہے",
+    "cannotVoteOnMock": " فرضی دعووں پر वोट नहीं कर सकते",
+    "explainButton": "وضاحت کریں",
+    "status": {
+      "Verified": "تصدیق شدہ",
+      "False": "غلط",
+      "Inconclusive": "غیر حتمی"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AI وضاحت",
+    "description": "تصدیق شدہ معلومات کی بنیاد پر وضاحت کنندہ ایجنٹ کے ذریعہ تیار کردہ۔",
+    "notAvailable": "اس دعوے کے لئے کوئی وضاحت دستیاب نہیں ہے۔"
+  },
+  "MisinformationChecker": {
+    "placeholder": "ایک خبر کی سرخی، سوشل میڈیا پوسٹ، یا کوئی بھی متن جسے آپ تصدیق करना चाहते ہیں پیسٹ کریں...",
+    "buttonText": "غلط معلومات کی जांच करें",
+    "errorMinChars": "براہ کرم کم از کم 20 حروف درج کریں۔",
+    "errorInvalidInput": " غلط ان پٹ۔",
+    "errorApi": "متن کا تجزیہ کرتے समय ایک خرابی پیش آئی۔ براہ کرم दोबारा کوشش کریں۔",
+    "alert": {
+      "potentialMisinformation": "ممکنہ غلط معلومات کا पता चला",
+      "noMisinformation": "کوئی गलत معلومات نہیں ملی",
+      "confidence": "اعتماد",
+      "reason": "وجہ"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "پاس ورڈ تبدیل کریں",
+    "description": "نیچے اپنا نیا پاس ورڈ درج کریں۔",
+    "newPassword": "نیا پاس ورڈ",
+    "confirmNewPassword": "نئے پاس ورڈ کی تصدیق کریں",
+    "updateButton": "پاس ورڈ اپ ڈیٹ کریں",
+    "cancelButton": "منسوخ करें",
+    "toast": {
+      "successTitle": "پاس ورڈ اپ ڈیٹ ہو گیا",
+      "successDescription": "آپ کا پاس ورڈ کامیابی سے تبدیل کر دیا गया ہے۔",
+      "failTitle": "اپ ڈیٹ ناکام",
+      "failDescription": "آپ کا سیشن ختم ہو گیا ہو सकता ہے۔ اپنا پاس ورڈ تبدیل کرنے کے لئے براہ کرم دوبارہ لاگ ان کریں۔",
+      "errorTitle": "خرابی"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "پروفائل اپ ڈیٹ ہو گیا",
+        "successDescription": "آپ کا ڈسپلے نام کامیابی سے اپ ڈیٹ ہو گیا ہے۔",
+        "failTitle": "اپ ڈیٹ ناکام",
+        "errorTitle": "خرابی",
+        "nameTooShort": "ڈسپلے نام کم از کم 3 حروف کا होना چاہئے۔"
+    }
+  }
+}

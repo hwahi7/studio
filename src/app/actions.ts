@@ -2,34 +2,10 @@
 "use server";
 
 import { z } from "zod";
-import { summarizeVerifiedInfo } from "@/ai/flows/summarize-verified-info";
 import { revalidatePath } from "next/cache";
 import { detectTrendingMisinformation } from "@/ai/flows/detect-trending-misinformation";
 import type { Claim } from "@/lib/types";
-import { translateText } from "@/ai/flows/translate-text";
 
-// This type can be simplified as we don't need the full Claim with Timestamps
-type ClaimSummary = {
-  content: string;
-  status: string;
-  confidenceScore: number;
-  upvotes?: number;
-  downvotes?: number;
-}
-
-export async function getExplanation(claim: ClaimSummary, language: string = "en") {
-  const communityFeedback = `This claim has received ${claim.upvotes || 0} positive community votes and ${claim.downvotes || 0} negative votes.`;
-
-  const summary = await summarizeVerifiedInfo({
-    claim: claim.content,
-    verificationResult: claim.status,
-    confidenceScore: claim.confidenceScore,
-    language: language,
-    communityFeedback: communityFeedback
-  });
-
-  return summary;
-}
 
 const misinformationSchema = z.object({
   text: z.string().min(20, { message: "Please enter at least 20 characters."}),
@@ -41,8 +17,9 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
   });
 
   if (!validatedFields.success) {
-    return {
-      message: validatedFields.error.flatten().fieldErrors.text?.[0] || 'Invalid input.',
+    const errorText = validatedFields.error.flatten().fieldErrors.text?.[0];
+     return {
+      message: errorText === "String must contain at least 20 character(s)" ? "error_min_chars" : "error_invalid_input",
     };
   }
 
@@ -53,7 +30,6 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
       webPageContent: textToAnalyze,
     });
     
-    // Revalidate the path to trigger a data refresh on the dashboard.
     revalidatePath('/');
 
     return {
@@ -64,31 +40,8 @@ export async function checkTextForMisinformation(prevState: any, formData: FormD
   } catch (error) {
     console.error("Error in checkTextForMisinformation:", error);
     return {
-      message: 'An error occurred while analyzing the text. Please try again.',
+      message: 'error_api',
       text: textToAnalyze,
     };
-  }
-}
-
-export async function translateDashboardContent(
-  content: { title: string; subtitle: string },
-  language: string
-) {
-  if (language === 'en') {
-    return content;
-  }
-  try {
-    const [translatedTitle, translatedSubtitle] = await Promise.all([
-      translateText({ text: content.title, targetLanguage: language }),
-      translateText({ text: content.subtitle, targetLanguage: language }),
-    ]);
-    return {
-      title: translatedTitle.translation,
-      subtitle: translatedSubtitle.translation,
-    };
-  } catch (error) {
-    console.error('Error translating content:', error);
-    // Return original content on error
-    return content;
   }
 }

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "ダッシュボード",
+    "dashboardTooltip": "ダッシュボード",
+    "chromeExtension": "Chrome拡張機能",
+    "extensionTooltip": "Chrome拡張機能",
+    "myAccount": "マイアカウント",
+    "profile": "プロフィール",
+    "settings": "設定",
+    "logout": "ログアウト",
+    "userRole": "ユーザー"
+  },
+  "DashboardPage": {
+    "title": "申し立て検出ダッシュボード",
+    "subtitle": "スカウトエージェントによって検出されたトレンドの申し立てのライブフィード。"
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome拡張機能",
+    "description": "LocalTruthのAI検証機能をブラウザに直接取り込みます。ソーシャルメディア、メール、ニュース記事で潜在的な誤情報をリアルタイムで検出します。",
+    "installButton": "Chrome拡張機能をインストール",
+    "comingSoon": "近日公開",
+    "simulatorTitle": "拡張機能シミュレーター",
+    "simulatorDescription": "検出エンジンをテストします。以下のテキストを貼り付けると、スカウトエージェントが潜在的な誤情報がないか分析します。"
+  },
+  "ProfilePage": {
+    "title": "プロフィール",
+    "subtitle": "公開プロフィールとアカウントの詳細を管理します。",
+    "accountInfoTitle": "アカウント情報",
+    "accountInfoDescription": "表示名を更新し、アカウントのメールアドレスを表示します。",
+    "emailLabel": "メール",
+    "displayNameLabel": "表示名",
+    "saveButton": "変更を保存"
+  },
+  "SettingsPage": {
+    "title": "設定",
+    "subtitle": "アカウントとアプリケーションの設定を管理します。",
+    "preferences": {
+      "title": "環境設定",
+      "description": "エクスペリエンスをカスタマイズします。"
+    },
+    "language": {
+      "label": "言語",
+      "placeholder": "言語を選択",
+      "description": "アプリケーションの表示言語を選択します。"
+    },
+    "password": {
+      "label": "パスワード",
+      "button": "パスワードを変更",
+      "description": "アカウントのパスワードを更新します。"
+    }
+  },
+  "LoginPage": {
+    "title": "ログイン",
+    "description": "以下にメールアドレスを入力してアカウントにログインします。",
+    "emailLabel": "メール",
+    "passwordLabel": "パスワード",
+    "signInButton": "サインイン",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "signUpLink": "サインアップ"
+  },
+  "SignupPage": {
+    "title": "サインアップ",
+    "description": "アカウントを作成するために情報を入力してください。",
+    "emailLabel": "メール",
+    "passwordLabel": "パスワード",
+    "languageLabel": "言語",
+    "languagePlaceholder": "言語を選択",
+    "signUpButton": "サインアップ",
+    "haveAccount": "すでにアカウントをお持ちですか？",
+    "loginLink": "ログイン"
+  },
+  "ClaimCard": {
+    "unknownSource": "不明なソース",
+    "verifiedIn": "{minutes}分で検証済み",
+    "confidenceScore": "信頼度スコア",
+    "communityAgreesTooltip": "コミュニティは同意しています",
+    "communityDisagreesTooltip": "コミュニティは同意していません",
+    "cannotVoteOnMock": "モッククレームに投票できません",
+    "explainButton": "説明",
+    "status": {
+      "Verified": "検証済み",
+      "False": "偽",
+      "Inconclusive": "結論が出ない"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "AIによる説明",
+    "description": "検証済みの情報に基づいて説明エージェントによって生成されました。",
+    "notAvailable": "この申し立てに関する説明はありません。"
+  },
+  "MisinformationChecker": {
+    "placeholder": "ニュースの見出し、ソーシャルメディアの投稿、または確認したいテキストを貼り付けてください...",
+    "buttonText": "誤情報を確認",
+    "errorMinChars": "20文字以上入力してください。",
+    "errorInvalidInput": "無効な入力です。",
+    "errorApi": "テキストの分析中にエラーが発生しました。もう一度お試しください。",
+    "alert": {
+      "potentialMisinformation": "潜在的な誤情報が検出されました",
+      "noMisinformation": "誤情報は検出されませんでした",
+      "confidence": "信頼度",
+      "reason": "理由"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "パスワードを変更",
+    "description": "以下に新しいパスワードを入力してください。",
+    "newPassword": "新しいパスワード",
+    "confirmNewPassword": "新しいパスワードを確認",
+    "updateButton": "パスワードを更新",
+    "cancelButton": "キャンセル",
+    "toast": {
+      "successTitle": "パスワードが更新されました",
+      "successDescription": "パスワードが正常に変更されました。",
+      "failTitle": "更新に失敗しました",
+      "failDescription": "セッションの有効期限が切れている可能性があります。パスワードを変更するには、もう一度ログインしてください。",
+      "errorTitle": "エラー"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "プロフィールが更新されました",
+        "successDescription": "表示名が正常に更新されました。",
+        "failTitle": "更新に失敗しました",
+        "errorTitle": "エラー",
+        "nameTooShort": "表示名は3文字以上にする必要があります。"
+    }
+  }
+}

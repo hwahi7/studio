@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Gösterge Paneli",
+    "dashboardTooltip": "Gösterge Paneli",
+    "chromeExtension": "Chrome Uzantısı",
+    "extensionTooltip": "Chrome Uzantısı",
+    "myAccount": "Hesabım",
+    "profile": "Profil",
+    "settings": "Ayarlar",
+    "logout": "Çıkış Yap",
+    "userRole": "Kullanıcı"
+  },
+  "DashboardPage": {
+    "title": "İddia Tespiti Gösterge Paneli",
+    "subtitle": "Scout Agent tarafından tespit edilen trend iddiaların canlı yayını."
+  },
+  "ExtensionPage": {
+    "title": "LocalTruth Chrome Uzantısı",
+    "description": "LocalTruth'un yapay zeka doğrulama gücünü doğrudan tarayıcınıza getirin. Sosyal medyada, e-postalarda ve haber makalelerinde potansiyel yanlış bilgileri gerçek zamanlı olarak tespit edin.",
+    "installButton": "Chrome Uzantısını Yükle",
+    "comingSoon": "Yakında",
+    "simulatorTitle": "Uzantı Simülatörü",
+    "simulatorDescription": "Tespit motorunu test edin. Aşağıya herhangi bir metin yapıştırın ve Scout Agent'ımız potansiyel yanlış bilgiler için onu analiz edecektir."
+  },
+  "ProfilePage": {
+    "title": "Profil",
+    "subtitle": "Genel profilinizi ve hesap detaylarınızı yönetin.",
+    "accountInfoTitle": "Hesap Bilgileri",
+    "accountInfoDescription": "Görünen adınızı güncelleyin ve hesap e-postanızı görüntüleyin.",
+    "emailLabel": "E-posta",
+    "displayNameLabel": "Görünen Ad",
+    "saveButton": "Değişiklikleri Kaydet"
+  },
+  "SettingsPage": {
+    "title": "Ayarlar",
+    "subtitle": "Hesabınızı ve uygulama ayarlarınızı yönetin.",
+    "preferences": {
+      "title": "Tercihler",
+      "description": "Deneyiminizi özelleştirin."
+    },
+    "language": {
+      "label": "Dil",
+      "placeholder": "Dil seçin",
+      "description": "Uygulama için görüntüleme dilini seçin."
+    },
+    "password": {
+      "label": "Şifre",
+      "button": "Şifreyi Değiştir",
+      "description": "Hesap şifrenizi güncelleyin."
+    }
+  },
+  "LoginPage": {
+    "title": "Giriş",
+    "description": "Hesabınıza giriş yapmak için aşağıya e-postanızı girin.",
+    "emailLabel": "E-posta",
+    "passwordLabel": "Şifre",
+    "signInButton": "Giriş Yap",
+    "noAccount": "Hesabınız yok mu?",
+    "signUpLink": "Kaydolun"
+  },
+  "SignupPage": {
+    "title": "Kaydolun",
+    "description": "Hesap oluşturmak için bilgilerinizi girin.",
+    "emailLabel": "E-posta",
+    "passwordLabel": "Şifre",
+    "languageLabel": "Dil",
+    "languagePlaceholder": "Bir dil seçin",
+    "signUpButton": "Kaydolun",
+    "haveAccount": "Zaten bir hesabınız var mı?",
+    "loginLink": "Giriş"
+  },
+  "ClaimCard": {
+    "unknownSource": "Bilinmeyen Kaynak",
+    "verifiedIn": "{minutes} dakika içinde doğrulandı",
+    "confidenceScore": "Güven Puanı",
+    "communityAgreesTooltip": "Topluluk aynı fikirde",
+    "communityDisagreesTooltip": "Topluluk aynı fikirde değil",
+    "cannotVoteOnMock": "Sahte iddialara oy verilemez",
+    "explainButton": "Açıkla",
+    "status": {
+      "Verified": "Doğrulandı",
+      "False": "Yanlış",
+      "Inconclusive": "Sonuçsuz"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Yapay Zeka Açıklaması",
+    "description": "Doğrulanmış bilgilere dayanarak Açıklayıcı Temsilci tarafından oluşturuldu.",
+    "notAvailable": "Bu iddia için bir açıklama mevcut değil."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Doğrulamak istediğiniz bir haber başlığını, sosyal medya gönderisini veya herhangi bir metni yapıştırın...",
+    "buttonText": "Yanlış Bilgi Kontrolü",
+    "errorMinChars": "Lütfen en az 20 karakter girin.",
+    "errorInvalidInput": "Geçersiz giriş.",
+    "errorApi": "Metin analiz edilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    "alert": {
+      "potentialMisinformation": "Potansiyel Yanlış Bilgi Tespit Edildi",
+      "noMisinformation": "Yanlış Bilgi Tespit Edilmedi",
+      "confidence": "Güven",
+      "reason": "Neden"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Şifreyi Değiştir",
+    "description": "Aşağıya yeni şifrenizi girin.",
+    "newPassword": "Yeni Şifre",
+    "confirmNewPassword": "Yeni Şifreyi Onayla",
+    "updateButton": "Şifreyi Güncelle",
+    "cancelButton": "İptal",
+    "toast": {
+      "successTitle": "Şifre Güncellendi",
+      "successDescription": "Şifreniz başarıyla değiştirildi.",
+      "failTitle": "Güncelleme Başarısız",
+      "failDescription": "Oturumunuzun süresi dolmuş olabilir. Şifrenizi değiştirmek için lütfen tekrar giriş yapın.",
+      "errorTitle": "Hata"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Profil Güncellendi",
+        "successDescription": "Görünen adınız başarıyla güncellendi.",
+        "failTitle": "Güncelleme Başarısız",
+        "errorTitle": "Hata",
+        "nameTooShort": "Görünen ad en az 3 karakter olmalıdır."
+    }
+  }
+}

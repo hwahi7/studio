@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "Панель керування",
+    "dashboardTooltip": "Панель керування",
+    "chromeExtension": "Розширення Chrome",
+    "extensionTooltip": "Розширення Chrome",
+    "myAccount": "Мій обліковий запис",
+    "profile": "Профіль",
+    "settings": "Налаштування",
+    "logout": "Вийти",
+    "userRole": "Користувач"
+  },
+  "DashboardPage": {
+    "title": "Панель керування виявленням заяв",
+    "subtitle": "Жива стрічка трендових заяв, виявлених агентом Scout."
+  },
+  "ExtensionPage": {
+    "title": "Розширення LocalTruth для Chrome",
+    "description": "Використовуйте можливості перевірки штучним інтелектом LocalTruth безпосередньо у своєму браузері. Виявляйте потенційну дезінформацію в режимі реального часу в соціальних мережах, електронних листах та новинних статтях.",
+    "installButton": "Встановити розширення Chrome",
+    "comingSoon": "Незабаром",
+    "simulatorTitle": "Симулятор розширення",
+    "simulatorDescription": "Перевірте механізм виявлення. Вставте будь-який текст нижче, і наш агент Scout проаналізує його на предмет потенційної дезінформації."
+  },
+  "ProfilePage": {
+    "title": "Профіль",
+    "subtitle": "Керуйте своїм загальнодоступним профілем та даними облікового запису.",
+    "accountInfoTitle": "Інформація про обліковий запис",
+    "accountInfoDescription": "Оновіть своє відображуване ім'я та перегляньте електронну пошту свого облікового запису.",
+    "emailLabel": "Електронна пошта",
+    "displayNameLabel": "Відображуване ім'я",
+    "saveButton": "Зберегти зміни"
+  },
+  "SettingsPage": {
+    "title": "Налаштування",
+    "subtitle": "Керуйте налаштуваннями свого облікового запису та програми.",
+    "preferences": {
+      "title": "Переваги",
+      "description": "Налаштуйте свій досвід."
+    },
+    "language": {
+      "label": "Мова",
+      "placeholder": "Виберіть мову",
+      "description": "Виберіть мову відображення програми."
+    },
+    "password": {
+      "label": "Пароль",
+      "button": "Змінити пароль",
+      "description": "Оновіть пароль свого облікового запису."
+    }
+  },
+  "LoginPage": {
+    "title": "Вхід",
+    "description": "Введіть свою електронну пошту нижче, щоб увійти до свого облікового запису.",
+    "emailLabel": "Електронна пошта",
+    "passwordLabel": "Пароль",
+    "signInButton": "Увійти",
+    "noAccount": "Немає облікового запису?",
+    "signUpLink": "Зареєструватися"
+  },
+  "SignupPage": {
+    "title": "Зареєструватися",
+    "description": "Введіть свою інформацію, щоб створити обліковий запис.",
+    "emailLabel": "Електронна пошта",
+    "passwordLabel": "Пароль",
+    "languageLabel": "Мова",
+    "languagePlaceholder": "Виберіть мову",
+    "signUpButton": "Зареєструватися",
+    "haveAccount": "Вже є обліковий запис?",
+    "loginLink": "Вхід"
+  },
+  "ClaimCard": {
+    "unknownSource": "Невідоме джерело",
+    "verifiedIn": "Перевірено за {minutes} хвилин",
+    "confidenceScore": "Оцінка впевненості",
+    "communityAgreesTooltip": "Спільнота погоджується",
+    "communityDisagreesTooltip": "Спільнота не погоджується",
+    "cannotVoteOnMock": "Неможливо голосувати за фіктивні заяви",
+    "explainButton": "Пояснити",
+    "status": {
+      "Verified": "Перевірено",
+      "False": "Неправда",
+      "Inconclusive": "Непереконливо"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "Пояснення ШІ",
+    "description": "Згенеровано агентом-пояснювачем на основі перевіреної інформації.",
+    "notAvailable": "Для цієї заяви пояснення недоступне."
+  },
+  "MisinformationChecker": {
+    "placeholder": "Вставте заголовок новини, допис у соціальних мережах або будь-який текст, який ви хочете перевірити...",
+    "buttonText": "Перевірити на дезінформацію",
+    "errorMinChars": "Будь ласка, введіть принаймні 20 символів.",
+    "errorInvalidInput": "Недійсний ввід.",
+    "errorApi": "Під час аналізу тексту сталася помилка. Спробуйте ще раз.",
+    "alert": {
+      "potentialMisinformation": "Виявлено потенційну дезінформацію",
+      "noMisinformation": "Дезінформації не виявлено",
+      "confidence": "Впевненість",
+      "reason": "Причина"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "Змінити пароль",
+    "description": "Введіть новий пароль нижче.",
+    "newPassword": "Новий пароль",
+    "confirmNewPassword": "Підтвердьте новий пароль",
+    "updateButton": "Оновити пароль",
+    "cancelButton": "Скасувати",
+    "toast": {
+      "successTitle": "Пароль оновлено",
+      "successDescription": "Ваш пароль успішно змінено.",
+      "failTitle": "Помилка оновлення",
+      "failDescription": "Ваша сесія могла закінчитися. Будь ласка, увійдіть знову, щоб змінити пароль.",
+      "errorTitle": "Помилка"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "Профіль оновлено",
+        "successDescription": "Ваше відображуване ім'я успішно оновлено.",
+        "failTitle": "Помилка оновлення",
+        "errorTitle": "Помилка",
+        "nameTooShort": "Відображуване ім'я має містити принаймні 3 символи."
+    }
+  }
+}

@@ -1,0 +1,129 @@
+
+{
+  "AppLayout": {
+    "dashboard": "لوحة التحكم",
+    "dashboardTooltip": "لوحة التحكم",
+    "chromeExtension": "إضافة كروم",
+    "extensionTooltip": "إضافة كروم",
+    "myAccount": "حسابي",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "userRole": "مستخدم"
+  },
+  "DashboardPage": {
+    "title": "لوحة التحكم في كشف الادعاءات",
+    "subtitle": "تغذية حية للادعاءات الشائعة التي اكتشفها العميل الكشفي."
+  },
+  "ExtensionPage": {
+    "title": "إضافة LocalTruth لمتصفح كروم",
+    "description": "أحضر قوة التحقق بالذكاء الاصطناعي من LocalTruth مباشرة إلى متصفحك. اكتشف المعلومات المضللة المحتملة في الوقت الفعلي على وسائل التواصل الاجتماعي ورسائل البريد الإلكتروني والمقالات الإخبارية.",
+    "installButton": "تثبيت إضافة كروم",
+    "comingSoon": "قريباً",
+    "simulatorTitle": "محاكي الإضافة",
+    "simulatorDescription": "اختبر محرك الكشف. الصق أي نص أدناه وسيقوم وكيلنا الكشفي بتحليله بحثًا عن معلومات مضللة محتملة."
+  },
+  "ProfilePage": {
+    "title": "الملف الشخصي",
+    "subtitle": "إدارة ملفك الشخصي العام وتفاصيل حسابك.",
+    "accountInfoTitle": "معلومات الحساب",
+    "accountInfoDescription": "تحديث اسم العرض الخاص بك وعرض البريد الإلكتروني لحسابك.",
+    "emailLabel": "البريد الإلكتروني",
+    "displayNameLabel": "اسم العرض",
+    "saveButton": "حفظ التغييرات"
+  },
+  "SettingsPage": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة حسابك وإعدادات التطبيق.",
+    "preferences": {
+      "title": "التفضيلات",
+      "description": "تخصيص تجربتك."
+    },
+    "language": {
+      "label": "اللغة",
+      "placeholder": "اختر اللغة",
+      "description": "اختر لغة عرض التطبيق."
+    },
+    "password": {
+      "label": "كلمة المرور",
+      "button": "تغيير كلمة المرور",
+      "description": "تحديث كلمة مرور حسابك."
+    }
+  },
+  "LoginPage": {
+    "title": "تسجيل الدخول",
+    "description": "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك.",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "signInButton": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟",
+    "signUpLink": "إنشاء حساب"
+  },
+  "SignupPage": {
+    "title": "إنشاء حساب",
+    "description": "أدخل معلوماتك لإنشاء حساب.",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "languageLabel": "اللغة",
+    "languagePlaceholder": "اختر لغة",
+    "signUpButton": "إنشاء حساب",
+    "haveAccount": "هل لديك حساب بالفعل؟",
+    "loginLink": "تسجيل الدخول"
+  },
+  "ClaimCard": {
+    "unknownSource": "مصدر غير معروف",
+    "verifiedIn": "تم التحقق في {minutes} دقائق",
+    "confidenceScore": "درجة الثقة",
+    "communityAgreesTooltip": "المجتمع يوافق",
+    "communityDisagreesTooltip": "المجتمع لا يوافق",
+    "cannotVoteOnMock": "لا يمكن التصويت على الادعاءات الوهمية",
+    "explainButton": "شرح",
+    "status": {
+      "Verified": "تم التحقق",
+      "False": "خاطئ",
+      "Inconclusive": "غير حاسم"
+    }
+  },
+  "ExplanationDialog": {
+    "title": "شرح الذكاء الاصطناعي",
+    "description": "تم إنشاؤه بواسطة وكيل الشرح بناءً على المعلومات التي تم التحقق منها.",
+    "notAvailable": "الشرح غير متوفر لهذا الادعاء."
+  },
+  "MisinformationChecker": {
+    "placeholder": "الصق عنوانًا إخباريًا أو منشورًا على وسائل التواصل الاجتماعي أو أي نص تريد التحقق منه...",
+    "buttonText": "التحقق من المعلومات المضللة",
+    "errorMinChars": "الرجاء إدخال 20 حرفًا على الأقل.",
+    "errorInvalidInput": "إدخال غير صالح.",
+    "errorApi": "حدث خطأ أثناء تحليل النص. يرجى المحاولة مرة أخرى.",
+    "alert": {
+      "potentialMisinformation": "تم الكشف عن معلومات مضللة محتملة",
+      "noMisinformation": "لم يتم الكشف عن معلومات مضللة",
+      "confidence": "الثقة",
+      "reason": "السبب"
+    }
+  },
+  "ChangePasswordDialog": {
+    "title": "تغيير كلمة المرور",
+    "description": "أدخل كلمة المرور الجديدة أدناه.",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "updateButton": "تحديث كلمة المرور",
+    "cancelButton": "إلغاء",
+    "toast": {
+      "successTitle": "تم تحديث كلمة المرور",
+      "successDescription": "تم تغيير كلمة المرور بنجاح.",
+      "failTitle": "فشل التحديث",
+      "failDescription": "ربما انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى لتغيير كلمة المرور.",
+      "errorTitle": "خطأ"
+    }
+  },
+  "ProfileUpdate": {
+    "toast": {
+        "successTitle": "تم تحديث الملف الشخصي",
+        "successDescription": "تم تحديث اسم العرض الخاص بك بنجاح.",
+        "failTitle": "فشل التحديث",
+        "errorTitle": "خطأ",
+        "nameTooShort": "يجب أن يتكون اسم العرض من 3 أحرف على الأقل."
+    }
+  }
+}
